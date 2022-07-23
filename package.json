@@ -1,0 +1,23 @@
+{
+  "name": "cbc",
+  "version": "1.0.0",
+  "description": "Mini Project for 3rd semester of MCA",
+  "scripts": {
+    "start": "cd cbcNode && npm run dev",
+    "postbuild":"cd cbcNode && npm ci && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sharanam/CBC.git"
+  },
+  "keywords": [
+    "CityBus",
+    "Courseware"
+  ],
+  "author": "Sharanam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sharanam/CBC/issues"
+  },
+  "homepage": "https://github.com/Sharanam/CBC#readme"
+}

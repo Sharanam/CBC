@@ -1,0 +1,4 @@
+module.exports = {
+  mongoURI:
+    "mongodb+srv://ak:ak@cluster0.rvmfm.mongodb.net/ak?retryWrites=true&w=majority",
+};
