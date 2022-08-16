@@ -4,7 +4,7 @@
   "description": "Mini Project for 3rd semester of MCA",
   "scripts": {
     "start": "cd cbcNode && npm run dev",
-    "postbuild":"cd cbcNode && npm ci && cd .."
+    "postbuild": "cd cbcNode && npm ci && cd .."
   },
   "repository": {
     "type": "git",

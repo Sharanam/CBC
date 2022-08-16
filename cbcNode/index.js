@@ -7,9 +7,14 @@ const Sanitize = require("express-mongo-sanitize");
 const hpp = require("hpp");
 const fs = require("fs");
 const cors = require("cors");
+require('dotenv').config();
+
+const authRoutes = require('./routes/auth');
+
+
 
 // db config
-const db = require("./config/keys").mongoURI; 
+// const db = require("./config/keys").mongoURI; 
 
 const app = express();
 app.use(cors());
@@ -28,8 +33,7 @@ app.use(xss());
 app.use(hpp());
 
 // Connect to MongoDB
-mongoose
-  .connect(db, {
+mongoose.connect(process.env.DATABASE, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -37,6 +41,9 @@ mongoose
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
+
+  app.use('/api', authRoutes);
+
 
 app.use(express.static("./static"));
 
