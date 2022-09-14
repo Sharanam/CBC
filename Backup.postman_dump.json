@@ -1,0 +1,1774 @@
+{
+	"version": 1,
+	"collections": [
+		{
+			"id": "404c45fc-e27a-48bf-92be-f75fe9c35696",
+			"uid": "0-404c45fc-e27a-48bf-92be-f75fe9c35696",
+			"name": "Admin",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"fd2afe00-938f-4a11-9f8d-8b2d16cee02f",
+				"e2770b5b-2f04-4369-bf10-8f7450427e68",
+				"479fbeda-d67a-49f3-9870-69242295e034",
+				"fce845a2-2d8d-4c19-b6ce-594d9fa5e951",
+				"91e77a64-0c52-49ce-9c03-498704d491ad"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-08-29T07:14:19.021Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "479fbeda-d67a-49f3-9870-69242295e034",
+					"uid": "0-479fbeda-d67a-49f3-9870-69242295e034",
+					"name": "discard admin",
+					"url": "{{url}}/admin",
+					"description": "# revoke privileges from an existing admin\n- requirement: authorized admin",
+					"data": [
+						{
+							"key": "id",
+							"value": "objectId",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a952d2e-7556-4455-9c49-63314263a55b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"preRequestScript": null,
+					"tests": null,
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "404c45fc-e27a-48bf-92be-f75fe9c35696",
+					"pathVariables": {}
+				},
+				{
+					"id": "91e77a64-0c52-49ce-9c03-498704d491ad",
+					"uid": "0-91e77a64-0c52-49ce-9c03-498704d491ad",
+					"name": "get User",
+					"url": "{{url}}/admin/getUser/:id",
+					"description": "",
+					"data": [],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [
+						{
+							"key": "id",
+							"value": "6309d8c247ca592cf43e775b"
+						}
+					],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "404c45fc-e27a-48bf-92be-f75fe9c35696",
+					"pathVariables": {
+						"id": "6309d8c247ca592cf43e775b"
+					}
+				},
+				{
+					"id": "e2770b5b-2f04-4369-bf10-8f7450427e68",
+					"uid": "0-e2770b5b-2f04-4369-bf10-8f7450427e68",
+					"name": "get users",
+					"url": "{{url}}/admin",
+					"description": "# get the list of existing users\n- requirement: authorized admin",
+					"data": [
+						{
+							"key": "email",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "name",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "phone",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "isAdmin",
+							"value": "",
+							"description": "[true, false]",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "92e763be-6cd6-465d-bcd5-9ac7161f1884",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"preRequestScript": null,
+					"tests": null,
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "404c45fc-e27a-48bf-92be-f75fe9c35696",
+					"pathVariables": {}
+				},
+				{
+					"id": "fce845a2-2d8d-4c19-b6ce-594d9fa5e951",
+					"uid": "0-fce845a2-2d8d-4c19-b6ce-594d9fa5e951",
+					"name": "get Users",
+					"url": "{{url}}/admin/getUsers",
+					"description": "",
+					"data": [
+						{
+							"key": "email",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "name",
+							"value": "test",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "404c45fc-e27a-48bf-92be-f75fe9c35696",
+					"pathVariables": {}
+				},
+				{
+					"id": "fd2afe00-938f-4a11-9f8d-8b2d16cee02f",
+					"uid": "0-fd2afe00-938f-4a11-9f8d-8b2d16cee02f",
+					"name": "make admin",
+					"url": "{{url}}/admin",
+					"description": "# make an existing user an admin\n- requirement: authorized admin",
+					"data": [
+						{
+							"key": "id",
+							"value": "ObjectId",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c45f7f55-cd09-4dbe-847d-4bc6eaeed5e2",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"preRequestScript": null,
+					"tests": null,
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "404c45fc-e27a-48bf-92be-f75fe9c35696",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "483c788f-b989-4a92-baf3-a2f98c235d3a",
+			"uid": "0-483c788f-b989-4a92-baf3-a2f98c235d3a",
+			"name": "Bus Stands",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"b3bc0016-c226-47bb-b284-0ff87abafc32"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-08-29T07:06:50.482Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "b3bc0016-c226-47bb-b284-0ff87abafc32",
+					"uid": "0-b3bc0016-c226-47bb-b284-0ff87abafc32",
+					"name": "get bus stands",
+					"url": "{{url}}/busStands",
+					"description": "# get stop names",
+					"data": [
+						{
+							"key": "name",
+							"value": "Maruti",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "area",
+							"value": "",
+							"description": "optional",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "noauth",
+						"noauth": []
+					},
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef60784e-9e78-446e-bcf0-e9325e65cc6b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"preRequestScript": null,
+					"tests": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "483c788f-b989-4a92-baf3-a2f98c235d3a",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "5290d448-769a-429c-8504-e4fb1e588190",
+			"uid": "0-5290d448-769a-429c-8504-e4fb1e588190",
+			"name": "Commuter Pass",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"0560df89-b172-4c83-aefa-ed3853d8c9c1",
+				"a75fac4b-9f9d-46a6-b59f-e084ecee3871"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-08-29T08:33:32.254Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "0560df89-b172-4c83-aefa-ed3853d8c9c1",
+					"uid": "0-0560df89-b172-4c83-aefa-ed3853d8c9c1",
+					"name": "make pass",
+					"url": "{{url}}/commuterpass",
+					"description": "# Get Commuter Pass\n- commuter must be logged in\n- if they have paid for it",
+					"data": [
+						{
+							"key": "user",
+							"value": "objectId",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "from",
+							"value": "stop id",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "to",
+							"value": "stop id",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "date",
+							"value": "from Date",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "validity",
+							"value": "number in months",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "price",
+							"value": "number",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "5290d448-769a-429c-8504-e4fb1e588190",
+					"pathVariables": {}
+				},
+				{
+					"id": "a75fac4b-9f9d-46a6-b59f-e084ecee3871",
+					"uid": "0-a75fac4b-9f9d-46a6-b59f-e084ecee3871",
+					"name": "get pass",
+					"url": "{{url}}/commuterpass/:id",
+					"description": "# Get Commuter Pass\n- commuter must be logged in\n- if they have paid for it\n- array of bus pass will be there in response",
+					"data": [],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [
+						{
+							"key": "id",
+							"value": "sdf"
+						}
+					],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "5290d448-769a-429c-8504-e4fb1e588190",
+					"pathVariables": {
+						"id": "sdf"
+					}
+				}
+			]
+		},
+		{
+			"id": "70dbfd11-854e-4c37-acae-0262680f36dd",
+			"uid": "0-70dbfd11-854e-4c37-acae-0262680f36dd",
+			"name": "Buses",
+			"description": "add CRUD requests here\neverything will be handled by an admin",
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"8281e413-c14c-469d-9215-45a065a5f9ab"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-08-29T08:23:31.755Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "8281e413-c14c-469d-9215-45a065a5f9ab",
+					"uid": "0-8281e413-c14c-469d-9215-45a065a5f9ab",
+					"name": "Add Bus",
+					"url": "{{url}}/bus",
+					"description": null,
+					"data": [
+						{
+							"key": "registrationNumber",
+							"value": "asdf",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "serviceType",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "status",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "route",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "70dbfd11-854e-4c37-acae-0262680f36dd",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+			"uid": "0-81ffbaeb-0a59-4e57-8507-7562ff454198",
+			"name": "User",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"19ba673e-b37e-4418-ae89-556bf3eee7d0",
+				"ade52e74-174a-4f49-83d8-41c9c685cd87",
+				"f6cb78f1-62d4-4bd2-b725-916ee699c770",
+				"5bbf51ef-bc96-45a7-97ab-856c548fc602",
+				"5c7c2469-bd8c-47ea-831c-6f06a3f884f4",
+				"07670964-8f0e-4d5c-9933-c7623f7a6c3c",
+				"ddac43dd-5392-4f81-92b1-a8cff57fc626",
+				"b175e64d-dee3-4606-bad7-827fa14904d8",
+				"59adc1a0-1d59-4414-9880-e2c20281ec2c"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-08-17T07:58:20.149Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "07670964-8f0e-4d5c-9933-c7623f7a6c3c",
+					"uid": "0-07670964-8f0e-4d5c-9933-c7623f7a6c3c",
+					"name": "confirm token",
+					"url": "{{url}}/auth/confirmToken",
+					"description": "",
+					"data": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWVlMmQ4YTljMDAyMzI0ODQzN2EwNSIsImVtYWlsIjoiYWRtaW5AZy5jb20iLCJ0eXBlIjoiYSIsImlhdCI6MTY2MzA1ODE4MywiZXhwIjoxNjYzMDYxNzgzfQ.fj8BWg6MMnvWd9ZuvSapx005l5z22Rj5t27aBo90Xio",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"responses_order": [
+						"8cf63737-89fc-42f6-b4e6-0633675b8fb2"
+					],
+					"responses": [
+						{
+							"id": "8cf63737-89fc-42f6-b4e6-0633675b8fb2",
+							"uid": "0-8cf63737-89fc-42f6-b4e6-0633675b8fb2",
+							"name": "confirm token",
+							"status": null,
+							"mime": null,
+							"language": "json",
+							"text": "{\n    \"success\": true,\n    \"msg\": \"Congratulations !!!\"\n}",
+							"responseCode": {
+								"code": 200,
+								"name": "OK"
+							},
+							"requestObject": {
+								"data": [
+									{
+										"key": "token",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWVlYWE3ZDM5YWNhMTc2OGVjOGI0MyIsImVtYWlsIjoic0BnLmNvbSIsInR5cGUiOiJjIiwiaWF0IjoxNjYyOTcwNTM1LCJleHAiOjE2NjI5NzQxMzV9.0weS3L0z4klsTs47MGKFHnrOkN0CVSMJUCoZGSh4bB4",
+										"description": "",
+										"type": "default",
+										"enabled": true
+									}
+								],
+								"dataMode": "urlencoded",
+								"dataOptions": null,
+								"headerData": null,
+								"method": "POST",
+								"pathVariableData": [],
+								"queryParams": [],
+								"url": "{{url}}/auth/confirmToken"
+							},
+							"headers": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c-OYprqYyg0YnRU1rlXMiAuzJvcZ4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 12 Sep 2022 08:17:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookies": null,
+							"request": "07670964-8f0e-4d5c-9933-c7623f7a6c3c",
+							"collection": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+							"owner": "0"
+						}
+					],
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+					"pathVariables": {}
+				},
+				{
+					"id": "19ba673e-b37e-4418-ae89-556bf3eee7d0",
+					"uid": "0-19ba673e-b37e-4418-ae89-556bf3eee7d0",
+					"name": "Sign In",
+					"url": "{{url}}/auth/signin",
+					"description": "",
+					"data": [
+						{
+							"key": "email",
+							"value": "s@g.com",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "password",
+							"value": "abcd@W33",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aaf2b593-32c8-466e-9ef2-cbced30afdb0",
+								"exec": [
+									"const response = pm.response.json();\r",
+									"pm.environment.set('jwt_token', response.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"preRequestScript": null,
+					"tests": "const response = pm.response.json();\r\npm.environment.set('jwt_token', response.access_token);",
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+					"pathVariables": {}
+				},
+				{
+					"id": "59adc1a0-1d59-4414-9880-e2c20281ec2c",
+					"uid": "0-59adc1a0-1d59-4414-9880-e2c20281ec2c",
+					"name": "Reset Password",
+					"url": "{{url}}/auth/resetPassword",
+					"description": "",
+					"data": [
+						{
+							"key": "password",
+							"value": "abcd@W33",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "id",
+							"value": "631eeaa7d39aca1768ec8b43",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMWVlYWE3ZDM5YWNhMTc2OGVjOGI0MyIsImVtYWlsIjoic0BnLmNvbSIsInR5cGUiOiJjIiwiaWF0IjoxNjYzMDYxMzY5LCJleHAiOjE2NjMwNjQ5Njl9.n7lZcnqmD2DsWgIUXYBnj50C3s4HE8JUzOwXkILfekU",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+					"pathVariables": {}
+				},
+				{
+					"id": "5bbf51ef-bc96-45a7-97ab-856c548fc602",
+					"uid": "0-5bbf51ef-bc96-45a7-97ab-856c548fc602",
+					"name": "update profile",
+					"url": "{{url}}/profile",
+					"description": "",
+					"data": [
+						{
+							"key": "name",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "PUT",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+					"pathVariables": {}
+				},
+				{
+					"id": "5c7c2469-bd8c-47ea-831c-6f06a3f884f4",
+					"uid": "0-5c7c2469-bd8c-47ea-831c-6f06a3f884f4",
+					"name": "delete user",
+					"url": "{{url}}/auth/deleteUser",
+					"description": "",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": null,
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+					"pathVariables": {}
+				},
+				{
+					"id": "ade52e74-174a-4f49-83d8-41c9c685cd87",
+					"uid": "0-ade52e74-174a-4f49-83d8-41c9c685cd87",
+					"name": "Sign Up",
+					"url": "{{url}}/auth/signup",
+					"description": "",
+					"data": [
+						{
+							"key": "email",
+							"value": "admin@g.com",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "password",
+							"value": "abcd@W33",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "phone",
+							"value": "1234597",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "name",
+							"value": "sharanam",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "confirmPassword",
+							"value": "abcd@W33",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "noauth",
+						"noauth": []
+					},
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "65f02387-de0d-4f41-b825-8d4f1291136c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"preRequestScript": null,
+					"tests": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+					"pathVariables": {}
+				},
+				{
+					"id": "b175e64d-dee3-4606-bad7-827fa14904d8",
+					"uid": "0-b175e64d-dee3-4606-bad7-827fa14904d8",
+					"name": "Forgot Password",
+					"url": "{{url}}/auth/forgotPassword",
+					"description": "",
+					"data": [
+						{
+							"key": "email",
+							"value": "s@g.com",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+					"pathVariables": {}
+				},
+				{
+					"id": "ddac43dd-5392-4f81-92b1-a8cff57fc626",
+					"uid": "0-ddac43dd-5392-4f81-92b1-a8cff57fc626",
+					"name": "resend token",
+					"url": "{{url}}/auth/resendToken",
+					"description": "",
+					"data": [
+						{
+							"key": "email",
+							"value": "admin@g.com",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+					"pathVariables": {}
+				},
+				{
+					"id": "f6cb78f1-62d4-4bd2-b725-916ee699c770",
+					"uid": "0-f6cb78f1-62d4-4bd2-b725-916ee699c770",
+					"name": "get profile",
+					"url": "{{url}}/auth/profile",
+					"description": "",
+					"data": [],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "81ffbaeb-0a59-4e57-8507-7562ff454198",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "965e1df5-55f9-47d4-9685-e4e00fe3a86c",
+			"uid": "0-965e1df5-55f9-47d4-9685-e4e00fe3a86c",
+			"name": "Routes",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"0697d79a-ab47-4ebd-96a5-fe810c1decec",
+				"2533d6b2-88bf-4b83-b2f5-5939e5b04e48",
+				"3e1205d8-b89c-421e-80d0-87968d168f73",
+				"36c5ba3e-419f-4e96-9598-c39ae03d76bd"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-08-29T05:00:08.907Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "0697d79a-ab47-4ebd-96a5-fe810c1decec",
+					"uid": "0-0697d79a-ab47-4ebd-96a5-fe810c1decec",
+					"name": "add route",
+					"url": "{{url}}/route",
+					"description": "# Add new route\n- requirement: authorized admin\n- feature: can add single route per request",
+					"data": [
+						{
+							"key": "id",
+							"value": "10A",
+							"description": "it consists number and optional alphabet without space",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "from",
+							"value": "Central Depot",
+							"description": "Initial Point",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "to",
+							"value": "GIDC",
+							"description": "Termination Point",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "up",
+							"value": "[id1,id2,id3]",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "down",
+							"value": "[id3,id2,id1]",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8a923a08-9a2a-4d8b-9ea7-2d06c2113794",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"preRequestScript": null,
+					"tests": null,
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "965e1df5-55f9-47d4-9685-e4e00fe3a86c",
+					"pathVariables": {}
+				},
+				{
+					"id": "2533d6b2-88bf-4b83-b2f5-5939e5b04e48",
+					"uid": "0-2533d6b2-88bf-4b83-b2f5-5939e5b04e48",
+					"name": "modify route",
+					"url": "{{url}}/route",
+					"description": "# Modify route\n- requirement: authorized admin\n- feature: can modify single route per request",
+					"data": [
+						{
+							"key": "id",
+							"value": "10A",
+							"description": "it consists number and optional alphabet without space",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "from",
+							"value": "Central Depot",
+							"description": "Initial Point",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "to",
+							"value": "GIDC",
+							"description": "Termination Point",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "up",
+							"value": "[id1,id2,id3]",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "down",
+							"value": "[id3,id2,id1]",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "PUT",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "819db6c3-9ec1-4f3e-9698-0cbb2c62f365",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"preRequestScript": null,
+					"tests": null,
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "965e1df5-55f9-47d4-9685-e4e00fe3a86c",
+					"pathVariables": {}
+				},
+				{
+					"id": "36c5ba3e-419f-4e96-9598-c39ae03d76bd",
+					"uid": "0-36c5ba3e-419f-4e96-9598-c39ae03d76bd",
+					"name": "get route",
+					"url": "{{url}}/route",
+					"description": "# Get route\n- feature: can get single route per request",
+					"data": [
+						{
+							"key": "id",
+							"value": "10A",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "noauth",
+						"noauth": []
+					},
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cd5f9e88-65ca-413b-955f-274384609f51",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"preRequestScript": null,
+					"tests": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "965e1df5-55f9-47d4-9685-e4e00fe3a86c",
+					"pathVariables": {}
+				},
+				{
+					"id": "3e1205d8-b89c-421e-80d0-87968d168f73",
+					"uid": "0-3e1205d8-b89c-421e-80d0-87968d168f73",
+					"name": "delete route",
+					"url": "{{url}}/route",
+					"description": "# Delete route\n- requirement: authorized admin\n- feature: can delete single route per request",
+					"data": [
+						{
+							"key": "id",
+							"value": "10A",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7f4b7684-98c4-4f98-946f-82ff7782bf25",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"folder": null,
+					"responses_order": [],
+					"preRequestScript": null,
+					"tests": null,
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "965e1df5-55f9-47d4-9685-e4e00fe3a86c",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "9a202785-049d-4694-856b-9ddd84203c1d",
+			"uid": "0-9a202785-049d-4694-856b-9ddd84203c1d",
+			"name": "Live Status",
+			"description": null,
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"0c3a5605-28af-4f59-8aae-01d4a4db0f32",
+				"e907b980-de73-4c0f-91f8-c30eb8008e58"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-08-29T08:26:09.336Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "0c3a5605-28af-4f59-8aae-01d4a4db0f32",
+					"uid": "0-0c3a5605-28af-4f59-8aae-01d4a4db0f32",
+					"name": "Contribute",
+					"url": "{{url}}/contribute",
+					"description": "# Contribution by user\r\n- current status of city bus by commuters",
+					"data": [
+						{
+							"key": "busId",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "status",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "9a202785-049d-4694-856b-9ddd84203c1d",
+					"pathVariables": {}
+				},
+				{
+					"id": "e907b980-de73-4c0f-91f8-c30eb8008e58",
+					"uid": "0-e907b980-de73-4c0f-91f8-c30eb8008e58",
+					"name": "Declare",
+					"url": "{{url}}/schedule",
+					"description": "# Schedule or reschedule\n- status of city bus",
+					"data": [
+						{
+							"key": "busId",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "status",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "routeId",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "9a202785-049d-4694-856b-9ddd84203c1d",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "a810f50b-8f2b-481d-aa27-bd9c1b3ad22c",
+			"uid": "0-a810f50b-8f2b-481d-aa27-bd9c1b3ad22c",
+			"name": "Feedback",
+			"description": "user can feed\nadmin can reply\nand everyone can see",
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"5c4f0393-05d7-4dfe-8291-8cf0e34ad042",
+				"5e720c24-a83a-4e29-81cc-2761369350ed"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-08-29T08:32:06.688Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "5c4f0393-05d7-4dfe-8291-8cf0e34ad042",
+					"uid": "0-5c4f0393-05d7-4dfe-8291-8cf0e34ad042",
+					"name": "Add Feedback",
+					"url": "{{url}}/commuter/feedback",
+					"description": null,
+					"data": [
+						{
+							"key": "message",
+							"value": "sharanam",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "a810f50b-8f2b-481d-aa27-bd9c1b3ad22c",
+					"pathVariables": {}
+				},
+				{
+					"id": "5e720c24-a83a-4e29-81cc-2761369350ed",
+					"uid": "0-5e720c24-a83a-4e29-81cc-2761369350ed",
+					"name": "Update Feedback",
+					"url": "{{url}}/commuter/feedback",
+					"description": null,
+					"data": [
+						{
+							"key": "message",
+							"value": "ab kar karna",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "feedbackId",
+							"value": "6320569ebe6cc103343e694f",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "PUT",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "a810f50b-8f2b-481d-aa27-bd9c1b3ad22c",
+					"pathVariables": {}
+				}
+			]
+		},
+		{
+			"id": "b72a7e57-9060-42b2-a128-7ac7abcddb9e",
+			"uid": "0-b72a7e57-9060-42b2-a128-7ac7abcddb9e",
+			"name": "Announcements",
+			"description": null,
+			"auth": null,
+			"events": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "28f0b6a1-e347-477d-9ade-45f410e90782",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "86f0f489-1a87-4dd2-bc81-2e3df7d2fa67",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"variables": [],
+			"order": [
+				"b6039e30-fa9a-4489-a86f-08ad4f2edcf5",
+				"380dd79d-d820-43ca-ba24-427b6f7e6384",
+				"9b82f8c9-3e8f-48b3-8dbc-ec1a0454e49d"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"createdAt": "2022-08-29T07:18:21.845Z",
+			"folders": [],
+			"requests": [
+				{
+					"id": "380dd79d-d820-43ca-ba24-427b6f7e6384",
+					"uid": "0-380dd79d-d820-43ca-ba24-427b6f7e6384",
+					"name": "get announcements",
+					"url": "{{url}}/announcement/get",
+					"description": "",
+					"data": [],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "noauth",
+						"noauth": []
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "b72a7e57-9060-42b2-a128-7ac7abcddb9e",
+					"pathVariables": {}
+				},
+				{
+					"id": "9b82f8c9-3e8f-48b3-8dbc-ec1a0454e49d",
+					"uid": "0-9b82f8c9-3e8f-48b3-8dbc-ec1a0454e49d",
+					"name": "delete announcement",
+					"url": "{{url}}/announcement/delete",
+					"description": "",
+					"data": [
+						{
+							"key": "announcementId",
+							"value": "6310549a7daf8e254023cd03",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "b72a7e57-9060-42b2-a128-7ac7abcddb9e",
+					"pathVariables": {}
+				},
+				{
+					"id": "b6039e30-fa9a-4489-a86f-08ad4f2edcf5",
+					"uid": "0-b6039e30-fa9a-4489-a86f-08ad4f2edcf5",
+					"name": "create announcement",
+					"url": "{{url}}/announcement/create",
+					"description": "",
+					"data": [
+						{
+							"key": "title",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						},
+						{
+							"key": "description",
+							"value": "",
+							"description": "",
+							"type": "default",
+							"enabled": true
+						}
+					],
+					"dataOptions": null,
+					"dataMode": "urlencoded",
+					"headerData": null,
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{jwt_token}}"
+							}
+						]
+					},
+					"events": null,
+					"folder": null,
+					"responses_order": [],
+					"currentHelper": "bearerAuth",
+					"helperAttributes": {
+						"id": "bearer",
+						"token": "{{jwt_token}}"
+					},
+					"collectionId": "b72a7e57-9060-42b2-a128-7ac7abcddb9e",
+					"pathVariables": {}
+				}
+			]
+		}
+	],
+	"environments": [
+		{
+			"id": "642a53c2-048b-4b4a-b685-16c7480ad611",
+			"name": "cbc",
+			"values": [
+				{
+					"key": "url",
+					"value": "http://localhost:8000/api",
+					"type": "default",
+					"enabled": true
+				},
+				{
+					"key": "jwt_token",
+					"value": "",
+					"type": "any",
+					"enabled": true
+				}
+			]
+		},
+		{
+			"id": "395653b1-f3ed-4f57-83cd-c28cfc73dada",
+			"name": "My Workspace - globals",
+			"values": []
+		}
+	],
+	"headerPresets": [],
+	"globals": []
+}

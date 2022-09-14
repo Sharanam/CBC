@@ -1,19 +1,37 @@
-.App {
-  text-align: center;
+:root {
+  --bov-dark: #1c3879;
+  --light-dark: #607eaa;
+  --white-dark: #eae3d2;
+  --white-light: #f9f5eb;
+  --black: black;
+  --tubelight: white;
+  --quiet-background-color: rgb(247, 247, 247);
+  --text-color: var(--google-gray-700);
+  --danger: rgb(117, 53, 49);
+
+  --footer-heading-underline-color: #e91e63;
+
+  --google-gray-700: rgb(95, 99, 104);
+  --google-gray-900: rgb(32, 33, 36);
+
+  --bold-font: 500;
+  --card-bg: rgb(17, 20, 197);
+  --card-shadow: 0 0.321rem 0.29rem hsl(0, 0%, 0%, 0.2);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+  text-decoration: none;
+  color: currentColor;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  font-size: calc(10px + 2vmin);
-  color: white;
+main {
+  min-height: 60vh;
+  margin: 0;
+  font-size: 1rem;
 }
 
-.link {
-  color: #61dafb;
+@media (max-width: 35em) {
+  main {
+    margin: 0 auto;
+  }
 }

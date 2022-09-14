@@ -1,11 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const {
+  createAnnouncement,
+  deleteAnnouncement,
+  getAnnouncements,
+} = require("../controllers/announcements");
 
-const { createAnnouncement, getAnnouncements, updateAnnouncement, deleteAnnouncement } =
-require('../controllers/announcements');
-const { isAuthorizedAdmin } = require("../utils/roleValidation")
+const { isAuthorizedAdmin } = require("../utils/roleValidation");
 
-router.get('/announcement', getAnnouncements);
-router.post('/announcement', isAuthorizedAdmin, createAnnouncement);
-router.delete('/announcement', isAuthorizedAdmin, deleteAnnouncement);
+router.get("/get", getAnnouncements);
+router.post("/create", isAuthorizedAdmin, createAnnouncement);
+router.delete("/delete", isAuthorizedAdmin, deleteAnnouncement);
+
 module.exports = router;

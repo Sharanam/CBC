@@ -1,0 +1,38 @@
+.hero {
+  margin: 0;
+  padding: 1rem;
+
+  width: 100%;
+  height: 80vh;
+
+  background-color: var(--light-dark);
+  color: var(--white-light);
+  background: url("./editedBG.jpg");
+  background-position: center;
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero .special {
+  display: block;
+  font-size: 1.6em;
+  background-color: var(--danger);
+  background-blend-mode: color;
+  text-transform: uppercase;
+}
+
+.hero .line {
+  font-size: 1.2em;
+  margin-bottom: 1rem;
+  max-width: 45vw;
+  opacity: 80%;
+  background-color: var(--bov-dark);
+  padding: 0.6rem;
+}
+
+.hero .line * {
+  font-weight: bold;
+}

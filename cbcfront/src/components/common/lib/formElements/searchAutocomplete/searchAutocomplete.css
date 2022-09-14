@@ -1,0 +1,32 @@
+div.autocomplete {
+  width: max-content;
+  position: relative;
+}
+
+div.autocomplete ul {
+  list-style-type: none;
+  max-height: 20vh;
+  overflow-y: scroll;
+  background-color: var(--white-dark);
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+  top: 35px;
+  bottom: -150px;
+  z-index: 15;
+}
+div.autocomplete ul::-webkit-scrollbar-thumb {
+  background-color: var(--bov-dark);
+  border-radius: 10px;
+}
+div.autocomplete ul::-webkit-scrollbar-track {
+  background-color: var(--tubelight);
+}
+div.autocomplete ul::-webkit-scrollbar {
+  width: 5px;
+}
+div.autocomplete li.active {
+  background-color: var(--text-color);
+  color: var(--white-light);
+}

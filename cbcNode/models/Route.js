@@ -1,23 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let routeSchema = new Schema(
-    {
-        number:{
-            type:Number,
-            required:true
-        },
-        name:{
-            type:String,
-            required:true
-        },
-        stops:[
-            {type: }
-        ]
-    }, {
-    timestamps: true,
-    collection: 'routes'
-}
-)
+  {
+    identifier: { type: String },
+    stops: [{ type: String }],
+  },
+  {
+    timestamps: false,
+    collection: "routes",
+  }
+);
 
-module.exports = mongoose.model("Route", routeSchema)
+module.exports = mongoose.model("Route", routeSchema);

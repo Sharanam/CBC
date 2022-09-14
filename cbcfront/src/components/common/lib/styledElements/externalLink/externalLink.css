@@ -1,0 +1,9 @@
+a.externalLink::after {
+  /* content: url("./externalArrow.svg"); */
+  background: url("./externalArrow.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 2pt;
+  color: white;
+  background-color: wheat;
+}

@@ -2,19 +2,19 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const xss = require("xss-clean");
-const path = require("path");
+// const path = require("path");
 const Sanitize = require("express-mongo-sanitize");
 const hpp = require("hpp");
-const fs = require("fs");
+// const fs = require("fs");
 const cors = require("cors");
-require('dotenv').config();
+require("dotenv").config();
 
-const authRoutes = require('./routes/auth');
-
-
-
-// db config
-// const db = require("./config/keys").mongoURI; 
+const authRoutes = require("./routes/auth");
+const announcementRoutes = require("./routes/announcements");
+const busStandRoutes = require("./routes/busStands");
+const busRoutes = require("./routes/buses");
+const adminRoutes = require("./routes/admin");
+const commuterRoutes = require("./routes/commuter");
 
 const app = express();
 app.use(cors());
@@ -33,7 +33,8 @@ app.use(xss());
 app.use(hpp());
 
 // Connect to MongoDB
-mongoose.connect(process.env.DATABASE, {
+mongoose
+  .connect(process.env.mongoURI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -42,12 +43,16 @@ mongoose.connect(process.env.DATABASE, {
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
-  app.use('/api', authRoutes);
-
-
 app.use(express.static("./static"));
+
+app.use("/api/auth", authRoutes);
+app.use("/api/announcement", announcementRoutes);
+app.use("/api/busStands", busStandRoutes);
+app.use("/api/bus", busRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/commuter", commuterRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
-console.log(`Server running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });

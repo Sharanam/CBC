@@ -1,0 +1,8 @@
+main.homepage h1 {
+  color: currentColor;
+  font-size: xx-large;
+  text-align: center;
+  font-weight: 200;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}

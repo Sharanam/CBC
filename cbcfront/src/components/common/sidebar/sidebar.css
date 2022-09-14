@@ -1,0 +1,39 @@
+div.sidebar {
+  width: 200px;
+  max-height: calc(100vh - 6.5rem);
+
+  background: transparent;
+  background: linear-gradient(
+    -90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 121, 0.1) 10%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  position: sticky;
+  top: 0;
+  max-height: 100vh;
+  overflow: auto;
+  position: -webkit-sticky;
+}
+div.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+div.sidebar ul * {
+  margin: 0.5rem auto;
+}
+
+div.sidebar::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: transparent;
+}
+div.sidebar::-webkit-scrollbar-thumb {
+  background-color: #fff;
+}
+
+@media (max-width: 35em) {
+  div.sidebar {
+    display: none;
+  }
+}

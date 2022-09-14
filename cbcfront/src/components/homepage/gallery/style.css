@@ -1,0 +1,15 @@
+.galleryCard {
+  width: 15vw;
+  height: 15vw;
+  min-width: 200px;
+  min-height: 200px;
+  background-size: cover;
+}
+
+div.galleryCards {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
