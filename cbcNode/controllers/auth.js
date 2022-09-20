@@ -188,7 +188,7 @@ exports.confirmToken = (req, res) => {
           user.save((error) => {
             if (error) {
               return res.status(500).json({
-                msg: err.message,
+                msg: error.message,
               });
             }
             token.remove();
@@ -318,7 +318,7 @@ exports.getProfile = (req, res) => {
       },
       (err, user) => {
         if (err) return res.status(500).send(err.message);
-        res.json(user);
+        res.json({ success: true, user });
       }
     );
   } catch (error) {
