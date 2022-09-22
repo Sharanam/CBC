@@ -11,8 +11,8 @@ const CreateAnnouncement = (props) => {
   const { errors } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [payload, setPayload] = useState({
-    title: "new vala",
-    description: new Date().toLocaleTimeString() + " okay?",
+    title: "",
+    description: "",
     expireAt: tomorrow,
   });
 
