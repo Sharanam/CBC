@@ -16,6 +16,7 @@ const initialState = {
 export default function LoginPage() {
   const [flag, setFlag] = useContext(FlagContext);
   const [user, setUser] = useState(initialState);
+  const [showPassword, setShowPassword] = useState(false);
 
   // const { isAuthenticated, errors }
   const [sessionUser, setSessionUser] = useSessionStorage(
@@ -49,15 +50,17 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
-    setFlag(Date.now());
-    if (sessionUser.isAuthenticated) {
-      //  navigate("/portal");
-      window.location.href = "/admin";
-      // trick, but it works
+    if (!isLoading) {
+      if (sessionUser.isAuthenticated) {
+        setFlag((_) => Date.now());
+        // navigate("/portal");
+        window.location.href = "/admin";
+        // trick, but it works
+      }
+      return () => {
+        clearErrors();
+      };
     }
-    return () => {
-      clearErrors();
-    };
   }, [isLoading]);
 
   return (
@@ -92,7 +95,7 @@ export default function LoginPage() {
                   <Error>{sessionUser.errors.password}</Error>
                 )}
                 <Input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter Password"
                   value={user.password}
                   onChange={(e) => {
@@ -102,6 +105,19 @@ export default function LoginPage() {
                     }));
                   }}
                 />
+                <Label
+                  style={{
+                    alignItems: "baseline",
+                    color: "var(--black)",
+                  }}
+                >
+                  <Input
+                    type="checkbox"
+                    checked={showPassword}
+                    onChange={() => setShowPassword((state) => !state)}
+                  />
+                  <span style={{ margin: "3px" }}>Show Password</span>
+                </Label>
               </>
             ),
             buttons: (
