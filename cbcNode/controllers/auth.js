@@ -188,7 +188,7 @@ exports.confirmToken = (req, res) => {
           user.save((error) => {
             if (error) {
               return res.status(500).json({
-                msg: err.message,
+                msg: error.message,
               });
             }
             token.remove();
@@ -318,9 +318,31 @@ exports.getProfile = (req, res) => {
       },
       (err, user) => {
         if (err) return res.status(500).send(err.message);
-        res.json(user);
+        res.json({ success: true, user });
       }
     );
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("something went wrong");
+  }
+};
+
+exports.getProfileOf = (req, res) => {
+  try {
+    const { id } = req.params;
+    if (isMongoId(id))
+      User.findOne({ _id: id })
+        .select("name bio social public")
+        .then((user) => {
+          if (user.public) res.json({ success: true, user });
+          else
+            res.json({
+              success: true,
+              user: { name: "Anonymous", bio: "", social: "" },
+            });
+        })
+        .catch((err) => res.json({ msg: err.message }));
+    else return res.json({ msg: "Please Enter valid Id" });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");

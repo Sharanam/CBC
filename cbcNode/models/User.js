@@ -41,6 +41,19 @@ let userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    bio: {
+      type: String,
+      default: "",
+    },
+    social: {
+      type: String,
+      lowercase: true,
+      default: "",
+    },
+    public: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

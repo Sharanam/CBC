@@ -10,6 +10,7 @@ const {
   resetPassword,
   // savePassword,
   getProfile,
+  getProfileOf,
 } = require("../controllers/auth");
 const { getUser } = require("../utils/getUser");
 
@@ -25,6 +26,7 @@ router.post("/confirmToken", confirmToken);
 router.post("/resendToken", resendToken);
 
 router.get("/profile", getUser, getProfile);
+router.get("/profile/:id", getProfileOf);
 
 router.delete("/deleteUser", getUser, deleteUser);
 
