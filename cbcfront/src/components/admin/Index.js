@@ -1,4 +1,4 @@
-import { MainWrapper } from "../common/lib/layout/Index";
+import { Container, MainWrapper } from "../common/lib/layout/Index";
 import Sidebar from "../common/sidebar/Sidebar";
 import Announcement from "./announcement/Index";
 import Routes from "./routes/Index";
@@ -8,10 +8,12 @@ import HumanResources from "./humanResources/Index";
 import Users from "./users/Index";
 import Pass from "./pass/Index";
 import Home from "./Home";
+import { useParams } from "react-router-dom";
 
-const Desk = (props) => {
+const Desk = () => {
   let component;
-  switch (props.path) {
+  const { path } = useParams();
+  switch (path) {
     case "routes":
       component = <Routes />;
       break;
@@ -40,7 +42,7 @@ const Desk = (props) => {
   return (
     <>
       <MainWrapper sidebar={<Sidebar for="dashboard" />}>
-        {component}
+        <Container>{component}</Container>
       </MainWrapper>
     </>
   );

@@ -7,3 +7,9 @@ div.card {
   background: var(--card-bg);
   color: var(--tubelight);
 }
+
+div.info-message {
+  text-transform: capitalize;
+  background-color: var(--info-message-bg);
+  color: var(--info-message-fg);
+}

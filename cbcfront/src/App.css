@@ -17,6 +17,14 @@
   --bold-font: 500;
   --card-bg: rgb(17, 20, 197);
   --card-shadow: 0 0.321rem 0.29rem hsl(0, 0%, 0%, 0.2);
+
+  --info-message-bg: lightgreen;
+  --info-message-fg: var(--black);
+
+  --yellow: yellow;
+
+  --warning-message-bg: var(--danger);
+  --warning-message-fg: var(--black);
 }
 
 a {

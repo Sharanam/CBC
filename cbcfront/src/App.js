@@ -75,16 +75,10 @@ function App() {
             <Route path="ResetPassword" element={<ResetPassword />} />
             <Route path="ResendToken" element={<ResendToken />} />
             <Route path="ConfirmToken" element={<ConfirmToken />} />
-
             <Route path="signup" element={<CommuterSignup />} />
             <Route path="portal">
               <Route index element={<CommuterPortal />} />
-              <Route path="routes" element={<CommuterPortal path="routes" />} />
-              <Route path="buses" element={<CommuterPortal path="buses" />} />
-              <Route
-                path="busstops"
-                element={<CommuterPortal path="busstops" />}
-              />
+              <Route path=":path" element={<CommuterPortal />} />
             </Route>
             <Route
               path="admin"
@@ -101,38 +95,16 @@ function App() {
               }
             >
               <Route index element={<AdminDesk />} />
-              <Route path="routes" element={<AdminDesk path="routes" />} />
-              <Route path="buses" element={<AdminDesk path="buses" />} />
-              <Route path="busstops" element={<AdminDesk path="busstops" />} />
-              <Route
-                path="humanresource"
-                element={<AdminDesk path="humanresource" />}
-              />
-              <Route path="users" element={<AdminDesk path="users" />} />
-              <Route
-                path="announcements"
-                element={<AdminDesk path="announcements" />}
-              />
-              <Route path="pass" element={<AdminDesk path="pass" />} />
+              <Route path=":path">
+                <Route index element={<AdminDesk />} />
+                <Route path=":argA" element={<AdminDesk />}>
+                  <Route path=":argB" element={<AdminDesk />}></Route>
+                </Route>
+              </Route>
             </Route>
-
-            <Route
-              path="/account"
-              element={<>{user.isAuthenticated && <Outlet />}</>}
-            >
+            <Route path="/account">
               <Route index element={<Account />} />
-              <Route path="profile" element={<Account path="profile" />} />
-              <Route path="buspass" element={<Account path="buspass" />} />
-              <Route path="contact" element={<Account path="contact" />} />
-              <Route
-                path="favourites"
-                element={<Account path="favourites" />}
-              />
-              <Route path="history" element={<Account path="history" />} />
-              <Route
-                path="deleteAccount"
-                element={<Account path="deleteAccount" />}
-              />
+              <Route path=":path" element={<Account />} />
             </Route>
             <Route path="/logout" element={<SignOut />} />
             <Route path="/Announcements" element={<Announcement />} />

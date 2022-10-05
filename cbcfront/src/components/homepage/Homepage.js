@@ -9,6 +9,9 @@ export default function Homepage() {
       <main className="homepage">
         <Hero />
         <Announcement />
+        No of Buses...
+        Years of trust (service )...
+        Area of services (List of bus stops)...
         <Gallery />
       </main>
     </>
