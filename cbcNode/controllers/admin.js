@@ -109,3 +109,30 @@ exports.setAdmin = (req, res) => {
     res.status(500).send("something went wrong");
   }
 };
+
+exports.setAdminPrivilege = (req, res) => {
+  // e.g., http://localhost:8000/api/admin/setAdmin/63276274dc0319342809014c?admin=false
+  try {
+    User.findOne(
+      {
+        _id: req.params.userId,
+      },
+      (_, user) => {
+        if (!user) return res.json({ msg: "User not found" });
+        if (!user.isVerified) return res.json({ msg: "User is not verified" });
+        user.type = req.query.admin === "true" ? "a" : "c";
+        console.log(user.type, req.query.admin);
+        user.save((error) => {
+          if (error) {
+            return res.status(500).json({
+              msg: error.message,
+            });
+          }
+          res.send({ success: true, msg: "Task finished successfully." });
+        });
+      }
+    );
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
