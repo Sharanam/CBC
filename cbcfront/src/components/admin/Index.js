@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { Container, MainWrapper } from "../common/lib/layout/Index";
 import Sidebar from "../common/sidebar/Sidebar";
 import Announcement from "./announcement/Index";
@@ -8,11 +9,11 @@ import HumanResources from "./humanResources/Index";
 import Users from "./users/Index";
 import Pass from "./pass/Index";
 import Home from "./Home";
-import { useParams } from "react-router-dom";
+import User from "./users/User";
 
 const Desk = () => {
   let component;
-  const { path } = useParams();
+  const { path, argA } = useParams();
   switch (path) {
     case "routes":
       component = <Routes />;
@@ -28,6 +29,9 @@ const Desk = () => {
       break;
     case "users":
       component = <Users />;
+      break;
+    case "user":
+      component = <User id={argA} />;
       break;
     case "announcements":
       component = <Announcement />;
