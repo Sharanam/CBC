@@ -3,17 +3,17 @@ const handleError = require("../utils/handleError");
 
 async function createAnnouncement(req, res) {
   try {
-    const { title, description } = req.body;
-    new Announcement({ title, description })
+    const { title, description, expireAt } = req.body;
+    new Announcement({
+      title,
+      description,
+      expireAt: new Date(expireAt),
+    })
       .save()
       .then((announcement) => {
         res.json({
           success: true,
-          announcement: {
-            title: announcement.title,
-            description: announcement.description,
-            _id: announcement._id,
-          },
+          announcement,
         });
       })
       .catch((error) => {
