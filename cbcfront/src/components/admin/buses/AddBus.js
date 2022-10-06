@@ -10,7 +10,6 @@ import {
   DropDown,
 } from "../../common/lib/formElements/Index";
 import { Container } from "../../common/lib/layout/Index";
-import Divider from "../../common/lib/styledElements/Divider";
 
 const statuses = [
   "under maintenance",
@@ -125,7 +124,7 @@ const AddBus = (props) => {
                 className="negative"
                 disabled={isLoading}
                 onClick={(e) => {
-                  props.onCancle();
+                  navigate(-1);
                 }}
               >
                 Cancel

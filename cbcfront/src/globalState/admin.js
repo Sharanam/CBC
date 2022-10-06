@@ -3,7 +3,6 @@ import axios from "axios";
 const adminModel = {
   getUsers: async (payload) => {
     try {
-      console.log(payload);
       const { data } = await axios.get("/admin/getUsers", { params: payload });
       return data;
     } catch (e) {

@@ -37,7 +37,20 @@ const Announcement = () => {
                   color: "currentColor",
                 }}
               >
-                <span style={{ display: "block" }}>{announcement.title}</span>
+                <p
+                  style={{
+                    display: "flex",
+                  }}
+                >
+                  <span style={{ flexGrow: 1 }}>{announcement.title}</span>
+                  <span
+                    style={{
+                      fontSize: "0.6em",
+                    }}
+                  >
+                    {new Date(announcement.createdAt).toLocaleDateString()}
+                  </span>
+                </p>
                 <span
                   style={{
                     display: "block",

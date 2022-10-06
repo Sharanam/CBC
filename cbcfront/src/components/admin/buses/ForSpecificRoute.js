@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import busesModel from "../../../globalState/buses";
 import { BusList } from "./BusList";
@@ -11,12 +11,15 @@ export default function ForSpecificRoute(props) {
   }, [route]);
 
   const [buses, setBuses] = useState(null);
-  useEffect(() => {
+  const fetchBuses = useCallback(() => {
     busesModel.getBuses(route).then((result) => {
       if (result.success) setBuses(result.buses);
       if (result.msg) alert(result.msg);
     });
-  });
+  }, []);
+  useEffect(() => {
+    fetchBuses();
+  }, [route]);
   return (
     <>
       <BusList buses={buses} />

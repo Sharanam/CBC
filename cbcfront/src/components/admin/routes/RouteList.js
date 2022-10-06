@@ -111,7 +111,7 @@ const BusCard = ({ bus }) => {
     </>
   );
 };
-export function BusList(props) {
+export function RouteList(props) {
   return (
     <>
       {props?.buses?.map(function (bus, i) {

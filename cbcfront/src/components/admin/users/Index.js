@@ -1,14 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import adminModel from "../../../globalState/admin";
+import { Button } from "../../common/lib/formElements/Index";
 
-import Container from "../../common/lib/layout/Container";
+import { Container } from "../../common/lib/layout/Index";
 import Table from "../../common/lib/layout/table/Index";
 import Blacklist from "./Blacklist";
+import IssuePass from "./IssuePass";
+import SearchBoxes from "./SearchBoxes";
 import SetAdmin from "./SetAdmin";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [openFilterBox, setOpenFilterBox] = useState(false);
   const [payload, setPayload] = useState({
     email: "",
     name: "",
@@ -25,17 +28,23 @@ const Users = () => {
     <>
       <Container>
         <h1>Users</h1>
-        <h3 style={{ textAlign: "center", color: "var(--danger)" }}>
-          <mark>Under development</mark>
-          <br />
-          Admin can see the table containing list of users.
-          <br />
-          Can perform various tasks, such as
-          <br />
-          1) blacklisting them.
-          <br />
-          2) giving privilages of an admin
-        </h3>
+        {openFilterBox ? (
+          <SearchBoxes
+            data={payload}
+            setData={setPayload}
+            onHide={() => setOpenFilterBox(false)}
+          />
+        ) : (
+          <div
+            style={{
+              textAlign: "right",
+            }}
+          >
+            <Button onClick={() => setOpenFilterBox(true)} className="positive">
+              Filter Search
+            </Button>
+          </div>
+        )}
         {users[0] && (
           <Table>
             <thead>
@@ -45,6 +54,7 @@ const Users = () => {
                 <td>phone</td>
                 <td>bio</td>
                 <td>social</td>
+                <td>issue pass</td>
                 <td>type</td>
                 <td>Blacklist</td>
               </tr>
@@ -62,17 +72,9 @@ const Users = () => {
                       user["public"] ? "public" : "private"
                     }`}
                   >
-                    <Link
-                      to={`/admin/user/${user["_id"]}`}
-                      style={{
-                        // backgroundColor: "var(--white-light)",
-                        color: user["public"]
-                          ? "var(--light-blue)"
-                          : "var(--danger)",
-                      }}
-                    >
+                    <IssuePass id={user["_id"]} visibility={user["public"]}>
                       {user["name"]}
-                    </Link>
+                    </IssuePass>
                   </td>
                   <td
                     title={user["email"]}
@@ -93,6 +95,11 @@ const Users = () => {
                   </td>
                   <td title={user["social"]} className="textOverflow">
                     {user["social"]}
+                  </td>
+                  <td title={user["type"]} className="center">
+                    <IssuePass id={user["_id"]} visibility={user["public"]}>
+                      New Pass
+                    </IssuePass>
                   </td>
                   <td title={user["type"]} className="center">
                     <SetAdmin type={user["type"]} _id={user["_id"]} />

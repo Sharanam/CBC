@@ -10,7 +10,7 @@ const busesModel = {
       return { error: "Server down" };
     }
   },
-  getBus: async ({ busId }) => {
+  getBus: async (busId) => {
     try {
       const result = await axios.get(`/bus/${busId}`);
       return result.data;
@@ -19,7 +19,7 @@ const busesModel = {
       return { error: "Server down" };
     }
   },
-  getBuses: async ({ route }) => {
+  getBuses: async (route) => {
     try {
       const result = await axios.get(`/bus/on/${route}`);
       return result.data;
