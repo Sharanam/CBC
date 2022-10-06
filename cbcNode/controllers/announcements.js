@@ -31,7 +31,7 @@ async function getAnnouncements(req, res) {
   try {
     const announcements = await Announcement.find({})
       .sort({ updatedAt: -1 })
-      .select("-updatedAt -createdAt -__v")
+      .select("-updatedAt -__v")
       .exec();
     return res.json({
       success: true,

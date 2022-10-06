@@ -32,7 +32,7 @@ exports.addBus = (req, res) => {
 exports.editBus = (req, res) => {
   try {
     const { busId, registrationNumber, serviceType, status, route } = req.body;
-    Bus.findOne({ _id: busId, registrationNumber }, (_, bus) => {
+    Bus.findOne({ _id: busId }, (_, bus) => {
       if (!bus) return res.json({ msg: "bus not found" });
       bus.registrationNumber = registrationNumber;
       bus.serviceType = serviceType || bus.serviceType;
@@ -71,7 +71,7 @@ exports.deleteBus = (req, res) => {
 
 exports.getBus = (req, res) => {
   try {
-    const { busId } = req.body;
+    const { busId } = req.params;
     Bus.findOne(
       {
         _id: busId,

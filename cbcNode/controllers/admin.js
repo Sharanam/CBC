@@ -7,8 +7,8 @@ exports.getUsers = (req, res) => {
         {
           $match: {
             $and: [
-              { email: { $regex: req.body.email || "", $options: "i" } },
-              { name: { $regex: req.body.name || "", $options: "i" } },
+              { email: { $regex: req.query.email || "", $options: "i" } },
+              { name: { $regex: req.query.name || "", $options: "i" } },
             ],
           },
         },
@@ -24,6 +24,12 @@ exports.getUsers = (req, res) => {
           return res
             .status(500)
             .send("something went wrong while fetching the users");
+
+        console.log(
+          req
+          // `email:${req.body.email} name:${req.body.name}`,
+          // JSON.stringify(users)
+        );
         res.json(users || []);
       }
     );
