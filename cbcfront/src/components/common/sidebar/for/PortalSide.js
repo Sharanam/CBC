@@ -12,6 +12,9 @@ const PortalSide = () => {
       <li>
         <Link to="/portal/routes">Routes</Link>
       </li>
+      <li>
+        <Link to="/portal/feedback">Feedback</Link>
+      </li>
     </ul>
   );
 };

@@ -28,25 +28,6 @@ exports.newFeedback = (req, res) => {
     res.status(500).send("something went wrong");
   }
 };
-exports.updateFeedback = (req, res) => {
-  try {
-    let { message, feedbackId } = req.body;
-    message = (message || "").toString().trim();
-    const { userId } = req.user;
-    Feedback.findOne(
-      { _id: feedbackId },
 
-      (err, feedback) => {
-        if (err) return res.json({ msg: err.message });
-        if (new RegExp(feedback.user).test(userId.toString())) {
-          feedback.message = feedback.message + "\n\nEdit: " + message;
-          feedback.save().then((fb) => res.json({ feedback: fb }));
-        }
-        return res.json({ feedback });
-      }
-    );
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("something went wrong");
-  }
-};
+// it has been done again in (or let say, moved to)
+// sophisticated feedback page

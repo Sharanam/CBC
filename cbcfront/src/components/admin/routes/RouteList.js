@@ -1,21 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import busesModel from "../../../globalState/buses";
-import { Button, Label } from "../../common/lib/formElements/Index";
-import {
-  Card,
-  Divider,
-  Highlighter,
-} from "../../common/lib/styledElements/Index";
+import { Button } from "../../common/lib/formElements/Index";
+import { Card, Highlighter } from "../../common/lib/styledElements/Index";
 
-const serviceType = {
-  0: "Ordinary",
-  1: "AC",
-  2: "Sofa",
-};
-
-const BusCard = ({ bus }) => {
+const RouteCard = ({ route }) => {
   const navigate = useNavigate();
-  if (!bus) return <>No bus is available</>;
+  if (!route) return <>No route is available</>;
   return (
     <>
       <Card
@@ -39,29 +28,29 @@ const BusCard = ({ bus }) => {
               onClick={(e) => {
                 e.preventDefault();
                 window.confirm(
-                  `Are you sure you want to remove ${bus.registrationNumber} permanently?`
-                ) && navigate(`/admin/buses/delete/${bus._id}`);
+                  `Are you sure you want to remove ${route.registrationNumber} permanently?`
+                ) && navigate(`/admin/routes/delete/${route._id}`);
               }}
             >
-              Delete This Bus
+              Delete This Route
             </Button>
             <Button
               className="neutral"
               onClick={(e) => {
                 e.preventDefault();
-                navigate(`/portal/bus/${bus._id}`);
+                navigate(`/portal/route/${route._id}`);
               }}
             >
-              View Bus
+              View Route
             </Button>
             <Button
               className="positive"
               onClick={(e) => {
                 e.preventDefault();
-                navigate(`/admin/buses/edit/${bus._id}`);
+                navigate(`/admin/routes/edit/${route._id}`);
               }}
             >
-              Edit Bus Details
+              Edit Route Details
             </Button>
           </div>
         }
@@ -79,14 +68,14 @@ const BusCard = ({ bus }) => {
               textTransform: "uppercase",
             }}
           >
-            {bus.registrationNumber}
+            {route.identifier}
           </span>
           <span
             style={{
               fontSize: "0.8em",
             }}
           >
-            {serviceType[bus.serviceType]}
+            {route.tripTime} mins
           </span>
         </p>
         <p
@@ -103,9 +92,36 @@ const BusCard = ({ bus }) => {
                 color: "var(--black)",
               }}
             >
-              {bus.status}
+              {route?.stops.join(", ")}
             </span>
           </Highlighter>
+        </p>
+        <p
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "0.5rem",
+            fontSize: "0.8em",
+            margin: "0.2rem",
+          }}
+        >
+          {route?.schedule.map((s, i) => (
+            <Highlighter
+              key={i}
+              style={{
+                backgroundColor: "var(--light-dark)",
+                color: "var(--yellow)",
+              }}
+            >
+              <span
+                style={{
+                  padding: "0.05rem",
+                }}
+              >
+                {s}
+              </span>
+            </Highlighter>
+          ))}
         </p>
       </Card>
     </>
@@ -114,9 +130,9 @@ const BusCard = ({ bus }) => {
 export function RouteList(props) {
   return (
     <>
-      {props?.buses?.map(function (bus, i) {
-        return <BusCard bus={bus} key={i} />;
-      })}
+      {props?.routes?.map((route, i) => (
+        <RouteCard route={route} key={i} />
+      ))}
     </>
   );
 }

@@ -21,28 +21,7 @@ const BusStops = () => {
             gap: "0.3em",
           }}
         >
-          {busStands &&
-            busStands.map((bs, i) => (
-              <Card
-                key={i}
-                style={{
-                  backgroundColor: "var(--google-gray-700)",
-                  flexGrow: "1",
-                }}
-              >
-                <p>
-                  {bs.from} is {bs.distance} KMs away from {bs.to}.
-                </p>
-                <span
-                  style={{
-                    display: "block",
-                    fontSize: "0.8em",
-                  }}
-                >
-                  Rs. {bs.price}
-                </span>
-              </Card>
-            ))}
+          {busStands && busStands.map((bs, i) => <Card key={i}>{bs}</Card>)}
         </div>
       </Container>
     </>

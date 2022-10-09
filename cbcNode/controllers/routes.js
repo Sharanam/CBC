@@ -3,15 +3,17 @@ const handleError = require("../utils/handleError");
 
 exports.addRoute = (req, res) => {
   try {
-    const { stops, identifier } = req.body;
-    new Route({ stops, identifier })
+    const { identifier, stops, schedule, tripTime } = req.body;
+    new Route({ identifier, stops, schedule, tripTime })
       .save()
       .then((route) => {
         return res.json({
           success: true,
           route: {
-            stops,
             identifier,
+            stops,
+            schedule,
+            tripTime,
             _id: route._id,
           },
         });
@@ -29,11 +31,13 @@ exports.addRoute = (req, res) => {
 };
 exports.editRoute = (req, res) => {
   try {
-    const { routeId, stops, identifier } = req.body;
-    Route.findOne({ _id: routeId, identifier }, (_, route) => {
+    const { routeId, stops, identifier, schedule, tripTime } = req.body;
+    Route.findOne({ _id: routeId }, (_, route) => {
       if (!route) return res.json({ msg: "route not found" });
       route.stops = stops;
       route.identifier = identifier;
+      route.schedule = schedule;
+      route.tripTime = tripTime;
       route.save((error) => {
         if (error) {
           return res.json({
@@ -95,6 +99,25 @@ exports.getRoutes = (req, res) => {
       success: false,
       msg: "No direct bus is available for given places.",
     });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("something went wrong");
+  }
+};
+
+exports.getAllRoutes = (req, res) => {
+  try {
+    Route.find()
+      .select("-__v")
+      .then((routes) => {
+        if (routes)
+          return res.json({
+            success: true,
+            routes,
+            msg: `${routes.length} routes found in the system.`,
+          });
+        res.json({ success: false, msg: "No bus for given route." });
+      });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");

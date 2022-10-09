@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const busStandsModel = {
+  stops: null,
   getStands: async () => {
     try {
       const result = await axios.get("/busStands");

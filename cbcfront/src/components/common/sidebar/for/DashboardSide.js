@@ -22,7 +22,7 @@ const DashboardSide = () => {
         <Link to="/admin/announcements">Announcements</Link>
       </li>
       <li>
-        <Link to="/admin/pass">Pass</Link>
+        <Link to="/admin/feedback">Feedback</Link>
       </li>
     </ul>
   );

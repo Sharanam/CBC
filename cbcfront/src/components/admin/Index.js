@@ -7,7 +7,7 @@ import Buses from "./buses/Index";
 import BusStops from "./busStops/Index";
 import HumanResources from "./humanResources/Index";
 import Users from "./users/Index";
-import Pass from "./pass/Index";
+import Feedback from "./feedback/Index";
 import Home from "./Home";
 import User from "./users/User";
 
@@ -36,8 +36,8 @@ const Desk = () => {
     case "announcements":
       component = <Announcement />;
       break;
-    case "pass":
-      component = <Pass />;
+    case "feedback":
+      component = <Feedback />;
       break;
     default:
       component = <Home />;

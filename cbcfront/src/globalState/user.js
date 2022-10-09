@@ -143,5 +143,14 @@ const userModel = {
       return false;
     }
   },
+  getMyProfile: async () => {
+    try {
+      const { data } = await axios.get("/auth/profile");
+      if (data.success) return data.user;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
 };
 export default userModel;

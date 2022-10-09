@@ -9,9 +9,9 @@ const AccountSide = () => {
       <li>
         <Link to="/account/profile">Profile</Link>
       </li>
-      <li>
+      {/* <li>
         <Link to="/account/contact">Contact</Link>
-      </li>
+      </li> */}
       <li>
         <Link to="/account/favourites">Favourites</Link>
       </li>

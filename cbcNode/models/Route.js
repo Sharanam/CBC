@@ -7,13 +7,11 @@ let routeSchema = new Schema(
     stops: [{ type: String, required: true }],
     schedule: [
       {
-        start: {
-          type: Date,
-          required: [
-            true,
-            "The time to start the journey by this bus has not been given.",
-          ],
-        },
+        type: String,
+        required: [
+          true,
+          "The time to start the journey by this bus has not been given.",
+        ],
       },
     ],
     tripTime: {

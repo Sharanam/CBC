@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import ViewRoutes from "./ViewRoutes";
+import AddRoute from "./AddRoute";
 
 const Route = () => {
   let component;
@@ -15,7 +16,7 @@ const Route = () => {
       component = `edit route ${argB}`;
       break;
     case "add":
-      component = "add route";
+      component = <AddRoute />;
       break;
     default:
       component = <ViewRoutes />;

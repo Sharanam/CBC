@@ -6,9 +6,11 @@ import Profile from "./Profile";
 const Home = () => {
   return (
     <Container size="md">
-      <Profile />
+      <Profile view="minimal" />
       <Link to="/logout">
-        <Button className="negative">Logout</Button>
+        <Button style={{ width: "100%" }} className="negative">
+          Logout
+        </Button>
       </Link>
     </Container>
   );

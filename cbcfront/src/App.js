@@ -78,7 +78,12 @@ function App() {
             <Route path="signup" element={<CommuterSignup />} />
             <Route path="portal">
               <Route index element={<CommuterPortal />} />
-              <Route path=":path" element={<CommuterPortal />} />
+              <Route path=":path">
+                <Route index element={<CommuterPortal />} />
+                <Route path=":argA" element={<CommuterPortal />}>
+                  <Route path=":argB" element={<CommuterPortal />}></Route>
+                </Route>
+              </Route>
             </Route>
             <Route
               path="admin"

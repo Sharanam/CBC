@@ -47,7 +47,7 @@ const AddBus = (props) => {
         }}
       >
         {{
-          title: "New Bus into Database",
+          title: "New Bus",
           formFields: (
             <>
               {/* <Label htmlFor="routeIdentifier">Chosen Route</Label>

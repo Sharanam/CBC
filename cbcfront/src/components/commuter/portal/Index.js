@@ -5,10 +5,11 @@ import PortalBusStops from "./busstops/Index";
 import { MainWrapper } from "../../common/lib/layout/Index";
 import Home from "./Home";
 import { useParams } from "react-router-dom";
+import Feedback from "./feedback/Index";
 
 const Desk = () => {
   let component;
-  let { path } = useParams();
+  let { path, argA } = useParams();
   switch (path) {
     case "routes":
       component = <PortalRoutes />;
@@ -19,7 +20,9 @@ const Desk = () => {
     case "busstops":
       component = <PortalBusStops />;
       break;
-
+    case "feedback":
+      component = <Feedback id={argA} />;
+      break;
     default:
       component = <Home />;
       break;

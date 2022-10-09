@@ -26,7 +26,11 @@ const ViewBuses = () => {
   return (
     <>
       {msg && <Card className="info-message">{msg}</Card>}
-      <Button className="positive" onClick={() => navigate("add")}>
+      <Button
+        className="positive"
+        onClick={() => navigate("add")}
+        style={{ width: "100%" }}
+      >
         New Bus
       </Button>
       <h1>Buses</h1>
