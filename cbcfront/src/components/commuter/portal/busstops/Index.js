@@ -34,7 +34,7 @@ const BusStops = (props) => {
         }}
       >
         {{
-          title: "Search Buses",
+          title: "Live Bus Stop",
           formFields: (
             <Container size="sm">
               <SearchAutocomplete
@@ -51,7 +51,7 @@ const BusStops = (props) => {
           buttons: (
             <>
               <Button type="submit" className="positive">
-                Search Buses
+                Live Bus Stop
               </Button>
             </>
           ),

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import busesModel from "../../../globalState/buses";
+import routesModel from "../../../globalState/routes";
 
-export default function DeleteBus(props) {
+export default function DeleteRoute(props) {
   const navigate = useNavigate();
   const fetchBus = async () => {
-    const res = await busesModel.deleteBus({ busId: props.id });
+    const res = await routesModel.deleteRoute({ routeId: props.route });
     if (res.msg) alert(res.msg);
     if (res.success) {
       navigate(-1);

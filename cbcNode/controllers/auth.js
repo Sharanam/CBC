@@ -222,7 +222,7 @@ exports.resendToken = (req, res) => {
 };
 exports.deleteUser = (req, res) => {
   try {
-    User.findByIdAndDelete(req.user.userId, async (err) => {
+    User.findByIdAndDelete(req.user.userId, (err) => {
       if (err) return res.status(500).send({ msg: err.message });
       res.json({
         success: true,

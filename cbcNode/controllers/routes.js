@@ -1,3 +1,4 @@
+const { isMongoId } = require("validator");
 const Route = require("../models/Route");
 const handleError = require("../utils/handleError");
 
@@ -56,15 +57,16 @@ exports.editRoute = (req, res) => {
 exports.deleteRoute = (req, res) => {
   try {
     const { routeId } = req.body;
-    if (isMongoId(routeId)) return res.json({ msg: "invalid route id" });
-    Route.findByIdAndDelete(routeId, async (err) => {
+    if (!isMongoId(routeId)) return res.json({ msg: "invalid route id" });
+    Route.findByIdAndDelete(routeId, (err) => {
       if (err) return res.status(500).send({ msg: err.message });
       res.json({
         success: true,
-        msg: "bus deleted successfully",
+        msg: "route deleted successfully",
       });
     });
   } catch (err) {
+    console.log(err);
     res.status(500).send(err.message);
   }
 };

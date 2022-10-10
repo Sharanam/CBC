@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import ViewRoutes from "./ViewRoutes";
 import AddRoute from "./AddRoute";
+import DeleteRoute from "./DeleteRoute";
 
 const Route = () => {
   let component;
@@ -10,7 +11,7 @@ const Route = () => {
       component = `View Route ${argB}. here "buses/ForSpecificRoute.js`;
       break;
     case "delete":
-      component = `delete route ${argB}`;
+      component = <DeleteRoute route={argB} />;
       break;
     case "edit":
       component = `edit route ${argB}`;

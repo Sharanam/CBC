@@ -57,7 +57,7 @@ exports.deleteBus = (req, res) => {
   try {
     const { busId } = req.body;
     if (!isMongoId(busId)) return res.json({ msg: "invalid bus id" });
-    Bus.findByIdAndDelete(busId, async (err) => {
+    Bus.findByIdAndDelete(busId, (err) => {
       if (err) return res.status(500).send({ msg: err.message });
       res.json({
         success: true,
