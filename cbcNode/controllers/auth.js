@@ -338,8 +338,8 @@ exports.updateProfile = (req, res) => {
       (err, user) => {
         if (err) return res.json({ msg: err.message });
         user.name = name;
-        user.email = email;
-        user.phone = phone;
+        // user.email = email;
+        // user.phone = phone;
         user.bio = bio;
         user.social = social;
         user.public = public;

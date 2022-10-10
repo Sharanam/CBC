@@ -72,20 +72,19 @@ exports.deleteBus = (req, res) => {
 exports.getBus = (req, res) => {
   try {
     const { busId } = req.params;
-    console.log(busId);
-    Bus.findOne(
-      {
-        registrationNumber: busId,
-      },
-      (err, bus) => {
-        if (err) return res.status(500).send(err.message);
-        return res.json({
-          success: true,
-          bus,
-          msg: !bus ? "No bus with given number found." : null,
-        });
-      }
-    );
+    if (!busId) return res.json({ success: false, msg: "Id is required." });
+    const criteria = {};
+    if (isMongoId(busId)) criteria._id = busId;
+    else criteria.registrationNumber = busId;
+    console.log(criteria);
+    Bus.findOne(criteria, (err, bus) => {
+      if (err) return res.status(500).send(err.message);
+      return res.json({
+        success: true,
+        bus,
+        msg: !bus ? "No bus with given number found." : null,
+      });
+    });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");

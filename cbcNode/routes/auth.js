@@ -28,7 +28,7 @@ router.post("/confirmToken", confirmToken);
 router.post("/resendToken", resendToken);
 
 router.get("/profile", getUser, getProfile);
-router.post("/profile", isAuthorizedCommuter, getUser, updateProfile);
+router.post("/profile", getUser, updateProfile);
 router.get("/profile/:id", getProfileOf);
 
 router.delete("/deleteUser", getUser, deleteUser);

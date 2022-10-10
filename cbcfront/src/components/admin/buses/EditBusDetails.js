@@ -32,9 +32,10 @@ export default function EditBusDetails(props) {
   const fetchBus = useCallback(() => {
     busesModel.getBus(regNumber).then((result) => {
       setPayload({
-        registrationNumber: result.bus.registrationNumber,
-        serviceType: result.bus.serviceType,
-        status: result.bus.status,
+        registrationNumber:
+          result?.bus?.registrationNumber || payload.registrationNumber,
+        serviceType: result?.bus?.serviceType || payload.serviceType,
+        status: result?.bus?.status || payload.status,
       });
     });
   }, []);
