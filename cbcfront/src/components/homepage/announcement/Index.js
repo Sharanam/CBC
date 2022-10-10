@@ -2,6 +2,7 @@ import announcementModel from "../../../globalState/announcement";
 import { useEffect, useState } from "react";
 import { Card } from "../../common/lib/styledElements/Index";
 import Container from "../../common/lib/layout/Container";
+import getDateInFormat from "../../../utils/getDate";
 
 const Announcement = () => {
   const [announcements, setAnnouncements] = useState(null);
@@ -48,7 +49,7 @@ const Announcement = () => {
                       fontSize: "0.6em",
                     }}
                   >
-                    {new Date(announcement.createdAt).toLocaleDateString()}
+                    {getDateInFormat(announcement.createdAt)}
                   </span>
                 </p>
                 <span

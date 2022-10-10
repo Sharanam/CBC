@@ -6,22 +6,30 @@ import { MainWrapper } from "../../common/lib/layout/Index";
 import Home from "./Home";
 import { useParams } from "react-router-dom";
 import Feedback from "./feedback/Index";
+import ProfileOf from "./profileOf/User";
 
 const Desk = () => {
   let component;
-  let { path, argA } = useParams();
+  let { path, argA, argB } = useParams();
   switch (path) {
     case "routes":
-      component = <PortalRoutes />;
+      component = argB ? (
+        <PortalRoutes from={argA} to={argB} />
+      ) : (
+        <PortalRoutes identifier={argA} />
+      );
       break;
     case "buses":
-      component = <PortalBuses />;
+      component = <PortalBuses regNumber={argA} />;
       break;
     case "busstops":
-      component = <PortalBusStops />;
+      component = <PortalBusStops name={argA} />;
       break;
     case "feedback":
       component = <Feedback id={argA} />;
+      break;
+    case "profile":
+      component = <ProfileOf userId={argA} />;
       break;
     default:
       component = <Home />;

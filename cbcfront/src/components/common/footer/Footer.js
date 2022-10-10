@@ -49,7 +49,7 @@ export default function Footer() {
             <h4>Important Links</h4>
             <ul>
               <li>
-                <Link to="Feedback">Feedback</Link>
+                <Link to="/portal/feedback">Feedback</Link>
               </li>
               <li>
                 <Link to="Announcements">Announcements</Link>

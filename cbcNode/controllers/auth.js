@@ -12,6 +12,7 @@ const { isEmpty } = require("../utils/errorGenerator");
 const handleError = require("../utils/handleError");
 const isStrongPassword = require("../utils/isStrongPassword");
 const { sendEmail } = require("../utils/sendEmail");
+const { getProfileOf } = require("../utils/getProfileOfUser");
 
 function sendAccountActivator(user, _, res) {
   jwt.sign(
@@ -327,22 +328,44 @@ exports.getProfile = (req, res) => {
   }
 };
 
+exports.updateProfile = (req, res) => {
+  try {
+    const { name, email, phone, bio, social, public } = req.body;
+    User.findOne(
+      {
+        _id: req.user.userId,
+      },
+      (err, user) => {
+        if (err) return res.json({ msg: err.message });
+        user.name = name;
+        user.email = email;
+        user.phone = phone;
+        user.bio = bio;
+        user.social = social;
+        user.public = public;
+        user
+          .save()
+          .then(() => {
+            return res.json({
+              success: true,
+              msg: "Profile Updated successfully.",
+            });
+          })
+          .catch(function (err) {
+            return res.json({ msg: err.message });
+          });
+      }
+    );
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("something went wrong");
+  }
+};
+
 exports.getProfileOf = (req, res) => {
   try {
     const { id } = req.params;
-    if (isMongoId(id))
-      User.findOne({ _id: id })
-        .select("name bio social public")
-        .then((user) => {
-          if (user.public) res.json({ success: true, user });
-          else
-            res.json({
-              success: true,
-              user: { name: "Anonymous", bio: "", social: "" },
-            });
-        })
-        .catch((err) => res.json({ msg: err.message }));
-    else return res.json({ msg: "Please Enter valid Id" });
+    res.json(getProfileOf(id));
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");

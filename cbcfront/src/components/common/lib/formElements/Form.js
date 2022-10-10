@@ -3,7 +3,7 @@ export default function Form(props) {
     <form
       {...props}
       style={{
-        margin: "2rem auto",
+        margin: props.margin || "2rem auto",
         width: "100%",
         display: "flex",
         flexDirection: "column",

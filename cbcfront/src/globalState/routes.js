@@ -10,16 +10,16 @@ const routesModel = {
       return { error: "Server down" };
     }
   },
-  getRoutes: async (busId) => {
+  getRoutes: async (payload) => {
     try {
-      const result = await axios.get(`/route`);
+      const result = await axios.get(`/route`, { params: payload });
       return result.data;
     } catch (err) {
       alert(err.message);
       return { error: "Server down" };
     }
   },
-  getAllRoutes: async (busId) => {
+  getAllRoutes: async () => {
     try {
       const result = await axios.get(`/route/view/all`);
       return result.data;

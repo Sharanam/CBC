@@ -28,4 +28,4 @@ let passSchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("Route", passSchema);
+module.exports = mongoose.model("Pass", passSchema);

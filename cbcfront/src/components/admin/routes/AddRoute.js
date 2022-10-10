@@ -8,7 +8,7 @@ import {
   Input,
   Label,
 } from "../../common/lib/formElements/Index";
-import SearchAutocomplete from "../../common/lib/formElements/searchAutocomplete/SearchAutocomplete";
+import { SearchAutocomplete } from "../../common/lib/formElements/Index";
 import { Container } from "../../common/lib/layout/Index";
 
 const AddRoute = (props) => {

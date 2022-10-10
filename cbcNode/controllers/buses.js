@@ -72,13 +72,18 @@ exports.deleteBus = (req, res) => {
 exports.getBus = (req, res) => {
   try {
     const { busId } = req.params;
+    console.log(busId);
     Bus.findOne(
       {
-        _id: busId,
+        registrationNumber: busId,
       },
       (err, bus) => {
         if (err) return res.status(500).send(err.message);
-        res.json({ success: true, bus });
+        return res.json({
+          success: true,
+          bus,
+          msg: !bus ? "No bus with given number found." : null,
+        });
       }
     );
   } catch (error) {
@@ -107,7 +112,7 @@ exports.getBuses = (req, res) => {
 exports.viewBuses = (req, res) => {
   try {
     const pageNumber = req.params.page;
-    // use page number is pagination is needed
+    // use page number for pagination
 
     Bus.find().then((buses) => {
       if (buses)

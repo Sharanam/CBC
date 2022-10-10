@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
-  Error,
   Form,
   Input,
   Label,
 } from "../../../common/lib/formElements/Index";
 import Container from "../../../common/lib/layout/Container";
-
-const errors = { bus: "no bus found" };
+import BusCurrent from "./Bus";
 const Bus = (props) => {
-  const [busNumber, setBusNumber] = useState("");
+  const [busNumber, setBusNumber] = useState(props.regNumber || "");
+  const navigate = useNavigate();
+  if (props.regNumber) return <BusCurrent number={busNumber} />;
   return (
     <Container size="md">
       <Form
@@ -19,6 +20,7 @@ const Bus = (props) => {
         }}
         onSubmit={(e) => {
           e.preventDefault();
+          navigate(`/portal/buses/${busNumber}`);
         }}
       >
         {{
@@ -28,7 +30,6 @@ const Bus = (props) => {
               <Label className="required" htmlFor="BusNumber">
                 Bus Number
               </Label>
-              {errors?.bus && <Error>{errors.bus}</Error>}
               <Input
                 type="text"
                 placeholder="Enter Bus Number"
@@ -36,11 +37,14 @@ const Bus = (props) => {
                 onChange={(e) => {
                   setBusNumber(e.target.value);
                 }}
-                error="Name require"
               />
             </>
           ),
-          buttons: <Button className="positive">Search Bus</Button>,
+          buttons: (
+            <Button type="submit" className="positive">
+              Search Bus
+            </Button>
+          ),
         }}
       </Form>
     </Container>

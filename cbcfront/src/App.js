@@ -9,9 +9,6 @@ import jwtDecode from "jwt-decode";
 
 import "./App.css";
 
-// import { lazy } from "react";
-// const Header = lazy(() => import("./components/common/header/Header"));
-
 import Header from "./components/common/header/Header";
 import Homepage from "./components/homepage/Homepage";
 import Footer from "./components/common/footer/Footer";
@@ -46,11 +43,8 @@ function App() {
     signOut(userModel);
   }
 
-  const [user, setUser] = useSessionStorage("user", userModel.user);
-  const [userDetails, setUserDetails] = useSessionStorage(
-    "userDetails",
-    userModel.userDetails
-  );
+  const [user] = useSessionStorage("user", userModel.user);
+  const [userDetails] = useSessionStorage("userDetails", userModel.userDetails);
 
   const isCommuter = user.isAuthenticated && /^c/i.test(userDetails.type);
   const isAdmin = user.isAuthenticated && /^a/i.test(userDetails.type);
@@ -114,6 +108,7 @@ function App() {
             <Route path="/logout" element={<SignOut />} />
             <Route path="/Announcements" element={<Announcement />} />
             <Route path="/Gallery" element={<Gallery />} />
+            <Route path="/profile/:id" element={<CommuterPortal />} />
             <Route path="/*" element={<FourZeroFour />} />
           </Route>
         </Routes>

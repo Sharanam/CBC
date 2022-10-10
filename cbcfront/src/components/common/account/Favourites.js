@@ -1,12 +1,13 @@
-import { Label, Input } from "../lib/formElements/Index";
-import { Divider } from "../lib/styledElements/Index";
+import { Container } from "../lib/layout/Index";
 
 const Favourites = () => {
   return (
-    <>
-      <h2>Favourites</h2>
-      <Label>Name</Label>
-    </>
+    <Container size="sm">
+      <h1>Favourites</h1>
+      <p>
+        <mark>Here, commuter can manage the list of their regular routes.</mark>
+      </p>
+    </Container>
   );
 };
 export default Favourites;

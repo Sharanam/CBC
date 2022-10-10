@@ -30,7 +30,7 @@ export default function AddFeedback() {
           setIsLoading(false);
           if (response?.success) {
             alert("Feedback saved !!");
-            navigate("/portal/feedback");
+            navigate("/portal");
           } else {
             alert("Something is erroneous in the data");
           }

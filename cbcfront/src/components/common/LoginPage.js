@@ -80,6 +80,7 @@ export default function LoginPage() {
                 <Input
                   type="email"
                   placeholder="Enter Email Id"
+                  autoFocus
                   value={user.email}
                   onChange={(e) => {
                     setUser((User) => ({

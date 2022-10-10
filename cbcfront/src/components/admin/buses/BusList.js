@@ -49,7 +49,7 @@ const BusCard = ({ bus }) => {
               className="neutral"
               onClick={(e) => {
                 e.preventDefault();
-                navigate(`/portal/bus/${bus._id}`);
+                navigate(`/portal/buses/${bus._id}`);
               }}
             >
               View Bus

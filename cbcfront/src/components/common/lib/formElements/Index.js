@@ -4,5 +4,6 @@ import Label from "./label/Label.js";
 import Button from "./button/Button.js";
 import Error from "./Error";
 import DropDown from "./DropDown";
+import SearchAutocomplete from "./searchAutocomplete/SearchAutocomplete";
 
-export { Form, Input, Label, Button, Error, DropDown };
+export { Form, Input, Label, Button, Error, DropDown, SearchAutocomplete };

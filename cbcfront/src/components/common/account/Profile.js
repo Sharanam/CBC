@@ -1,30 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import userModel from "../../../globalState/user";
 import { Label, Input, Form, Button } from "../lib/formElements/Index";
 import { Container } from "../lib/layout/Index";
-import { Card, Divider } from "../lib/styledElements/Index";
+import { Card } from "../lib/styledElements/Index";
 
-const type = { a: "admin", c: "commuter" };
-function Field({ label, value }) {
-  return (
-    <>
-      <Label
-        style={{
-          textTransform: "capitalize",
-        }}
-      >
-        {label}
-      </Label>
-      <Input type="text" readOnly value={value} />
-    </>
-  );
-}
 const Profile = (props) => {
-  const [errors, setErrors] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
-  const navigate = useNavigate();
 
   const fetchProfile = useCallback(() => {
     setIsLoading(true);
@@ -37,43 +19,144 @@ const Profile = (props) => {
     fetchProfile();
   }, []);
   if (isLoading) return <h3>Loading...</h3>;
+  if (props.card) {
+    return (
+      <Container size="sm">
+        <Card
+          style={{
+            color: "var(--bov-dark)",
+            backgroundColor: "var(--tubelight)",
+          }}
+        >
+          <h2>
+            {data.name}
+            <span style={{ fontSize: "0.5em", marginLeft: "2pt" }}>
+              {data.public ? "Public" : "Private"}
+            </span>
+          </h2>
+          <p>{data.bio}</p>
+          <p>{data.social}</p>
+        </Card>
+      </Container>
+    );
+  }
   return (
     <Container size="sm">
-      <Form>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          userModel.updateMyProfile(data);
+        }}
+      >
         {{
-          title: "Profile",
+          title: "Edit Profile",
           formFields: (
             <>
-              <Field label="Name" value={data.name} />
-              <Field label="email" value={data.email} />
-              <Field label="phone" value={data.phone} />
-              <Field label="Bio" value={data.bio} />
-              <Field label="Social" value={data.social} />
-              {props.view !== "minimal" && (
-                <>
-                  {" "}
-                  <Field
-                    label="Visibility"
-                    value={data.public ? "Public" : "Private"}
-                  />
-                  <Field label="Type" value={type[data.type]} />
-                  <Field
-                    label="Authorized User"
-                    value={data.isVerified ? "Yes" : "No"}
-                  />
-                  <Field
-                    label="Blocked User"
-                    value={data.isBlacklisted ? "Yes" : "No"}
-                  />
-                </>
-              )}
+              <Label
+                style={{
+                  textTransform: "capitalize",
+                }}
+              >
+                Name
+              </Label>
+              <Input
+                type="text"
+                value={data.name}
+                onChange={(e) => {
+                  setData({ ...data, name: e.target.value });
+                }}
+              />
+              <Label
+                style={{
+                  textTransform: "capitalize",
+                }}
+              >
+                email
+              </Label>
+              <Input
+                type="email"
+                value={data.email}
+                onChange={(e) => {
+                  setData({ ...data, email: e.target.value });
+                }}
+              />
+              <Label
+                style={{
+                  textTransform: "capitalize",
+                }}
+              >
+                bio
+              </Label>
+              <Input
+                type="text"
+                value={data.bio}
+                onChange={(e) => {
+                  setData({ ...data, bio: e.target.value });
+                }}
+              />
+              <Label
+                style={{
+                  textTransform: "capitalize",
+                }}
+              >
+                social
+              </Label>
+              <Input
+                type="text"
+                value={data.social}
+                onChange={(e) => {
+                  setData({ ...data, social: e.target.value });
+                }}
+              />
+              <Label
+                style={{
+                  textTransform: "capitalize",
+                }}
+              >
+                phone
+              </Label>
+              <Input
+                type="text"
+                value={data.phone}
+                onChange={(e) => {
+                  setData({ ...data, phone: e.target.value });
+                }}
+              />
+              <span>
+                <Label
+                  style={{
+                    textTransform: "capitalize",
+                  }}
+                  htmlFor="public"
+                >
+                  private:
+                </Label>
+                <Input
+                  type="checkbox"
+                  style={{
+                    margin: "0 0.5em",
+                  }}
+                  name="public"
+                  checked={!data.public}
+                  onChange={(e) => {
+                    setData({ ...data, public: !data.public });
+                  }}
+                />
+              </span>
+              <p
+                style={{
+                  textAlign: "center",
+                  color: data.isVerified ? "currentColor" : "var(--danger)",
+                }}
+              >
+                You Have {data.isVerified ? "Verified" : "Not Verified"} Your
+                Email Id.
+              </p>
             </>
           ),
           buttons: (
             <>
-              {props.view !== "minimal" && (
-                <Button className="positive">Update Profile</Button>
-              )}
+              <Button className="positive">Update Profile</Button>
             </>
           ),
         }}

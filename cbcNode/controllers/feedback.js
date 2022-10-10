@@ -1,5 +1,6 @@
 const { isMongoId } = require("validator");
 const Feedback = require("../models/Feedback");
+const { getProfileOf } = require("../utils/getProfileOfUser");
 const handleError = require("../utils/handleError");
 
 exports.newFeedback = (req, res) => {
@@ -56,7 +57,8 @@ exports.getFeedback = (req, res) => {
       },
       (err, feedback) => {
         if (err) return res.status(500).send(err.message);
-        res.json({ success: true, feedback });
+        if (feedback) res.json({ success: true, feedback });
+        res.json({ success: false, msg: "No feedback for given id." });
       }
     );
   } catch (error) {
@@ -67,17 +69,18 @@ exports.getFeedback = (req, res) => {
 exports.viewFeedbacks = (req, res) => {
   try {
     const pageNumber = req.params.page;
-    // use page number is pagination is needed
+    // use page number for pagination
 
-    Feedback.find().then((feedbacks) => {
-      if (feedbacks)
+    Feedback.find()
+      .populate("users", "name")
+      .exec()
+      .then((feedbacks) => {
         return res.json({
           success: true,
           feedbacks,
           msg: `${feedbacks.length} feedbacks found in the system.`,
         });
-      res.json({ success: false, msg: "No feedback for given id." });
-    });
+      });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Something went wrong");

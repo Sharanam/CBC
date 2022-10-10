@@ -152,5 +152,23 @@ const userModel = {
       return false;
     }
   },
+  updateMyProfile: async (payload) => {
+    try {
+      const { data } = await axios.post("/auth/profile", payload);
+      if (data.msg) alert(data.msg);
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  getProfileOf: async (userId) => {
+    try {
+      const { data } = await axios.get(`/auth/profile/${userId}`);
+      if (data.success) return data.user;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
 };
 export default userModel;
