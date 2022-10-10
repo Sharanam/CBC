@@ -36,17 +36,16 @@ const BusStops = (props) => {
         {{
           title: "Live Bus Stop",
           formFields: (
-            <Container size="sm">
-              <SearchAutocomplete
-                data={busStands}
-                injected={stop}
-                tabIndex="1"
-                handleCallback={(selected) => {
-                  setStop(selected || "");
-                }}
-                placeholder="at this busstop"
-              />
-            </Container>
+            <SearchAutocomplete
+              data={busStands}
+              injected={stop}
+              tabIndex="1"
+              handleCallback={(selected) => {
+                setStop(selected || "");
+              }}
+              placeholder="at this busstop"
+              style={{ width: "100%" }}
+            />
           ),
           buttons: (
             <>

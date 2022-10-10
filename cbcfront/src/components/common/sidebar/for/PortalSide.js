@@ -4,16 +4,16 @@ const PortalSide = () => {
   return (
     <ul>
       <li>
-        <Link to="/portal/busstops">Bus Stops</Link>
+        <Link to="/portal/busstops">Live Bus Stops</Link>
       </li>
       <li>
-        <Link to="/portal/buses">Buses</Link>
+        <Link to="/portal/buses">Live Bus</Link>
       </li>
       <li>
-        <Link to="/portal/routes">Routes</Link>
+        <Link to="/portal/routes">Search Routes</Link>
       </li>
       <li>
-        <Link to="/portal/feedback">Feedback</Link>
+        <Link to="/portal/feedback">Give Feedback</Link>
       </li>
     </ul>
   );

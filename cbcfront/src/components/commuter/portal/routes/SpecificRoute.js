@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import routesModel from "../../../../globalState/routes";
 import Form from "../../../common/lib/formElements/Form";
 import {
   Button,
+  DropDown,
   Error,
   Input,
   Label,
+  SearchAutocomplete,
 } from "../../../common/lib/formElements/Index";
 import Container from "../../../common/lib/layout/Container";
 
@@ -15,6 +18,15 @@ function BusList(props) {
 
 const SpecificRoute = (props) => {
   const [routeNumber, setRouteNumber] = useState(props.identifier || "");
+  const [routes, setRoutes] = useState([]);
+  const fetchRoutes = useCallback(() => {
+    routesModel.getAllRoutes().then((result) => {
+      setRoutes(result.routes.map((a) => a.identifier));
+    });
+  }, []);
+  useEffect(() => {
+    fetchRoutes();
+  }, [props.identifier]);
   const navigate = useNavigate();
   if (props.identifier) {
     return <BusList i={props.identifier} />;
@@ -29,20 +41,19 @@ const SpecificRoute = (props) => {
         margin="unset"
       >
         {{
-          title: "Search Specific Route",
+          title: "Select Route",
           formFields: (
             <>
               <Label className="required" htmlFor="Route">
                 Route Number
               </Label>
-              <Input
-                type="text"
-                placeholder="Enter Route Number"
-                value={routeNumber}
-                onChange={(e) => {
-                  setRouteNumber(e.target.value);
+              <SearchAutocomplete
+                style={{ width: "100%" }}
+                data={routes}
+                handleCallback={(selected) => {
+                  setRouteNumber(selected);
                 }}
-                error="Name require"
+                placeholder="Route Identifier"
               />
             </>
           ),

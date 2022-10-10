@@ -7,7 +7,7 @@ export default function BusCurrent(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [busDetails, setBusDetails] = useState(null);
   const navigate = useNavigate();
-  const fetch = async () => {
+  const fetchBus = async () => {
     setIsLoading(true);
     const res = await busesModel.getBus(regNumber);
     if (res.msg) {
@@ -18,7 +18,7 @@ export default function BusCurrent(props) {
     setIsLoading(false);
   };
   useEffect(() => {
-    fetch();
+    fetchBus();
   }, [regNumber]);
   if (isLoading) return "Loading...";
   return <>{JSON.stringify(busDetails)}</>;

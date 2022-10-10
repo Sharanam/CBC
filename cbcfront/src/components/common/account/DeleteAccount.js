@@ -17,7 +17,7 @@ const DeleteAccount = () => {
           gap: "0.5rem",
         }}
       >
-        <Label>Delete your account permanently !!!</Label>
+        <Label>Delete this account permanently !!!</Label>
         <Button
           className="negative"
           onClick={() => {

@@ -205,7 +205,7 @@ const BetweenStops = (props) => {
         }}
       >
         {{
-          title: "Search Routes",
+          title: "Get Available Routes",
           formFields: (
             <Container
               size="sm"
