@@ -56,6 +56,7 @@ const Profile = (props) => {
                 style={{
                   textTransform: "capitalize",
                 }}
+                className="required"
               >
                 Name
               </Label>
@@ -64,20 +65,6 @@ const Profile = (props) => {
                 value={data.name}
                 onChange={(e) => {
                   setData({ ...data, name: e.target.value });
-                }}
-              />
-              <Label
-                style={{
-                  textTransform: "capitalize",
-                }}
-              >
-                email
-              </Label>
-              <Input
-                type="email"
-                value={data.email}
-                onChange={(e) => {
-                  setData({ ...data, email: e.target.value });
                 }}
               />
               <Label
@@ -108,20 +95,6 @@ const Profile = (props) => {
                   setData({ ...data, social: e.target.value });
                 }}
               />
-              <Label
-                style={{
-                  textTransform: "capitalize",
-                }}
-              >
-                phone
-              </Label>
-              <Input
-                type="text"
-                value={data.phone}
-                onChange={(e) => {
-                  setData({ ...data, phone: e.target.value });
-                }}
-              />
               <span>
                 <Label
                   style={{
@@ -143,6 +116,44 @@ const Profile = (props) => {
                   }}
                 />
               </span>
+              <Label
+                style={{
+                  textTransform: "capitalize",
+                }}
+              >
+                phone
+              </Label>
+              <Input
+                type="text"
+                style={{
+                  backgroundColor: "var(--google-gray-700)",
+                  color: "var(--tubelight)",
+                }}
+                value={data.phone}
+                readOnly
+                // onChange={(e) => {
+                //   setData({ ...data, phone: e.target.value });
+                // }}
+              />
+              <Label
+                style={{
+                  textTransform: "capitalize",
+                }}
+              >
+                email
+              </Label>
+              <Input
+                type="email"
+                style={{
+                  backgroundColor: "var(--google-gray-700)",
+                  color: "var(--tubelight)",
+                }}
+                value={data.email}
+                readOnly
+                // onChange={(e) => {
+                //   setData({ ...data, email: e.target.value });
+                // }}
+              />
               <p
                 style={{
                   textAlign: "center",
