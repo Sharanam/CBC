@@ -1,6 +1,8 @@
 export default function getDateInFormat(date) {
-  return new Date(date)
-    .toLocaleDateString("en-CA")
-    .toString()
-    .replace(/-/gi, "/");
+  date = new Date(date);
+  return /invalid/ig.test(date.toString()) ? "" :
+    date
+      .toLocaleDateString("en-CA")
+      .toString()
+      .replace(/-/gi, "/");
 }
