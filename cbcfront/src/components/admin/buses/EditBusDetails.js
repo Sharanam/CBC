@@ -25,6 +25,7 @@ export default function EditBusDetails(props) {
   const [payload, setPayload] = useState({
     registrationNumber: "Loading...",
     serviceType: "-1",
+    capacity: "30",
     status: "Loading...",
   });
   const navigate = useNavigate();
@@ -98,6 +99,22 @@ export default function EditBusDetails(props) {
                     setPayload((payload) => ({
                       ...payload,
                       serviceType: e.target.value,
+                    }));
+                  }}
+                />
+                <Label className="required" htmlFor="capacity">
+                  Maximum capacity of the bus
+                </Label>
+                {errors?.capacity && <Error>{errors.capacity}</Error>}
+                <Input
+                  type="number"
+                  min="15"
+                  placeholder="Enter the capacity of the bus"
+                  value={payload.capacity}
+                  onChange={(e) => {
+                    setPayload((payload) => ({
+                      ...payload,
+                      capacity: e.target.value,
                     }));
                   }}
                 />
