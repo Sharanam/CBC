@@ -10,6 +10,7 @@ import Users from "./users/Index";
 import Feedback from "./feedback/Index";
 import Home from "./Home";
 import User from "./users/User";
+import Reports from "./reports/Index";
 
 const Desk = () => {
   let component;
@@ -38,6 +39,9 @@ const Desk = () => {
       break;
     case "feedback":
       component = <Feedback />;
+      break;
+    case "reports":
+      component = <Reports />;
       break;
     default:
       component = <Home />;

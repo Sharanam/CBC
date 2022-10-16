@@ -13,3 +13,13 @@ div.main-wrapper {
   padding-left: 1.5rem;
   padding-right: 2rem;
 }
+
+@media (max-width: 35em) {
+  div.main-wrapper {
+    display: block;
+
+    min-height: 90vh;
+    width: 100%;
+    padding: unset;
+  }
+}

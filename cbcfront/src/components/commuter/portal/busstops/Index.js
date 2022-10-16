@@ -39,7 +39,7 @@ const BusStops = (props) => {
             <SearchAutocomplete
               data={busStands}
               injected={stop}
-              tabIndex="1"
+              autoFocus
               handleCallback={(selected) => {
                 setStop(selected || "");
               }}

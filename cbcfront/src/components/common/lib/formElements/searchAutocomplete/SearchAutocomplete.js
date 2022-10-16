@@ -32,6 +32,7 @@ const SearchAutocomplete = ({
   placeholder,
   tabIndex,
   injected,
+  autoFocus,
 }) => {
   let concernedData = data;
 
@@ -163,6 +164,7 @@ const SearchAutocomplete = ({
         style={{ ...style }}
         placeholder={placeholder}
         tabIndex={tabIndex}
+        autoFocus={autoFocus}
       />
       {suggestionsActive && <Suggestions />}
     </div>
