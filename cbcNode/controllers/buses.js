@@ -4,8 +4,8 @@ const handleError = require("../utils/handleError");
 
 exports.addBus = (req, res) => {
   try {
-    const { registrationNumber, serviceType, status, route } = req.body;
-    new Bus({ registrationNumber, serviceType, status, route })
+    const { registrationNumber, serviceType, status, route, capacity } = req.body;
+    new Bus({ registrationNumber, serviceType, status, route, capacity })
       .save()
       .then((bus) => {
         return res.json({

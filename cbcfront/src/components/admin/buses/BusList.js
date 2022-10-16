@@ -1,17 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import busesModel from "../../../globalState/buses";
-import { Button, Label } from "../../common/lib/formElements/Index";
+import { Button, } from "../../common/lib/formElements/Index";
 import {
   Card,
-  Divider,
   Highlighter,
 } from "../../common/lib/styledElements/Index";
-
-const serviceType = {
-  0: "Ordinary",
-  1: "AC",
-  2: "Sofa",
-};
+import serviceType from "../../../utils/getBusServiceTypes";
 
 const BusCard = ({ bus }) => {
   const navigate = useNavigate();
@@ -89,22 +82,32 @@ const BusCard = ({ bus }) => {
             {serviceType[bus.serviceType]}
           </span>
         </p>
+        <p>
+          Maximum Capacity: <Highlighter color="correct">
+            <span style={{
+              padding: "0.2rem",
+              textTransform: "capitalize",
+              color: "var(--black)",
+            }}
+            >
+              {bus.capacity}
+            </span>
+          </Highlighter>
+        </p>
         <p
           style={{
             fontSize: "0.8em",
           }}
         >
-          {/* Status: */}
-          <Highlighter color="correct">
-            <span
-              style={{
-                padding: "0.2rem",
-                textTransform: "capitalize",
-                color: "var(--black)",
-              }}
-            >
-              {bus.status}
-            </span>
+          The bus is <Highlighter color="correct"><span
+            style={{
+              padding: "0.2rem",
+              textTransform: "capitalize",
+              color: "var(--black)",
+            }}
+          >
+            {bus.status}
+          </span>
           </Highlighter>
         </p>
       </Card>

@@ -24,6 +24,7 @@ const AddBus = (props) => {
   const [payload, setPayload] = useState({
     registrationNumber: "GJ ",
     serviceType: "0",
+    capacity: "30",
     status: statuses[0],
   });
   const navigate = useNavigate();
@@ -89,6 +90,22 @@ const AddBus = (props) => {
                   setPayload((payload) => ({
                     ...payload,
                     serviceType: e.target.value,
+                  }));
+                }}
+              />
+              <Label className="required" htmlFor="capacity">
+                Maximum capacity of the bus
+              </Label>
+              {errors?.capacity && <Error>{errors.capacity}</Error>}
+              <Input
+                type="number"
+                min="15"
+                placeholder="Enter the capacity of the bus"
+                value={payload.capacity}
+                onChange={(e) => {
+                  setPayload((payload) => ({
+                    ...payload,
+                    capacity: e.target.value,
                   }));
                 }}
               />

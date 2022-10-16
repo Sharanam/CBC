@@ -15,6 +15,11 @@ let busSchema = new Schema(
       default: 0,
       enum: [0, 1, 2],
     },
+    capacity: {
+      type: Number,
+      min: [20, 'too few peeps'],
+      required: [true, 'maximum number of people is required.']
+    },
     status: {
       type: String,
       required: [true, "status of bus is required."],
