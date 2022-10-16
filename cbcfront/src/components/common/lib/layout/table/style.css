@@ -7,15 +7,15 @@ table.customtable {
 }
 
 table.customtable tbody tr:nth-child(even) {
-  background: var(--white-dark);
+  background: var(--dull-white);
 }
 table.customtable tbody tr:nth-child(2n + 1) {
-  background: var(--white-light);
+  background: var(--less-white);
 }
 
 table.customtable thead tr {
   background-color: var(--bov-dark);
-  color: var(--white-light);
+  color: var(--less-white);
 }
 table.customtable thead {
   padding: 0.5rem;

@@ -10,7 +10,7 @@ export default function Form(props) {
 
         padding: "1rem",
         borderRadius: "0.5rem",
-        backgroundColor: "var(--white-dark)",
+        backgroundColor: "var(--dull-white)",
         ...props.style,
       }}
     >

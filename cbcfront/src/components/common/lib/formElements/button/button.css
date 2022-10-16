@@ -1,18 +1,18 @@
 button.positive {
   background-color: var(--bov-dark);
-  color: var(--tubelight);
+  color: var(--white);
 }
 button.negative {
   background-color: var(--danger);
-  color: var(--tubelight);
+  color: var(--white);
 }
 button.neutral:focus,
 button.neutral:hover {
   background-color: var(--google-gray-700);
-  color: var(--tubelight);
+  color: var(--white);
 }
 
 button:disabled {
-  background-color: var(--light-dark);
-  color: var(--tubelight);
+  background-color: var(--light-blue);
+  color: var(--white);
 }

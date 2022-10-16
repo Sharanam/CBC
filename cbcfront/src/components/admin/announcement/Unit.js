@@ -15,7 +15,7 @@ const UnitAnnouncement = (props) => {
           display: "flex",
           alignItems: "center",
           gap: "1rem",
-          backgroundColor: "var(--tubelight)",
+          backgroundColor: "var(--white)",
           justifyContent: "center",
         }}
       >

@@ -1,11 +1,11 @@
 :root {
   --bov-dark: #1c3879;
-  --light-dark: #607eaa;
-  --white-dark: #eae3d2;
-  --white-light: #f9f5eb;
+  --light-blue: #607eaa;
+  --dull-white: #eae3d2;
+  --less-white: #f9f5eb;
   --black: black;
-  --tubelight: white;
-  --quiet-background-color: rgb(247, 247, 247);
+  --white: white;
+
   --text-color: var(--google-gray-700);
   --danger: rgb(117, 53, 49);
 

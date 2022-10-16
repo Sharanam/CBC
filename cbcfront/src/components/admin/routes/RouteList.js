@@ -12,7 +12,7 @@ const RouteCard = ({ route }) => {
           display: "flex",
           flexDirection: "column",
           flexWrap: "nowrap",
-          backgroundColor: "var(--white-light)",
+          backgroundColor: "var(--less-white)",
           color: "var(--card-bg)",
         }}
         actions={
@@ -109,7 +109,7 @@ const RouteCard = ({ route }) => {
             <Highlighter
               key={i}
               style={{
-                backgroundColor: "var(--light-dark)",
+                backgroundColor: "var(--light-blue)",
                 color: "var(--yellow)",
               }}
             >

@@ -36,7 +36,7 @@ function RouteView({ route, tripTime, stops, schedule }) {
           display: "flex",
           flexDirection: "column",
           flexWrap: "nowrap",
-          backgroundColor: "var(--white-light)",
+          backgroundColor: "var(--less-white)",
           color: "var(--card-bg)",
         }}
         actions={
@@ -113,7 +113,7 @@ function RouteView({ route, tripTime, stops, schedule }) {
             <Highlighter
               key={i}
               style={{
-                backgroundColor: "var(--light-dark)",
+                backgroundColor: "var(--light-blue)",
                 color: "var(--yellow)",
               }}
             >

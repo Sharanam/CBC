@@ -16,7 +16,7 @@ const BusCard = ({ bus }) => {
           display: "flex",
           flexDirection: "column",
           flexWrap: "nowrap",
-          backgroundColor: "var(--white-light)",
+          backgroundColor: "var(--less-white)",
           color: "var(--card-bg)",
         }}
         actions={

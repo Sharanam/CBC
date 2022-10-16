@@ -11,7 +11,7 @@ function FeedbackView({ feedback }) {
       <Card
         style={{
           color: "var(--bov-dark)",
-          backgroundColor: "var(--tubelight)",
+          backgroundColor: "var(--white)",
         }}
         actions={
           <div

@@ -11,7 +11,7 @@ export default function SearchBoxes(props) {
         flexDirection: "row",
         padding: "1rem",
         borderRadius: "0.5rem",
-        backgroundColor: "var(--white-dark)",
+        backgroundColor: "var(--dull-white)",
         flexWrap: "row nowrap",
         alignItems: "center",
         justifyContent: "space-evenly",

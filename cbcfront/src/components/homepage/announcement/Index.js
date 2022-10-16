@@ -20,7 +20,7 @@ const Announcement = () => {
       <h1>Announcements</h1>
       <div
         style={{
-          backgroundColor: "var(--white-dark)",
+          backgroundColor: "var(--dull-white)",
           color: "var(--black)",
           padding: "0.5rem",
           borderRadius: "0.3rem",
@@ -34,7 +34,7 @@ const Announcement = () => {
               <Card
                 key={i}
                 style={{
-                  backgroundColor: "var(--tubelight)",
+                  backgroundColor: "var(--white)",
                   color: "currentColor",
                 }}
               >

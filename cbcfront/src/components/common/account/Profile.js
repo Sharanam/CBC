@@ -25,7 +25,7 @@ const Profile = (props) => {
         <Card
           style={{
             color: "var(--bov-dark)",
-            backgroundColor: "var(--tubelight)",
+            backgroundColor: "var(--white)",
           }}
         >
           <h2>
@@ -127,13 +127,13 @@ const Profile = (props) => {
                 type="text"
                 style={{
                   backgroundColor: "var(--google-gray-700)",
-                  color: "var(--tubelight)",
+                  color: "var(--white)",
                 }}
                 value={data.phone}
                 readOnly
-                // onChange={(e) => {
-                //   setData({ ...data, phone: e.target.value });
-                // }}
+              // onChange={(e) => {
+              //   setData({ ...data, phone: e.target.value });
+              // }}
               />
               <Label
                 style={{
@@ -146,13 +146,13 @@ const Profile = (props) => {
                 type="email"
                 style={{
                   backgroundColor: "var(--google-gray-700)",
-                  color: "var(--tubelight)",
+                  color: "var(--white)",
                 }}
                 value={data.email}
                 readOnly
-                // onChange={(e) => {
-                //   setData({ ...data, email: e.target.value });
-                // }}
+              // onChange={(e) => {
+              //   setData({ ...data, email: e.target.value });
+              // }}
               />
               <p
                 style={{

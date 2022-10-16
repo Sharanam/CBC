@@ -4,7 +4,7 @@ export default function Label(props) {
     <label
       {...props}
       style={{
-        color: "var(--light-dark)",
+        color: "var(--light-blue)",
         ...props.style,
       }}
     >

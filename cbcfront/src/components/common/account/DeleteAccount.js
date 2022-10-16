@@ -12,7 +12,7 @@ const DeleteAccount = () => {
           flexWrap: "nowrap",
           flexDirection: "column",
           alignItems: "center",
-          backgroundColor: "var(--tubelight)",
+          backgroundColor: "var(--white)",
           color: "var(--black)",
           gap: "0.5rem",
         }}

@@ -11,7 +11,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: var(--white-light);
+  background-color: var(--less-white);
   color: var(--bov-dark);
 
   word-wrap: break-word;
