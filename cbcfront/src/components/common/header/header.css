@@ -20,7 +20,7 @@ header {
 
 h1.logo {
   font-size: 2rem;
-  color: var(--bov-dark);
+  color: var(--dark-blue);
 }
 @media (max-width: 35em) {
   header {

@@ -17,7 +17,7 @@ div.autocomplete ul {
   z-index: 15;
 }
 div.autocomplete ul::-webkit-scrollbar-thumb {
-  background-color: var(--bov-dark);
+  background-color: var(--dark-blue);
   border-radius: 10px;
 }
 div.autocomplete ul::-webkit-scrollbar-track {

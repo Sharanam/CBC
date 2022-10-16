@@ -1,5 +1,5 @@
 button.positive {
-  background-color: var(--bov-dark);
+  background-color: var(--dark-blue);
   color: var(--white);
 }
 button.negative {

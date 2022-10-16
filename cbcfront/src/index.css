@@ -12,7 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   background-color: var(--less-white);
-  color: var(--bov-dark);
+  color: var(--dark-blue);
 
   word-wrap: break-word;
 }

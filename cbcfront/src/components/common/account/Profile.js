@@ -24,7 +24,7 @@ const Profile = (props) => {
       <Container size="sm">
         <Card
           style={{
-            color: "var(--bov-dark)",
+            color: "var(--dark-blue)",
             backgroundColor: "var(--white)",
           }}
         >
@@ -131,9 +131,9 @@ const Profile = (props) => {
                 }}
                 value={data.phone}
                 readOnly
-              // onChange={(e) => {
-              //   setData({ ...data, phone: e.target.value });
-              // }}
+                // onChange={(e) => {
+                //   setData({ ...data, phone: e.target.value });
+                // }}
               />
               <Label
                 style={{
@@ -150,9 +150,9 @@ const Profile = (props) => {
                 }}
                 value={data.email}
                 readOnly
-              // onChange={(e) => {
-              //   setData({ ...data, email: e.target.value });
-              // }}
+                // onChange={(e) => {
+                //   setData({ ...data, email: e.target.value });
+                // }}
               />
               <p
                 style={{

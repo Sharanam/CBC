@@ -14,7 +14,7 @@ table.customtable tbody tr:nth-child(2n + 1) {
 }
 
 table.customtable thead tr {
-  background-color: var(--bov-dark);
+  background-color: var(--dark-blue);
   color: var(--less-white);
 }
 table.customtable thead {

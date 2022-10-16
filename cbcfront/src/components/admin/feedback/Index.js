@@ -10,7 +10,7 @@ function FeedbackView({ feedback }) {
     <>
       <Card
         style={{
-          color: "var(--bov-dark)",
+          color: "var(--dark-blue)",
           backgroundColor: "var(--white)",
         }}
         actions={
@@ -77,9 +77,7 @@ const Feedback = (props) => {
     fetchData();
   }, []);
   if (id) {
-    {
-      return <>{id} Under development</>;
-    }
+    return <>{id} Under development</>;
   }
   return (
     <>

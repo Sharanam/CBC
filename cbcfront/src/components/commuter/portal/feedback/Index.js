@@ -13,7 +13,7 @@ function Feedback({ feedback }) {
     <>
       <Card
         style={{
-          color: "var(--bov-dark)",
+          color: "var(--dark-blue)",
           backgroundColor: "var(--white)",
         }}
       >
@@ -87,6 +87,7 @@ export default function ViewFeedbacks(props) {
         >
           Give Feedback
         </Button>
+        {feedbacks && JSON.stringify(feedbacks[0] || {})}
         {isLoading ? (
           <h3>Loading...</h3>
         ) : (
