@@ -1,14 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 import "./navbar.css";
 import ListGenerator from "./ListGenerator";
 import { useSessionStorage } from "../../../../utils/browserStore";
 import userModel from "../../../../globalState/user";
-import { FlagContext } from "../../../../context/Flag";
 
 const routes = {
   universal: [
-    // { to: "", name: "Home" },
     { to: "portal", name: "Portal" },
   ],
   forVisitor: [{ to: "login", name: "Login" }],
@@ -21,7 +19,6 @@ const routes = {
 
 function Navbar() {
   const [expanded, setExpanded] = useState(false);
-  const [flag, setFlag] = useContext(FlagContext);
   const close = () => {
     setExpanded(false);
   };
@@ -29,7 +26,7 @@ function Navbar() {
   const user =
     JSON.parse(window.sessionStorage.getItem("user")) || userModel.user;
 
-  const [userDetails, setUserDetails] = useSessionStorage(
+  const [userDetails] = useSessionStorage(
     "userDetails",
     userModel.userDetails
   );
