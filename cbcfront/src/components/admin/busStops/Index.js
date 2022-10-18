@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import busStandsModel from "../../../globalState/busStands";
-import Container from "../../common/lib/layout/Container";
-import Card from "../../common/lib/styledElements/card/Index";
+import { Container } from "../../common/lib/layout/Index";
+import { Card } from "../../common/lib/styledElements/Index";
 
 const BusStops = () => {
   const [busStands, setBusStands] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    setIsLoading(true);
     busStandsModel.getStands().then((result) => {
       setBusStands(result);
+      setIsLoading(false);
     });
   }, []);
+  if (isLoading) return <h2>Loading...</h2>;
   return (
     <>
       <Container size="md">
