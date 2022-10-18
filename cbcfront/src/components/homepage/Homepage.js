@@ -1,6 +1,8 @@
 import Announcement from "./announcement/Index";
 import Gallery from "./gallery/Index";
 import Hero from "./hero/Hero";
+import AboutUs from "./promo/AboutUs";
+import AreaOfService from "./promo/AreaOfService";
 import "./style.css";
 
 export default function Homepage() {
@@ -9,9 +11,8 @@ export default function Homepage() {
       <main className="homepage">
         <Hero />
         <Announcement />
-        No of Buses...
-        Years of trust (service )...
-        Area of services (List of bus stops)...
+        <AboutUs />
+        <AreaOfService />
         <Gallery />
       </main>
     </>

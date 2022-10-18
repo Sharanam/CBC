@@ -49,7 +49,10 @@ const Announcement = () => {
                       fontSize: "0.6em",
                     }}
                   >
-                    {getDateInFormat(announcement.createdAt)}
+                    announced:{" "}
+                    <span>
+                      {getDateInFormat(announcement.createdAt, { days: 1 })}
+                    </span>
                   </span>
                 </p>
                 <span
