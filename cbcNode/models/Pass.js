@@ -15,11 +15,14 @@ let passSchema = new Schema(
       type: Number,
       required: [true, "for How many months?"],
       default: 1,
+      min: 1,
+      max: 12,
     },
     price: {
       type: Number,
       required: [true, "final price is required"],
       default: 1,
+      min: 0,
     },
   },
   {

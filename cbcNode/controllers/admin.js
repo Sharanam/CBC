@@ -1,4 +1,6 @@
+const Pass = require("../models/Pass");
 const User = require("../models/User");
+const handleError = require("../utils/handleError");
 
 exports.getUsers = (req, res) => {
   try {
@@ -138,6 +140,33 @@ exports.setAdminPrivilege = (req, res) => {
         });
       }
     );
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+};
+exports.issuePass = async (req, res) => {
+  try {
+    const { user, from, to, date, validity, price } = req.body;
+    new Pass({
+      user,
+      from,
+      to,
+      date,
+      validity,
+      price,
+    })
+      .save()
+      .then((pass) => {
+        return res.json({
+          success: true,
+          pass,
+          msg: "pass created successfully!",
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        res.json({ success: false, errors: handleError(error) });
+      });
   } catch (e) {
     res.status(500).send(e.message);
   }

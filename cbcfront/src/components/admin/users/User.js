@@ -30,6 +30,7 @@ export default function User(props) {
     price: "",
   });
   const navigate = useNavigate();
+  const [errors, setErrors] = useState(null);
 
   return (
     <>
@@ -41,9 +42,13 @@ export default function User(props) {
             <Form
               onSubmit={(e) => {
                 e.preventDefault();
+                setErrors(null);
                 const payload = { user: id, ...pass };
-                console.log(payload);
-                adminModel.issuePass(payload);
+                adminModel.issuePass(payload).then((result) => {
+                  if (result?.msg) alert(result?.msg);
+                  if (result.success) navigate(-1);
+                  if (result.errors) setErrors(...result.errors);
+                });
                 // pending
                 // .then((res) => {
                 //   if (res) navigate("/login");

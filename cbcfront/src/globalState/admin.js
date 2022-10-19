@@ -43,5 +43,14 @@ const adminModel = {
       return false;
     }
   },
+  issuePass: async (payload) => {
+    try {
+      const { data } = await axios.post(`/admin/issuePass/`, payload);
+      return data;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
 };
 export default adminModel;

@@ -6,6 +6,7 @@ const {
   blacklistUser,
   setAdmin,
   setAdminPrivilege,
+  issuePass,
 } = require("../controllers/admin");
 const { isAuthorizedAdmin } = require("../utils/roleValidation");
 
@@ -15,5 +16,6 @@ router.post("/blacklist/:id", isAuthorizedAdmin, blacklistUser);
 router.post("/setAdmin/:id", isAuthorizedAdmin, setAdmin);
 
 router.get("/setAdmin/:userId", isAuthorizedAdmin, setAdminPrivilege);
+router.post("/issuePass", isAuthorizedAdmin, issuePass);
 
 module.exports = router;
