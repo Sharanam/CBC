@@ -60,7 +60,7 @@ const AddBus = (props) => {
               />
               <Divider /> */}
               <Label className="required" htmlFor="registrationNumber">
-                Registraion Number
+                Registration Number
               </Label>
               {errors?.registrationNumber && (
                 <Error>{errors.registrationNumber}</Error>
@@ -111,17 +111,6 @@ const AddBus = (props) => {
               />
               <Label htmlFor="status">Status of the bus</Label>
               {errors?.status && <Error>{errors.status}</Error>}
-              {/* <Input
-                type="text"
-                placeholder="Enter current status of the bus"
-                value={payload.status}
-                onChange={(e) => {
-                  setPayload((payload) => ({
-                    ...payload,
-                    status: e.target.value,
-                  }));
-                }}
-              /> */}
               <DropDown
                 options={statuses}
                 default={payload.status}

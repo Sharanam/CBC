@@ -35,13 +35,16 @@ export default function EditBusDetails(props) {
       setPayload({
         registrationNumber:
           result?.bus?.registrationNumber || payload.registrationNumber,
-        serviceType: result?.bus?.serviceType || payload.serviceType,
+        serviceType: result?.bus?.serviceType ?? payload.serviceType,
         status: result?.bus?.status || payload.status,
+        capacity: result?.bus?.capacity || payload.capacity,
       });
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     fetchBus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [regNumber]);
   return (
     <>
@@ -69,7 +72,7 @@ export default function EditBusDetails(props) {
             formFields: (
               <>
                 <Label className="required" htmlFor="registrationNumber">
-                  Registraion Number
+                  Registration Number
                 </Label>
                 {errors?.registrationNumber && (
                   <Error>{errors.registrationNumber}</Error>

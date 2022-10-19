@@ -4,7 +4,8 @@ const handleError = require("../utils/handleError");
 
 exports.addBus = (req, res) => {
   try {
-    const { registrationNumber, serviceType, status, route, capacity } = req.body;
+    const { registrationNumber, serviceType, status, route, capacity } =
+      req.body;
     new Bus({ registrationNumber, serviceType, status, route, capacity })
       .save()
       .then((bus) => {
@@ -45,7 +46,7 @@ exports.editBus = (req, res) => {
             msg: error.message,
           });
         }
-        res.send({ success: true, msg: "Updated successfully !!" });
+        res.json({ success: true, msg: "Updated successfully !!" });
       });
     });
   } catch (e) {
@@ -76,7 +77,6 @@ exports.getBus = (req, res) => {
     const criteria = {};
     if (isMongoId(busId)) criteria._id = busId;
     else criteria.registrationNumber = busId;
-    console.log(criteria);
     Bus.findOne(criteria, (err, bus) => {
       if (err) return res.status(500).send(err.message);
       return res.json({
@@ -93,35 +93,30 @@ exports.getBus = (req, res) => {
 
 exports.getBuses = (req, res) => {
   try {
-    const routeId = req.params.route;
-    Bus.find({ route: routeId }).then((buses) => {
-      if (buses)
-        return res.json({
-          success: true,
-          buses,
-          msg: `${buses.length} found for given route.`,
-        });
-      res.json({ success: false, msg: "No bus for given route." });
-    });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("something went wrong");
-  }
-};
-exports.viewBuses = (req, res) => {
-  try {
     const pageNumber = req.params.page;
     // use page number for pagination
 
-    Bus.find().then((buses) => {
-      if (buses)
-        return res.json({
-          success: true,
-          buses,
-          msg: `${buses.length} buses found in the system.`,
-        });
-      res.json({ success: false, msg: "No bus for given route." });
-    });
+    const routeId = req.params.route;
+    let criteria = {};
+    let msg = "buses found in the system.";
+    if (routeId) {
+      criteria = { route: routeId };
+      msg = `found for given route.`;
+    }
+    Bus.find(criteria)
+      .then((buses) => {
+        if (buses)
+          return res.json({
+            success: true,
+            buses,
+            msg: `${buses.length} ${msg}`,
+          });
+        res.json({ success: false, msg: "No bus for given route." });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        res.status(500).send("Something went wrong");
+      });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");
