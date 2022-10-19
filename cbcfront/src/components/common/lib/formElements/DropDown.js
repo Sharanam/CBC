@@ -1,4 +1,11 @@
 export default function DropDown(props) {
+  const displayDefault = props.hideDefault ? (
+    <></>
+  ) : (
+    <option defaultChecked={!props.default} disabled>
+      select one of the options:
+    </option>
+  );
   return (
     <select
       style={{
@@ -12,11 +19,10 @@ export default function DropDown(props) {
         ...props.style,
       }}
       onChange={(e) => props.onChange(e.target.value)}
+      value={props.default || ""}
     >
-      <option defaultChecked defaultValue={props.default} disabled>
-        select one of the options:
-      </option>
-      {props.options.map((data, index) => (
+      {displayDefault}
+      {props?.options?.map((data, index) => (
         <option key={index} value={data}>
           {data}
         </option>

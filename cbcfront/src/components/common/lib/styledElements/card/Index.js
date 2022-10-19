@@ -14,6 +14,7 @@ export default function Card(props) {
           ...whiteStyle,
           ...props.style,
         }}
+        onClick={props.onClick}
       >
         {props.children}
         {props.actions && (
