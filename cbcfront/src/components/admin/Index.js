@@ -11,6 +11,8 @@ import Feedback from "./feedback/Index";
 import Home from "./Home";
 import User from "./users/User";
 import Reports from "./reports/Index";
+import ViewLinks from "./link/ViewLinks";
+import Passes from "./passes/Index";
 
 const Desk = () => {
   let component;
@@ -21,6 +23,9 @@ const Desk = () => {
       break;
     case "buses":
       component = <Buses />;
+      break;
+    case "link":
+      component = <ViewLinks />;
       break;
     case "busstops":
       component = <BusStops />;
@@ -33,6 +38,9 @@ const Desk = () => {
       break;
     case "user":
       component = <User id={argA} />;
+      break;
+    case "passes":
+      component = <Passes />;
       break;
     case "announcements":
       component = <Announcement />;

@@ -4,7 +4,7 @@ import routesModel from "../../../globalState/routes";
 
 export default function DeleteRoute(props) {
   const navigate = useNavigate();
-  const fetchBus = async () => {
+  const deleteRoute = async () => {
     const res = await routesModel.deleteRoute({ routeId: props.route });
     if (res.msg) alert(res.msg);
     if (res.success) {
@@ -13,7 +13,7 @@ export default function DeleteRoute(props) {
     }
   };
   useEffect(() => {
-    fetchBus();
-  }, [props.id]);
+    deleteRoute();
+  }, [props.route]);
   return;
 }

@@ -1,6 +1,4 @@
-const { isMongoId } = require("validator");
 const Feedback = require("../models/Feedback");
-const { getProfileOf } = require("../utils/getProfileOfUser");
 const handleError = require("../utils/handleError");
 
 exports.newFeedback = (req, res) => {
@@ -38,7 +36,13 @@ exports.updateFeedback = (req, res) => {
         if (err) return res.json({ msg: err.message });
         if (new RegExp(feedback.user).test(userId.toString())) {
           feedback.message = feedback.message + "\n\nEdit: " + message;
-          feedback.save().then((fb) => res.json({ feedback: fb }));
+          feedback
+            .save()
+            .then((fb) => res.json({ feedback: fb }))
+            .catch((err) => {
+              console.log(err.message);
+              res.status(500).send("Something went wrong");
+            });
         }
         return res.json({ feedback });
       }
@@ -51,13 +55,13 @@ exports.updateFeedback = (req, res) => {
 exports.getFeedback = (req, res) => {
   try {
     const { feedbackId } = req.params;
-    Bus.findOne(
+    Feedback.findOne(
       {
         _id: feedbackId,
       },
       (err, feedback) => {
         if (err) return res.status(500).send(err.message);
-        if (feedback) res.json({ success: true, feedback });
+        if (feedback) return res.json({ success: true, feedback });
         res.json({ success: false, msg: "No feedback for given id." });
       }
     );
@@ -72,14 +76,17 @@ exports.viewFeedbacks = (req, res) => {
     // use page number for pagination
 
     Feedback.find()
-      .populate("users", "name")
-      .exec()
+      .populate("users")
       .then((feedbacks) => {
         return res.json({
           success: true,
           feedbacks,
           msg: `${feedbacks.length} feedbacks found in the system.`,
         });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        res.status(500).send("Something went wrong");
       });
   } catch (error) {
     console.log(error.message);

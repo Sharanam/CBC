@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import busesModel from "../../../../globalState/buses";
+import { Card } from "../../../common/lib/styledElements/Index";
 
 export default function BusCurrent(props) {
   const regNumber = props?.number || 0;
@@ -19,7 +20,20 @@ export default function BusCurrent(props) {
   };
   useEffect(() => {
     fetchBus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [regNumber]);
   if (isLoading) return "Loading...";
-  return <>{JSON.stringify(busDetails)}</>;
+  return (
+    <>
+      <Card white={true}>
+        {Object.keys(busDetails).map((d, i) => {
+          return (
+            <p key={i}>
+              {d}: <b>{JSON.stringify(busDetails[d])}</b>
+            </p>
+          );
+        })}
+      </Card>
+    </>
+  );
 }

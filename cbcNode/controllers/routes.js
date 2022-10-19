@@ -119,6 +119,10 @@ exports.getAllRoutes = (req, res) => {
             msg: `${routes.length} routes found in the system.`,
           });
         res.json({ success: false, msg: "No bus for given route." });
+      })
+      .catch((err) => {
+        console.log(err.message);
+        res.status(500).send("Something went wrong");
       });
   } catch (error) {
     console.error(error.message);

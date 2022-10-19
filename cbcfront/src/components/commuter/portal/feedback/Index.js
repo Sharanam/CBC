@@ -9,12 +9,17 @@ import AddFeedback from "./AddFeedback";
 import UnitFeedback from "./UnitFeedback";
 
 function Feedback({ feedback }) {
+  const navigate = useNavigate();
   return (
     <>
       <Card
         style={{
           color: "var(--dark-blue)",
           backgroundColor: "var(--white)",
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          navigate(feedback._id);
         }}
       >
         <div

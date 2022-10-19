@@ -277,34 +277,39 @@ exports.forgotPassword = (req, res) => {
     if (!isEmpty(email)) {
       const payload = {};
       let secret;
-      User.findOne({ email }).then((user) => {
-        if (!user) {
-          return res.json({ msg: "There is no user for this email" });
-        }
-        if (!user.isVerified) {
-          return res.json({ msg: "User is not verified yet" });
-        }
-        payload.id = user.id;
-        payload.email = email;
-        payload.type = user.type;
+      User.findOne({ email })
+        .then((user) => {
+          if (!user) {
+            return res.json({ msg: "There is no user for this email" });
+          }
+          if (!user.isVerified) {
+            return res.json({ msg: "User is not verified yet" });
+          }
+          payload.id = user.id;
+          payload.email = email;
+          payload.type = user.type;
 
-        secret = `${user.password}-${user.updatedAt}`;
-        const token = jwt.sign(payload, secret, { expiresIn: 3600 });
-        console.log(token);
-        const host = req.get("host");
-        const url = `/api/auth/resetPassword/${payload.id}/${token}`;
-        sendEmail(
-          {
-            from: process.env.email,
-            to: payload.email,
-            subject: "Reset Password",
-            id: payload.id,
-            token,
-            html: `<b>Click on this link to reset Password</b><a href=\"${url}\">Link</a>`,
-          },
-          res
-        );
-      });
+          secret = `${user.password}-${user.updatedAt}`;
+          const token = jwt.sign(payload, secret, { expiresIn: 3600 });
+          console.log(token);
+          const host = req.get("host");
+          const url = `/api/auth/resetPassword/${payload.id}/${token}`;
+          sendEmail(
+            {
+              from: process.env.email,
+              to: payload.email,
+              subject: "Reset Password",
+              id: payload.id,
+              token,
+              html: `<b>Click on this link to reset Password</b><a href=\"${url}\">Link</a>`,
+            },
+            res
+          );
+        })
+        .catch((err) => {
+          console.log(err.message);
+          res.status(500).send("Something went wrong");
+        });
     }
   } catch (err) {
     res.status(500).send(err.message);

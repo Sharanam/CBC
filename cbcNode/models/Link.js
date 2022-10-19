@@ -5,29 +5,31 @@ let linkSchema = new Schema(
   {
     route: {
       type: Schema.Types.ObjectId,
-      required: false,
+      required: true,
       ref: "routes",
     },
     bus: {
       type: Schema.Types.ObjectId,
-      required: false,
+      required: true,
       ref: "buses",
+      unique: [
+        true,
+        "bus has already been assigned to some other or same route.",
+      ],
     },
     schedule: [
       {
-        start: {
-          type: Date,
-          required: [
-            true,
-            "The time to start the journey by this bus has not been given.",
-          ],
-        },
+        type: Date,
+        required: [
+          true,
+          "The time to start the journey by this bus has not been given.",
+        ],
       },
     ],
   },
   {
     timestamps: false,
-    collection: "linkes",
+    collection: "links",
   }
 );
 

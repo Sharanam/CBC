@@ -52,6 +52,17 @@ const RouteCard = ({ route }) => {
             >
               Edit Route Details
             </Button>
+            <Button
+              className="positive"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(
+                  `/admin/link/?routeId=${route._id}&name=${route.identifier}`
+                );
+              }}
+            >
+              Set Buses
+            </Button>
           </div>
         }
       >

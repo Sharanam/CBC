@@ -22,6 +22,9 @@ const DashboardSide = () => {
         <Link to="/admin/users">Manage Users</Link>
       </li>
       <li>
+        <Link to="/admin/passes">View Passes</Link>
+      </li>
+      <li>
         <Link to="/admin/announcements">Announcements</Link>
       </li>
       <li>
