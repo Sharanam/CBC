@@ -55,16 +55,17 @@ exports.updateFeedback = (req, res) => {
 exports.getFeedback = (req, res) => {
   try {
     const { feedbackId } = req.params;
-    Feedback.findOne(
-      {
-        _id: feedbackId,
-      },
-      (err, feedback) => {
-        if (err) return res.status(500).send(err.message);
+    Feedback.findOne({
+      _id: feedbackId,
+    })
+      .populate("user", "name isBlacklisted")
+      .then((feedback) => {
         if (feedback) return res.json({ success: true, feedback });
         res.json({ success: false, msg: "No feedback for given id." });
-      }
-    );
+      })
+      .catch((err) => {
+        return res.status(500).send(err.message);
+      });
   } catch (error) {
     console.log(error.message);
     res.status(500).send("Something went wrong");
@@ -76,7 +77,7 @@ exports.viewFeedbacks = (req, res) => {
     // use page number for pagination
 
     Feedback.find()
-      .populate("users")
+      .populate("user", "name isBlacklisted")
       .then((feedbacks) => {
         return res.json({
           success: true,
