@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import feedbacksModel from "../../../globalState/feedback";
 import { Container } from "../../common/lib/layout/Index";
-import getDateInFormat from "../../../utils/getDate";
+import getDateInFormat from "../../../utils/timekeeper";
 import { Card } from "../../common/lib/styledElements/Index";
 import { Button } from "../../common/lib/formElements/Index";
 
@@ -75,6 +75,7 @@ const Feedback = (props) => {
   }, []);
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (id) {
     return <>{id} Under development</>;

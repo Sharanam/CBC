@@ -33,6 +33,7 @@ const SearchAutocomplete = ({
   tabIndex,
   injected,
   autoFocus,
+  required,
 }) => {
   let concernedData = data;
 
@@ -63,6 +64,7 @@ const SearchAutocomplete = ({
 
   useEffect(() => {
     setValue(injected || value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [injected]);
 
   const handleChange = (e) => {
@@ -165,6 +167,7 @@ const SearchAutocomplete = ({
         placeholder={placeholder}
         tabIndex={tabIndex}
         autoFocus={autoFocus}
+        required={required}
       />
       {suggestionsActive && <Suggestions />}
     </div>

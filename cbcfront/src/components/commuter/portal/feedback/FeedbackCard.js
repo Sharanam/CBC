@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import getDateInFormat from "../../../../utils/getDate";
+import getDateInFormat from "../../../../utils/timekeeper";
 import { Button } from "../../../common/lib/formElements/Index";
 import { Card } from "../../../common/lib/styledElements/Index";
 

@@ -18,7 +18,7 @@ let linkSchema = new Schema(
     },
     schedule: [
       {
-        type: Date,
+        type: String,
         required: [
           true,
           "The time to start the journey by this bus has not been given.",

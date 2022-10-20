@@ -4,10 +4,15 @@ const Link = require("../models/Link");
 const Route = require("../models/Route");
 const handleError = require("../utils/handleError");
 
+function getUniqueFrom(schedule) {
+  return Array.from(new Set(schedule));
+}
+
 exports.addLink = async (req, res) => {
   try {
     let { route, bus, schedule } = req.body;
-    const criteria = {};
+    schedule = getUniqueFrom(schedule);
+    let criteria = {};
     if (!bus || !route) return res.json({ msg: "Fields are missing" });
 
     if (!isMongoId(bus)) {
@@ -17,19 +22,13 @@ exports.addLink = async (req, res) => {
       else return res.json({ errors: { bus: "No bus found." } });
     }
 
+    criteria = {};
     if (!isMongoId(route)) {
       criteria.identifier = route;
       route = await Route.findOne(criteria);
       if (route?._id) route = route._id;
       else return res.json({ errors: { route: "No route found." } });
     }
-    // const alreadyLinkedBus = await Link.findOne({ bus });
-    // if (alreadyLinkedBus) {
-    //   return res.json({
-    //     success: false,
-    //     msg: "Bus has already been assigned to some other route.",
-    //   });
-    // }
 
     new Link({ route, bus, schedule })
       .save()
@@ -52,9 +51,27 @@ exports.addLink = async (req, res) => {
     res.status(500).send("Something went wrong");
   }
 };
-exports.editLink = (req, res) => {
+exports.editLink = async (req, res) => {
   try {
-    const { _id, route, bus, schedule } = req.body;
+    let { _id, route, bus, schedule } = req.body;
+    schedule = getUniqueFrom(schedule);
+    let criteria = {};
+    if (!bus || !route) return res.json({ msg: "Fields are missing" });
+
+    if (!isMongoId(bus)) {
+      criteria.registrationNumber = bus;
+      bus = await Bus.findOne(criteria);
+      if (bus?._id) bus = bus._id;
+      else return res.json({ errors: { bus: "No bus found." } });
+    }
+
+    criteria = {};
+    if (!isMongoId(route)) {
+      criteria.identifier = route;
+      route = await Route.findOne(criteria);
+      if (route?._id) route = route._id;
+      else return res.json({ errors: { route: "No route found." } });
+    }
     Link.findOne({ _id }, (_, link) => {
       if (!link) return res.json({ msg: "instance not found." });
       link.route = route || link.route;
@@ -82,7 +99,7 @@ exports.deleteLink = (req, res) => {
       if (err) return res.status(500).send({ msg: err.message });
       res.json({
         success: true,
-        msg: "link deleted successfully",
+        msg: "assignment removed successfully",
       });
     });
   } catch (e) {
@@ -94,15 +111,22 @@ exports.getLink = (req, res) => {
   try {
     const { linkId, route, page } = req.params;
     if (linkId) {
-      Link.findOne({ _id: linkId }, (err, link) => {
-        if (err) return res.status(500).send(err.message);
-        return res.json({
-          success: true,
-          link,
+      Link.findOne({ _id: linkId })
+        .populate("route", "identifier")
+        .populate("bus", "registrationNumber")
+        .then((link) => {
+          return res.json({
+            success: true,
+            link,
+          });
+        })
+        .catch((err) => {
+          if (err) return res.status(500).send(err.message);
         });
-      });
     } else if (route) {
       Link.find({ route })
+        .populate("route", "identifier stops tripTime")
+        .populate("bus", "registrationNumber serviceType capacity status")
         .then((links) => {
           if (links)
             return res.json({
@@ -120,6 +144,8 @@ exports.getLink = (req, res) => {
         });
     } else if (bus) {
       Link.find({ bus })
+        .populate("route", "identifier stops tripTime")
+        .populate("bus", "registrationNumber serviceType capacity status")
         .then((links) => {
           if (links)
             return res.json({
@@ -137,6 +163,8 @@ exports.getLink = (req, res) => {
         });
     } else if (page) {
       Link.find()
+        .populate("route", "identifier stops tripTime")
+        .populate("bus", "registrationNumber serviceType capacity status")
         .then((links) => {
           if (links)
             return res.json({

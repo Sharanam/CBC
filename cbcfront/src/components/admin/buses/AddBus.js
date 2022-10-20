@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import busesModel from "../../../globalState/buses";
+import statuses from "../../../utils/getBusServiceStatuses";
 import {
   Input,
   Label,
@@ -10,13 +11,6 @@ import {
   DropDown,
 } from "../../common/lib/formElements/Index";
 import { Container } from "../../common/lib/layout/Index";
-
-const statuses = [
-  "under maintenance",
-  "running on time",
-  "running late",
-  "cancelled",
-];
 
 const AddBus = (props) => {
   const [errors, setErrors] = useState(null);

@@ -13,11 +13,12 @@ import {
 } from "../../common/lib/formElements/Index";
 import { Container } from "../../common/lib/layout/Index";
 
-export default function LinkForm(props) {
+export default function EditLinkForm(props) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState(null);
   const [payload, setPayload] = useState({
+    _id: props.link || "",
     route: props.route || "",
     bus: props.bus || "",
     schedule: [],
@@ -52,9 +53,25 @@ export default function LinkForm(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // fetch prefilled payload
+  const fetchLink = useCallback(() => {
+    setIsLoading(true);
+    linksModel.getSpecificLinkInstance(props.link).then((result) => {
+      setIsLoading(false);
+      if (result.success) {
+        const t = result.link;
+        t.bus = result?.link?.bus?.registrationNumber || result?.link?.bus;
+        t.route = result?.link?.route?.identifier || result?.link?.route;
+        setPayload(t);
+      } else alert("something went wrong");
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     fetchRoutes();
     fetchBuses();
+    fetchLink();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -64,7 +81,7 @@ export default function LinkForm(props) {
           onSubmit={async (e) => {
             e.preventDefault();
             setIsLoading(true);
-            const response = await linksModel.addLink(payload);
+            const response = await linksModel.editLink(payload);
             if (response.errors) {
               setErrors({ ...response.errors });
               console.log("errors", response.errors);
@@ -72,12 +89,25 @@ export default function LinkForm(props) {
             setIsLoading(false);
             if (response.msg) alert(response.msg);
             if (response?.success) {
-              navigate("/admin/routes");
+              navigate(-1);
+            } else {
+              alert("Something went wrong");
             }
           }}
         >
           {{
-            title: "New Assignment",
+            title: (
+              <>
+                Edit Link{" "}
+                <span
+                  style={{
+                    color: "var(--black)",
+                  }}
+                >
+                  {props.link}
+                </span>
+              </>
+            ),
             formFields: (
               <>
                 {/* Route */}

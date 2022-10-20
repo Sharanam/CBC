@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import busesModel from "../../../globalState/buses";
+import linksModel from "../../../globalState/links";
 
-export default function DeleteBus(props) {
+export default function DeleteLink(props) {
   const navigate = useNavigate();
   const deleteBus = async () => {
-    const res = await busesModel.deleteBus({ busId: props.id });
+    const res = await linksModel.deleteLink({ _id: props.link });
     if (res.msg) alert(res.msg);
     if (res.success) {
       navigate(-1);
@@ -15,6 +15,6 @@ export default function DeleteBus(props) {
   useEffect(() => {
     deleteBus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.id]);
+  }, [props.link]);
   return;
 }

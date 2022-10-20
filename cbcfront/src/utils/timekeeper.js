@@ -14,3 +14,12 @@ function getTotalDays(date) {
   let x = formatter.format(-diff / (1000 * 60 * 60 * 24), "days");
   return x;
 }
+
+export function toDateFrom(time) {
+  let d = new Date();
+  return new Date(d.toString().split(":")[0].slice(0, -2) + time);
+}
+
+export function toTimeFrom(date) {
+  return new Date(date).toTimeString().slice(0, 8);
+}

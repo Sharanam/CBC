@@ -103,7 +103,7 @@ const RouteCard = ({ route }) => {
                 color: "var(--black)",
               }}
             >
-              {route?.stops.join(", ")}
+              {route?.stops?.join(", ")}
             </span>
           </Highlighter>
         </p>

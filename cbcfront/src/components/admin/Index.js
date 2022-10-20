@@ -16,7 +16,7 @@ import Passes from "./passes/Index";
 
 const Desk = () => {
   let component;
-  const { path, argA } = useParams();
+  const { path, argA, argB } = useParams();
   switch (path) {
     case "routes":
       component = <Routes />;
@@ -25,7 +25,7 @@ const Desk = () => {
       component = <Buses />;
       break;
     case "link":
-      component = <ViewLinks />;
+      component = <ViewLinks task={argA} link={argB} />;
       break;
     case "busstops":
       component = <BusStops />;

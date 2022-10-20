@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import busStandsModel from "../../../globalState/busStands";
 import routesModel from "../../../globalState/routes";
 import {
   Button,
@@ -21,6 +22,14 @@ const AddRoute = (props) => {
     tripTime: 0,
   });
   const navigate = useNavigate();
+  const [busStands, setBusStands] = useState(null);
+  useEffect(() => {
+    setIsLoading(true);
+    busStandsModel.getStands().then((result) => {
+      setBusStands(result);
+      setIsLoading(false);
+    });
+  }, []);
   return (
     <Container size="sm">
       <Form
@@ -85,9 +94,10 @@ const AddRoute = (props) => {
                   key={i}
                   style={{
                     display: "flex",
+                    width: "100%",
                   }}
                 >
-                  <Input
+                  {/* <Input
                     type="text"
                     required
                     style={{ flexGrow: "1" }}
@@ -101,19 +111,30 @@ const AddRoute = (props) => {
                         stops: s,
                       }));
                     }}
-                  />
-                  {/* <SearchAutocomplete
-                    style={{ flexGrow: "1" }}
-                    forData="stops"
-                    handleCallback={(v) => {
-                      const s = payload.stops;
-                      s[i] = v;
-                      setPayload((payload) => ({
-                        ...payload,
-                        stops: s,
-                      }));
-                    }}
                   /> */}
+                  <div
+                    style={{
+                      flexGrow: 1,
+                    }}
+                  >
+                    <SearchAutocomplete
+                      data={busStands}
+                      injected={value}
+                      autoFocus
+                      handleCallback={(selected) => {
+                        const s = [...payload.stops];
+                        s[i] = selected;
+
+                        setPayload((payload) => ({
+                          ...payload,
+                          stops: s,
+                        }));
+                      }}
+                      placeholder="at this bus stop"
+                      style={{ width: "100%" }}
+                      required={true}
+                    />
+                  </div>
                   <Button
                     className="negative"
                     onClick={(e) => {

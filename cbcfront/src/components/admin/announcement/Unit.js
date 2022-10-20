@@ -1,4 +1,4 @@
-import getDateInFormat from "../../../utils/getDate";
+import getDateInFormat from "../../../utils/timekeeper";
 import Button from "../../common/lib/formElements/button/Button";
 import { Card } from "../../common/lib/styledElements/Index";
 
