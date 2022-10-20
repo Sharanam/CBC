@@ -4,6 +4,7 @@ let busSchema = new Schema(
   {
     registrationNumber: {
       type: String,
+      trim: true,
       unique: true,
       required: [true, "Registration number is required."],
       lowercase: true,
@@ -22,6 +23,7 @@ let busSchema = new Schema(
     status: {
       type: String,
       required: [true, "status of bus is required."],
+      trim: true,
       enum: [
         "running on time",
         "running late",

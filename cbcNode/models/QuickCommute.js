@@ -11,10 +11,12 @@ let quickCommuteSchema = new Schema(
       {
         path: {
           type: String,
+          trim: true,
           required: [true, "path is required."],
         },
         forThe: {
           type: String,
+          trim: true,
           enum: ["bus", "route"],
           required: [true, "type is required."],
         },
@@ -24,10 +26,12 @@ let quickCommuteSchema = new Schema(
       {
         path: {
           type: String,
+          trim: true,
           required: [true, "path is required."],
         },
         forThe: {
           type: String,
+          trim: true,
           enum: ["bus", "route"],
           required: [true, "type is required."],
         },

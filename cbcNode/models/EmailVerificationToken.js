@@ -9,6 +9,7 @@ let tokenSchema = new Schema(
     },
     token: {
       type: String,
+      trim: true,
       required: true,
     },
     createdAt: {

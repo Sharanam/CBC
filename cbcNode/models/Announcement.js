@@ -5,10 +5,12 @@ let announcementSchema = new Schema(
     title: {
       type: String,
       required: true,
+      trim: true,
     },
     description: {
       type: String,
       required: false,
+      trim: true,
     },
     expireAt: {
       type: Date,

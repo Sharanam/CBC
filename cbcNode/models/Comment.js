@@ -9,6 +9,7 @@ let commentSchema = new Schema(
     },
     message: {
       type: String,
+      trim: true,
       required: [true, "message is required."],
     },
     likes: [

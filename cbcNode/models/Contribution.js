@@ -16,10 +16,11 @@ let contributionSchema = new Schema(
     // },
     message: {
       type: String,
+      trim: true,
       required: [true, "message is required."],
       enum: ["bus reached at", "hasn't reached"],
     },
-    stop: { type: String, required: true },
+    stop: { type: String, trim: true, required: true },
     bus: {
       type: Schema.Types.ObjectId,
       required: [true, "bus id is required."],

@@ -5,6 +5,7 @@ let userSchema = new Schema(
   {
     name: {
       type: String,
+      trim: true,
       required: [true, "name is required"],
       validate: [
         (val) => val.match("^[A-Za-z1-9 ]+$"),
@@ -13,6 +14,7 @@ let userSchema = new Schema(
     },
     email: {
       type: String,
+      trim: true,
       required: [true, "email is required"],
       unique: true,
       lowercase: true,
@@ -20,15 +22,18 @@ let userSchema = new Schema(
     },
     password: {
       type: String,
+      trim: true,
       required: [true, "password is required"],
     },
     phone: {
       type: String,
+      trim: true,
       required: [true, "phone number is required."],
       validate: [isMobilePhone, "phone number is invalid."],
     },
     type: {
       type: String,
+      trim: true,
       enum: ["a", "c"], // a:'admin', c:'commuter'
       default: "c",
     },
@@ -42,10 +47,12 @@ let userSchema = new Schema(
     },
     bio: {
       type: String,
+      trim: true,
       default: "",
     },
     social: {
       type: String,
+      trim: true,
       lowercase: true,
       default: "",
     },

@@ -7,8 +7,8 @@ let passSchema = new Schema(
       required: [true, "user id is required."],
       ref: "users",
     },
-    from: { type: String, required: [true, "from which stop?"] },
-    to: { type: String, required: [true, "to which stop?"] },
+    from: { type: String, trim: true, required: [true, "from which stop?"] },
+    to: { type: String, trim: true, required: [true, "to which stop?"] },
     date: { type: Date, required: [true, "starting from which date?"] },
     validity: {
       type: Number,

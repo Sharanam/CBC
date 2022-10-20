@@ -2,11 +2,12 @@ const { model, Schema } = require("mongoose");
 
 let routeSchema = new Schema(
   {
-    identifier: { type: String, required: true, unique: true },
-    stops: [{ type: String, required: true }],
+    identifier: { type: String, trim: true, required: true, unique: true },
+    stops: [{ type: String, trim: true, required: true }],
     schedule: [
       {
         type: String,
+        trim: true,
         required: [
           true,
           "The time to start the journey by this bus has not been given.",
