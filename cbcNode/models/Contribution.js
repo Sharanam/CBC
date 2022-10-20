@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 
 let contributionSchema = new Schema(
   {
@@ -13,12 +12,12 @@ let contributionSchema = new Schema(
     //   required: [true, "type is required."],
     //   enum: [0, 1],
     //   // 0: about current location
-    //   // 1: about bus timimgs
+    //   // 1: about bus timings
     // },
     message: {
       type: String,
       required: [true, "message is required."],
-      enum: ["bus reached at", "hasnt reached"],
+      enum: ["bus reached at", "hasn't reached"],
     },
     stop: { type: String, required: true },
     bus: {
@@ -29,8 +28,7 @@ let contributionSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: "contributions",
   }
 );
 
-module.exports = mongoose.model("Contribution", contributionSchema);
+module.exports = model("contributions", contributionSchema);

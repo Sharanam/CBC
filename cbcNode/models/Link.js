@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 
 let linkSchema = new Schema(
   {
@@ -29,8 +28,7 @@ let linkSchema = new Schema(
   },
   {
     timestamps: false,
-    collection: "links",
   }
 );
 
-module.exports = mongoose.model("Link", linkSchema);
+module.exports = model("links", linkSchema);

@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 
 let routeSchema = new Schema(
   {
@@ -24,8 +23,7 @@ let routeSchema = new Schema(
   },
   {
     timestamps: false,
-    collection: "routes",
   }
 );
 
-module.exports = mongoose.model("Route", routeSchema);
+module.exports = model("routes", routeSchema);

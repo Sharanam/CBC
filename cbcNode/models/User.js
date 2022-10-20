@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 const { isEmail, isMobilePhone } = require("validator");
 
 let userSchema = new Schema(
@@ -57,8 +56,7 @@ let userSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: "users",
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = model("users", userSchema);

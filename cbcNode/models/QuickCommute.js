@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 
 let quickCommuteSchema = new Schema(
   {
@@ -21,7 +20,7 @@ let quickCommuteSchema = new Schema(
         },
       },
     ],
-    favourites: [
+    favorites: [
       {
         path: {
           type: String,
@@ -37,8 +36,7 @@ let quickCommuteSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: "quickCommutes",
   }
 );
 
-module.exports = mongoose.model("QuickCommute", quickCommuteSchema);
+module.exports = model("quickCommutes", quickCommuteSchema);

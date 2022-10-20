@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 
 let busSchema = new Schema(
   {
@@ -17,8 +16,8 @@ let busSchema = new Schema(
     },
     capacity: {
       type: Number,
-      min: [20, 'too few peeps'],
-      required: [true, 'maximum number of people is required.']
+      min: [20, "too few peeps"],
+      required: [true, "maximum number of people is required."],
     },
     status: {
       type: String,
@@ -35,8 +34,7 @@ let busSchema = new Schema(
   },
   {
     timestamps: false,
-    collection: "buses",
   }
 );
 
-module.exports = mongoose.model("Bus", busSchema);
+module.exports = model("buses", busSchema);

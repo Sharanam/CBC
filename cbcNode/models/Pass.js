@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 
 let passSchema = new Schema(
   {
@@ -27,8 +26,7 @@ let passSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: "passes",
   }
 );
 
-module.exports = mongoose.model("Pass", passSchema);
+module.exports = model("passes", passSchema);
