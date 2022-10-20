@@ -30,6 +30,7 @@ import Gallery from "./components/homepage/gallery/Index";
 import ResetPassword from "./components/common/ResetPassword";
 import ResendToken from "./components/common/ResendToken";
 import ConfirmToken from "./components/common/ConfirmToken";
+import { ErrorBoundary } from ".";
 
 function App() {
   document.title = "Home | CBC";
@@ -58,7 +59,9 @@ function App() {
             element={
               <MyContext>
                 <Header />
-                <Outlet />
+                <ErrorBoundary>
+                  <Outlet />
+                </ErrorBoundary>
                 <Footer />
               </MyContext>
             }

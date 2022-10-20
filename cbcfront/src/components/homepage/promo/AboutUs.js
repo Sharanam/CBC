@@ -29,10 +29,10 @@ export default function AboutUs() {
           <>
             <Card white={true}>
               We are serving the bus service in the ABC city since{" "}
-              <mark class="correct">2012</mark>.
+              <mark className="correct">2012</mark>.
             </Card>
             <Card white={true}>
-              Currently, Our <mark class="correct">{buses}</mark> buses are
+              Currently, Our <mark className="correct">{buses}</mark> buses are
               running in very well condition.
             </Card>
           </>
