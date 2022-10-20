@@ -5,7 +5,8 @@ import { Button } from "../../../common/lib/formElements/Index";
 import { Container } from "../../../common/lib/layout/Index";
 import { Card } from "../../../common/lib/styledElements/Index";
 import AddFeedback from "./AddFeedback";
-import UnitFeedback, { FeedbackCard } from "./UnitFeedback";
+import UnitFeedback from "./UnitFeedback";
+import { FeedbackCard } from "./FeedbackCard";
 
 export default function ViewFeedbacks(props) {
   const { id } = props;
@@ -23,6 +24,7 @@ export default function ViewFeedbacks(props) {
   }, []);
   useEffect(() => {
     if (!id && id !== "add") fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
   if (id) {
     if (id === "add") {
