@@ -8,6 +8,7 @@ export default function ForSpecificRoute(props) {
   const navigate = useNavigate();
   useEffect(() => {
     if (!route) navigate("/admin/buses");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route]);
 
   const [buses, setBuses] = useState(null);
@@ -16,9 +17,11 @@ export default function ForSpecificRoute(props) {
       if (result.success) setBuses(result.buses);
       if (result.msg) alert(result.msg);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     fetchBuses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route]);
   return (
     <>

@@ -76,7 +76,7 @@ export default function InsertLinkForm(props) {
             setIsLoading(false);
             if (response.msg) alert(response.msg);
             if (response?.success) {
-              navigate("/admin/routes");
+              navigate(-1);
             } else {
               alert("Something went wrong");
             }

@@ -1,9 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Button, } from "../../common/lib/formElements/Index";
-import {
-  Card,
-  Highlighter,
-} from "../../common/lib/styledElements/Index";
+import { Button } from "../../common/lib/formElements/Index";
+import { Card, Highlighter } from "../../common/lib/styledElements/Index";
 import serviceType from "../../../utils/getBusServiceTypes";
 
 const BusCard = ({ bus }) => {
@@ -56,6 +53,21 @@ const BusCard = ({ bus }) => {
             >
               Edit Bus Details
             </Button>
+            <Button
+              className="positive"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(
+                  // `/admin/link?bus=${bus._id}&busNumber=${bus.registrationNumber}`
+                  `/admin/link?${new URLSearchParams({
+                    bus: bus._id,
+                    busNumber: bus.registrationNumber,
+                  }).toString()}`
+                );
+              }}
+            >
+              Edit Bus Link
+            </Button>
           </div>
         }
       >
@@ -83,12 +95,14 @@ const BusCard = ({ bus }) => {
           </span>
         </p>
         <p>
-          Maximum Capacity: <Highlighter color="correct">
-            <span style={{
-              padding: "0.2rem",
-              textTransform: "capitalize",
-              color: "var(--black)",
-            }}
+          Maximum Capacity:{" "}
+          <Highlighter color="correct">
+            <span
+              style={{
+                padding: "0.2rem",
+                textTransform: "capitalize",
+                color: "var(--black)",
+              }}
             >
               {bus.capacity}
             </span>
@@ -99,15 +113,17 @@ const BusCard = ({ bus }) => {
             fontSize: "0.8em",
           }}
         >
-          The bus is <Highlighter color="correct"><span
-            style={{
-              padding: "0.2rem",
-              textTransform: "capitalize",
-              color: "var(--black)",
-            }}
-          >
-            {bus.status}
-          </span>
+          The bus is{" "}
+          <Highlighter color="correct">
+            <span
+              style={{
+                padding: "0.2rem",
+                textTransform: "capitalize",
+                color: "var(--black)",
+              }}
+            >
+              {bus.status}
+            </span>
           </Highlighter>
         </p>
       </Card>

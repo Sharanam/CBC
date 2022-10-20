@@ -25,7 +25,12 @@ const BusStops = () => {
             gap: "0.3em",
           }}
         >
-          {busStands && busStands.map((bs, i) => <Card key={i}>{bs}</Card>)}
+          {busStands &&
+            busStands.map((bs, i) => (
+              <Card white={true} key={i}>
+                {bs}
+              </Card>
+            ))}
         </div>
       </Container>
     </>

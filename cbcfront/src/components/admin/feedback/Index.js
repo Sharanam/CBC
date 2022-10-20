@@ -34,7 +34,23 @@ function FeedbackView({ feedback }) {
             justifyContent: "space-between",
           }}
         >
-          <h2>{feedback.user.slice(0, 5)}</h2>
+          <h2
+            style={{
+              color: feedback?.user?.isBlacklisted
+                ? "var(--danger)"
+                : "currentColor",
+            }}
+          >
+            <span
+              title={
+                feedback?.user?.isBlacklisted
+                  ? "User has been black listed."
+                  : feedback?.user?.name
+              }
+            >
+              {feedback?.user?.name}
+            </span>
+          </h2>
           <p
             style={{
               fontSize: "0.8em",

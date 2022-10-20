@@ -107,9 +107,11 @@ exports.deleteLink = (req, res) => {
     res.status(500).send("Something went wrong");
   }
 };
-exports.getLink = (req, res) => {
+exports.getLink = async (req, res) => {
   try {
-    const { linkId, route, page } = req.params;
+    let { linkId, route, page, bus } = req.params;
+
+    let criteria = {};
     if (linkId) {
       Link.findOne({ _id: linkId })
         .populate("route", "identifier")
@@ -124,6 +126,12 @@ exports.getLink = (req, res) => {
           if (err) return res.status(500).send(err.message);
         });
     } else if (route) {
+      criteria = {};
+      if (!isMongoId(route)) {
+        criteria.identifier = route;
+        route = await Route.findOne(criteria);
+        if (route?._id) route = route._id;
+      }
       Link.find({ route })
         .populate("route", "identifier stops tripTime")
         .populate("bus", "registrationNumber serviceType capacity status")
@@ -143,6 +151,11 @@ exports.getLink = (req, res) => {
           res.status(500).send("Something went wrong");
         });
     } else if (bus) {
+      if (!isMongoId(bus)) {
+        criteria.registrationNumber = bus;
+        bus = await Bus.findOne(criteria);
+        if (bus?._id) bus = bus._id;
+      }
       Link.find({ bus })
         .populate("route", "identifier stops tripTime")
         .populate("bus", "registrationNumber serviceType capacity status")

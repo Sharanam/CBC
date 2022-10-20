@@ -28,7 +28,7 @@ export function LinkCards(props) {
                 }}
                 className="negative"
               >
-                Delete
+                Delete Link
               </Button>
               <Button
                 onClick={() => {
@@ -36,7 +36,7 @@ export function LinkCards(props) {
                 }}
                 className="neutral"
               >
-                Edit
+                Edit Link
               </Button>
             </div>
           }
@@ -81,6 +81,14 @@ export function LinkCards(props) {
             >
               {link?.route?.tripTime} mins
             </span>
+          </p>
+          <p
+            style={{
+              margin: "3px 0",
+            }}
+          >
+            Assigned onto route{" "}
+            <mark className="correct">{link?.route?.identifier}</mark>
           </p>
           <p
             style={{

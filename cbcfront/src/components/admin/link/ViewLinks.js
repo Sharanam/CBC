@@ -13,6 +13,7 @@ export default function ViewLinks(props) {
   const routeId = searchParams.get("routeId");
   const routeName = searchParams.get("name");
   const bus = searchParams.get("bus");
+  const busNumber = searchParams.get("busNumber");
 
   const navigate = useNavigate();
 
@@ -20,11 +21,13 @@ export default function ViewLinks(props) {
 
   const [links, setLinks] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const fetchLinks = async () => {
-    const res = await linksModel.getRouteSpecificLinks(routeId);
-    if (res.msg) alert(res.msg);
-    if (res.links) {
-      setLinks(res.links);
+  const fetchLinks = async ({ routeId, bus }) => {
+    let res;
+    if (routeId) res = await linksModel.getRouteSpecificLinks(routeId);
+    else if (bus) res = await linksModel.getBusSpecificLinks(busNumber);
+    if (res?.msg) alert(res?.msg);
+    if (res?.links) {
+      setLinks(res?.links);
       setIsLoading(false);
       setMsg(`${res?.links?.length} bus(es) found on route ${routeName}`);
     }
@@ -34,8 +37,8 @@ export default function ViewLinks(props) {
     if (props.task) {
       return;
     }
-    if (!routeId) navigate(-1);
-    fetchLinks();
+    if (!routeId && !bus && !busNumber && !routeName) navigate(-1);
+    fetchLinks({ routeId, bus });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [routeId]);
 
@@ -55,41 +58,62 @@ export default function ViewLinks(props) {
   } else
     return (
       <>
-        <h1>Buses on route {routeName}</h1>
-        {msg && (
-          <Card
-            className="info-message"
-            style={{
-              textTransform: "unset",
-            }}
-          >
-            {msg}
-          </Card>
+        {routeId ? (
+          <>
+            <h1>Buses on route {routeName}</h1>
+            {msg && (
+              <Card
+                className="info-message"
+                style={{
+                  textTransform: "unset",
+                }}
+              >
+                {msg}
+              </Card>
+            )}
+          </>
+        ) : (
+          <h1>Link the bus</h1>
         )}
         {isLoading ? (
           "Loading..."
         ) : (
           <>
-            {openForm ? (
-              <InsertLinkForm
-                route={routeName}
-                bus={bus}
-                onCancel={() => {
-                  setOpenForm(false);
-                }}
-              />
+            <>
+              {openForm ? (
+                <InsertLinkForm
+                  route={routeName || routeId}
+                  bus={busNumber || bus}
+                  onCancel={() => {
+                    setOpenForm(false);
+                  }}
+                />
+              ) : (
+                <Button
+                  style={{ width: "100%" }}
+                  className="positive"
+                  onClick={() => setOpenForm(true)}
+                >
+                  {routeId || routeName
+                    ? `Assign Bus into ${routeName}`
+                    : `Schedule the bus (${busNumber || bus})`}
+                </Button>
+              )}
+            </>
+
+            {links?.length ? (
+              <LinkCards links={links} />
             ) : (
-              <Button
-                style={{ width: "100%" }}
-                className="positive"
-                onClick={() => setOpenForm(true)}
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "var(--danger)",
+                  margin: "3em 0",
+                }}
               >
-                {routeName
-                  ? `Assign Bus into ${routeName}`
-                  : `Assign route to ${bus}`}
-              </Button>
+                <h3>Nothing to display</h3>
+              </div>
             )}
-            <LinkCards links={links} />
           </>
         )}
       </>
