@@ -51,7 +51,7 @@ const Announcement = () => {
                   >
                     announced:{" "}
                     <span>
-                      {getDateInFormat(announcement.createdAt, { days: 1 })}
+                      {getDateInFormat(announcement.createdAt, { counter: 1 })}
                     </span>
                   </span>
                 </p>

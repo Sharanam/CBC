@@ -6,8 +6,8 @@
   height: 80vh;
 
   background-color: var(--light-blue);
-  color: var(--less-white);
-  background: url("./editedBG.jpg");
+  color: var(--dark-blue);
+  background: url("./vinayak.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -22,6 +22,7 @@
   display: block;
   font-size: 1.6em;
   background-color: var(--danger);
+  color: var(--white);
   background-blend-mode: color;
   text-transform: uppercase;
 }
@@ -32,9 +33,18 @@
   max-width: 45vw;
   opacity: 80%;
   background-color: var(--dark-blue);
+  color: var(--white);
   padding: 0.6rem;
 }
 
 .hero .line * {
   font-weight: bold;
+}
+
+.hero .blur {
+  backdrop-filter: blur(1rem);
+}
+
+.hero p {
+  border-radius: 0 0.3em;
 }

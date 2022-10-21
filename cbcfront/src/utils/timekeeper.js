@@ -1,5 +1,5 @@
 export default function getDateInFormat(date, options = {}) {
-  if (options.days) {
+  if (options.counter) {
     return getTotalDays(date);
   }
   date = new Date(date);
@@ -9,9 +9,19 @@ export default function getDateInFormat(date, options = {}) {
 }
 
 function getTotalDays(date) {
-  const formatter = new Intl.RelativeTimeFormat("en");
+  const formatter = new Intl.RelativeTimeFormat("en", {
+    // style: "narrow",
+    // numeric: "auto",
+    // type: "integer",
+    // localeMatcher: "best fit",
+  });
   const diff = new Date() - new Date(date);
-  let x = formatter.format(-diff / (1000 * 60 * 60 * 24), "days");
+  let x = formatter.format(-diff / (1000 * 60 * 60 * 24), "day");
+  if (!parseInt(x.split(" ")[0]))
+    x = formatter.format(-diff / (1000 * 60 * 60), "hours");
+  if (!parseInt(x.split(" ")[0]))
+    x = formatter.format(-diff / (1000 * 60), "minutes");
+  x = x.replace(/\.\d+/, "");
   return x;
 }
 

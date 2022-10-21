@@ -109,8 +109,30 @@ function App() {
               <Route path=":path" element={<Account />} />
             </Route>
             <Route path="/logout" element={<SignOut />} />
-            <Route path="/Announcements" element={<Announcement />} />
-            <Route path="/Gallery" element={<Gallery />} />
+            <Route
+              path="/Announcements"
+              element={
+                <div
+                  style={{
+                    minHeight: "80vh",
+                  }}
+                >
+                  <Announcement />
+                </div>
+              }
+            />
+            <Route
+              path="/Gallery"
+              element={
+                <div
+                  style={{
+                    minHeight: "80vh",
+                  }}
+                >
+                  <Gallery />
+                </div>
+              }
+            />
             <Route path="/profile/:id" element={<CommuterPortal />} />
             <Route path="/*" element={<FourZeroFour />} />
           </Route>

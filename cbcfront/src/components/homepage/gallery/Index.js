@@ -15,7 +15,11 @@ const Gallery = () => {
               key={i}
               className="galleryCard"
               style={{
-                background: `url("./(${val}).jpg")`,
+                backgroundColor: "grey",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundImage: `url("./(${val}).jpg")`,
               }}
             ></Card>
           );

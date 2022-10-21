@@ -1,7 +1,7 @@
 const serviceType = {
-    0: "Ordinary",
-    1: "AC",
-    2: "Sofa",
+  0: "Ordinary",
+  1: "Double Decker",
+  2: "AC",
 };
 
 export default serviceType;
