@@ -8,6 +8,7 @@ import {
   SearchAutocomplete,
 } from "../../../common/lib/formElements/Index";
 import Container from "../../../common/lib/layout/Container";
+import { Loading } from "../../../common/lib/styledElements/Index";
 import BusCurrent from "./Bus";
 const Bus = (props) => {
   const [busNumber, setBusNumber] = useState(props.regNumber || "");
@@ -22,7 +23,7 @@ const Bus = (props) => {
     });
   }, []);
   const navigate = useNavigate();
-  if (isLoading) return <h3>Loading...</h3>;
+  if (isLoading) return <Loading />;
   if (props.regNumber) return <BusCurrent number={busNumber} />;
   return (
     <Container size="md">

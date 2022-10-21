@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import routesModel from "../../../globalState/routes";
 import { Button } from "../../common/lib/formElements/Index";
-import { Card } from "../../common/lib/styledElements/Index";
+import { Card, Loading } from "../../common/lib/styledElements/Index";
 import { RouteList } from "./RouteList";
 
 export default function ViewRoutes() {
@@ -25,8 +25,9 @@ export default function ViewRoutes() {
   }, []);
   useEffect(() => {
     fetchRoutes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (isLoading) return <h3>Loading...</h3>;
+  if (isLoading) return <Loading />;
   return (
     <>
       {msg && <Card className="info-message">{msg}</Card>}

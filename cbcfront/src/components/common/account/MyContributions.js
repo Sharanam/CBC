@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import commutersModel from "../../../globalState/commuter";
 import { Container } from "../lib/layout/Index";
+import { Loading } from "../lib/styledElements/Index";
 
 const MyContributions = () => {
   const [contributions, setContributions] = useState(null);
@@ -20,7 +21,7 @@ const MyContributions = () => {
     <Container size="md">
       <h1>My Contributions</h1>
       {isLoading ? (
-        <h3>Loading...</h3>
+        <Loading />
       ) : (
         <>
           {JSON.stringify(contributions)}

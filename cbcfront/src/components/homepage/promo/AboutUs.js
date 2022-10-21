@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import busesModel from "../../../globalState/buses";
 import { Container } from "../../common/lib/layout/Index";
-import { Card } from "../../common/lib/styledElements/Index";
+import { Card, Loading } from "../../common/lib/styledElements/Index";
 
 export default function AboutUs() {
   const [buses, setBuses] = useState(null);
@@ -24,7 +24,7 @@ export default function AboutUs() {
         }}
       >
         {isLoading ? (
-          <h4>Loading...</h4>
+          <Loading />
         ) : (
           <>
             <Card white={true}>

@@ -1,6 +1,6 @@
 import announcementModel from "../../../globalState/announcement";
 import { useEffect, useState } from "react";
-import { Card } from "../../common/lib/styledElements/Index";
+import { Card, Loading } from "../../common/lib/styledElements/Index";
 import Container from "../../common/lib/layout/Container";
 import getDateInFormat from "../../../utils/timekeeper";
 
@@ -69,7 +69,7 @@ const Announcement = () => {
             ))}
           </>
         ) : (
-          <>Loading...</>
+          <Loading />
         )}
       </div>
     </Container>

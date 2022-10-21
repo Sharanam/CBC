@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import feedbacksModel from "../../../../globalState/feedback";
 import { Button } from "../../../common/lib/formElements/Index";
 import { Container } from "../../../common/lib/layout/Index";
-import { Card } from "../../../common/lib/styledElements/Index";
+import { Card, Loading } from "../../../common/lib/styledElements/Index";
 import AddFeedback from "./AddFeedback";
 import UnitFeedback from "./UnitFeedback";
 import { FeedbackCard } from "./FeedbackCard";
@@ -47,7 +47,7 @@ export default function ViewFeedbacks(props) {
           Give Feedback
         </Button>
         {isLoading ? (
-          <h3>Loading...</h3>
+          <Loading />
         ) : (
           <>
             {feedbacks?.map((f, i) => (

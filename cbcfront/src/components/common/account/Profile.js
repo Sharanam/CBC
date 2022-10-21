@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import userModel from "../../../globalState/user";
 import { Label, Input, Form, Button } from "../lib/formElements/Index";
 import { Container } from "../lib/layout/Index";
-import { Card } from "../lib/styledElements/Index";
+import { Card, Loading } from "../lib/styledElements/Index";
 
 const Profile = ({ user, card }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +31,7 @@ const Profile = ({ user, card }) => {
     fetchProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (isLoading) return <h3>Loading...</h3>;
+  if (isLoading) return <Loading />;
   if (card || user) {
     return (
       <Container size="sm">

@@ -5,7 +5,11 @@ import { colorOf } from "../../../../utils/getBusServiceStatuses";
 import serviceType from "../../../../utils/getBusServiceTypes";
 import { Button } from "../../../common/lib/formElements/Index";
 import { Container } from "../../../common/lib/layout/Index";
-import { Card, Highlighter } from "../../../common/lib/styledElements/Index";
+import {
+  Card,
+  Highlighter,
+  Loading,
+} from "../../../common/lib/styledElements/Index";
 
 export function BusList({ route }) {
   const navigate = useNavigate();
@@ -34,15 +38,7 @@ export function BusList({ route }) {
   return (
     <Container>
       {isLoading ? (
-        <h2
-          style={{
-            margin: "1em 0",
-            textAlign: "center",
-            color: "var(--danger)",
-          }}
-        >
-          Loading...
-        </h2>
+        <Loading />
       ) : (
         <>
           {links?.length === 0 ? (

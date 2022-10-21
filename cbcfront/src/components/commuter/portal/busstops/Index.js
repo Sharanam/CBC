@@ -7,6 +7,7 @@ import {
   SearchAutocomplete,
 } from "../../../common/lib/formElements/Index";
 import Container from "../../../common/lib/layout/Container";
+import { Loading } from "../../../common/lib/styledElements/Index";
 
 const BusStops = (props) => {
   const [stop, setStop] = useState("");
@@ -20,7 +21,7 @@ const BusStops = (props) => {
     });
   }, []);
   const navigate = useNavigate();
-  if (isLoading) return <h3>Loading...</h3>;
+  if (isLoading) return <Loading />;
   if (props.name) return <>Buses at {props.name}.</>;
   return (
     <Container size="md">

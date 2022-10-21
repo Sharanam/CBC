@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import busesModel from "../../../../globalState/buses";
-import { Card } from "../../../common/lib/styledElements/Index";
+import { Card, Loading } from "../../../common/lib/styledElements/Index";
 
 export default function BusCurrent(props) {
   const regNumber = props?.number || 0;
@@ -22,7 +22,7 @@ export default function BusCurrent(props) {
     fetchBus();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [regNumber]);
-  if (isLoading) return "Loading...";
+  if (isLoading) return <Loading />;
   return (
     <>
       <Card white={true}>

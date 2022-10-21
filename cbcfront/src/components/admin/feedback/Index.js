@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import feedbacksModel from "../../../globalState/feedback";
 import { Container } from "../../common/lib/layout/Index";
 import getDateInFormat from "../../../utils/timekeeper";
-import { Card } from "../../common/lib/styledElements/Index";
+import { Card, Loading } from "../../common/lib/styledElements/Index";
 import { Button } from "../../common/lib/formElements/Index";
 
 function FeedbackView({ feedback }) {
@@ -102,7 +102,7 @@ const Feedback = (props) => {
         <h1>Feedbacks</h1>
         {msg && <Card className="info-message">{msg}</Card>}
         {isLoading ? (
-          <h3>Loading...</h3>
+          <Loading />
         ) : (
           <>
             {feedbacks?.map((f, i) => (

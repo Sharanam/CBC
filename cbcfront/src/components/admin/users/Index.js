@@ -4,6 +4,7 @@ import { Button } from "../../common/lib/formElements/Index";
 
 import { Container } from "../../common/lib/layout/Index";
 import Table from "../../common/lib/layout/table/Index";
+import { Loading } from "../../common/lib/styledElements/Index";
 import Blacklist from "./Blacklist";
 import IssuePass from "./IssuePass";
 import SearchBoxes from "./SearchBoxes";
@@ -12,12 +13,15 @@ import SetAdmin from "./SetAdmin";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [openFilterBox, setOpenFilterBox] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [payload, setPayload] = useState({
     email: "",
     name: "",
   });
   const fetchUsers = useCallback(() => {
+    setIsLoading(true);
     adminModel.getUsers(payload).then((result) => {
+      setIsLoading(false);
       setUsers(result);
     });
   }, [payload]);
@@ -45,6 +49,7 @@ const Users = () => {
             </Button>
           </div>
         )}
+        {isLoading && <Loading />}
         {users[0] && (
           <Table>
             <thead>

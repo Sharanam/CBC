@@ -6,7 +6,7 @@ import InsertLinkForm from "./InsertLinkForm";
 import EditLinkForm from "./EditLinkForm";
 import DeleteLink from "./DeleteLink";
 import { LinkCards } from "./LinkCards";
-import { Card } from "../../common/lib/styledElements/Index";
+import { Card, Loading } from "../../common/lib/styledElements/Index";
 
 export default function ViewLinks(props) {
   const [searchParams] = useSearchParams();
@@ -76,7 +76,7 @@ export default function ViewLinks(props) {
           <h1>Link the bus</h1>
         )}
         {isLoading ? (
-          "Loading..."
+          <Loading />
         ) : (
           <>
             <>

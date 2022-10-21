@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import busStandsModel from "../../../globalState/busStands";
 import { Container } from "../../common/lib/layout/Index";
-import { Card } from "../../common/lib/styledElements/Index";
+import { Card, Loading } from "../../common/lib/styledElements/Index";
 
 const BusStops = () => {
   const [busStands, setBusStands] = useState(null);
@@ -13,7 +13,7 @@ const BusStops = () => {
       setIsLoading(false);
     });
   }, []);
-  if (isLoading) return <h2>Loading...</h2>;
+  if (isLoading) return <Loading />;
   return (
     <>
       <Container size="md">

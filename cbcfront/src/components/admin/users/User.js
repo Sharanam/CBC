@@ -7,6 +7,7 @@ import Input from "../../common/lib/formElements/Input";
 import Label from "../../common/lib/formElements/label/Label";
 import Container from "../../common/lib/layout/Container";
 import Divider from "../../common/lib/styledElements/Divider";
+import { Loading } from "../../common/lib/styledElements/Index";
 
 export default function User(props) {
   const [user, setUser] = useState("");
@@ -34,7 +35,7 @@ export default function User(props) {
   return (
     <>
       {user === "" ? (
-        <h1>Loading...</h1>
+        <Loading />
       ) : (
         <>
           <Container size="xs">

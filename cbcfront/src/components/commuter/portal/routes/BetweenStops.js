@@ -8,7 +8,11 @@ import {
   SearchAutocomplete,
 } from "../../../common/lib/formElements/Index";
 import Container from "../../../common/lib/layout/Container";
-import { Card, Highlighter } from "../../../common/lib/styledElements/Index";
+import {
+  Card,
+  Highlighter,
+  Loading,
+} from "../../../common/lib/styledElements/Index";
 
 const dummy = [
   {
@@ -192,7 +196,7 @@ const BetweenStops = (props) => {
     });
   }, []);
   const navigate = useNavigate();
-  if (isLoading) return <h3>Loading...</h3>;
+  if (isLoading) return <Loading />;
   if (props.from && props.to) return <RouteList data={props} />;
   return (
     <Container size="md">
