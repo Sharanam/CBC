@@ -9,7 +9,8 @@
   --text-color: var(--google-gray-700);
   --danger: rgb(117, 53, 49);
 
-  --footer-heading-underline-color: #e91e63;
+  --light-red: #e91e63;
+  --footer-heading-underline-color: var(--light-red);
 
   --google-gray-700: rgb(95, 99, 104);
   --google-gray-900: rgb(32, 33, 36);
@@ -24,8 +25,8 @@
 
   --yellow: yellow;
 
-  --warning-message-bg: var(--danger);
-  --warning-message-fg: var(--black);
+  --warning-message-bg: var(--light-red);
+  --warning-message-fg: var(--less-white);
 }
 
 a {

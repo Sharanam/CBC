@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../common/lib/formElements/Index";
 import { Card, Highlighter } from "../../common/lib/styledElements/Index";
 import serviceType from "../../../utils/getBusServiceTypes";
+import { colorOf } from "../../../utils/getBusServiceStatuses";
 
 const BusCard = ({ bus }) => {
   const navigate = useNavigate();
@@ -114,12 +115,11 @@ const BusCard = ({ bus }) => {
           }}
         >
           The bus is{" "}
-          <Highlighter color="correct">
+          <Highlighter color={colorOf(bus?.status)}>
             <span
               style={{
                 padding: "0.2rem",
                 textTransform: "capitalize",
-                color: "var(--black)",
               }}
             >
               {bus.status}

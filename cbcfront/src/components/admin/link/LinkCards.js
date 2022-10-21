@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { colorOf } from "../../../utils/getBusServiceStatuses";
 import serviceType from "../../../utils/getBusServiceTypes";
 import { Button } from "../../common/lib/formElements/Index";
 import { Card, Highlighter } from "../../common/lib/styledElements/Index";
@@ -141,12 +142,11 @@ export function LinkCards(props) {
             }}
           >
             The bus is{" "}
-            <Highlighter color="correct">
+            <Highlighter color={colorOf(link?.bus?.status)}>
               <span
                 style={{
                   padding: "0.2rem",
                   textTransform: "capitalize",
-                  color: "var(--black)",
                 }}
               >
                 {link?.bus?.status}

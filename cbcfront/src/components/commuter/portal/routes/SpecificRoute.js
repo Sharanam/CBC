@@ -4,17 +4,11 @@ import routesModel from "../../../../globalState/routes";
 import Form from "../../../common/lib/formElements/Form";
 import {
   Button,
-  DropDown,
-  Error,
-  Input,
   Label,
   SearchAutocomplete,
 } from "../../../common/lib/formElements/Index";
 import Container from "../../../common/lib/layout/Container";
-
-function BusList(props) {
-  return <>{props.i}</>;
-}
+import { BusList } from "./BusList";
 
 const SpecificRoute = (props) => {
   const [routeNumber, setRouteNumber] = useState(props.identifier || "");
@@ -26,10 +20,11 @@ const SpecificRoute = (props) => {
   }, []);
   useEffect(() => {
     fetchRoutes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.identifier]);
   const navigate = useNavigate();
   if (props.identifier) {
-    return <BusList i={props.identifier} />;
+    return <BusList route={props.identifier} />;
   }
   return (
     <Container size="md">
