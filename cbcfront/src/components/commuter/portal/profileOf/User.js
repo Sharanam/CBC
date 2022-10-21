@@ -1,3 +1,9 @@
-export default function ProfileOf(props) {
-  return <>{props.userId}</>;
+import Profile from "../../../common/account/Profile";
+
+export default function ProfileOf({ user }) {
+  return (
+    <>
+      <Profile card={true} user={user} />
+    </>
+  );
 }

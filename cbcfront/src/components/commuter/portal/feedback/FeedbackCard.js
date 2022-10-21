@@ -25,6 +25,10 @@ export function FeedbackCard({ feedback, additional }) {
               color: feedback?.user?.isBlacklisted
                 ? "var(--danger)"
                 : "currentColor",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              navigate(`/profile/${feedback?.user?._id}`);
             }}
           >
             <span

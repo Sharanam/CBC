@@ -6,7 +6,13 @@ const Gallery = () => {
   return (
     <>
       <Container size="sm">
-        <h1>Gallery</h1>
+        <h1
+          style={{
+            textAlign: "center",
+          }}
+        >
+          Gallery
+        </h1>
       </Container>
       <div className="galleryCards">
         {[1, 2, 3, 4, 5, 6].map((val, i) => {

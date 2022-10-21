@@ -6,7 +6,6 @@ import { MainWrapper } from "../../common/lib/layout/Index";
 import Home from "./Home";
 import { useParams } from "react-router-dom";
 import Feedback from "./feedback/Index";
-import ProfileOf from "./profileOf/User";
 
 const Desk = () => {
   let component;
@@ -27,9 +26,6 @@ const Desk = () => {
       break;
     case "feedback":
       component = <Feedback id={argA} />;
-      break;
-    case "profile":
-      component = <ProfileOf userId={argA} />;
       break;
     default:
       component = <Home />;

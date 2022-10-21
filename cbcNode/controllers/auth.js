@@ -367,10 +367,10 @@ exports.updateProfile = (req, res) => {
   }
 };
 
-exports.getProfileOf = (req, res) => {
+exports.getProfileOf = async (req, res) => {
   try {
     const { id } = req.params;
-    res.json(getProfileOf(id));
+    res.json(await getProfileOf(id));
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");

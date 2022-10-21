@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import adminModel from "../../../globalState/admin";
 import Button from "../../common/lib/formElements/button/Button";
 import Form from "../../common/lib/formElements/Form";
@@ -30,7 +30,6 @@ export default function User(props) {
     price: "",
   });
   const navigate = useNavigate();
-  const [errors, setErrors] = useState(null);
 
   return (
     <>
@@ -42,12 +41,10 @@ export default function User(props) {
             <Form
               onSubmit={(e) => {
                 e.preventDefault();
-                setErrors(null);
                 const payload = { user: id, ...pass };
                 adminModel.issuePass(payload).then((result) => {
                   if (result?.msg) alert(result?.msg);
                   if (result.success) navigate(-1);
-                  if (result.errors) setErrors(...result.errors);
                 });
                 // pending
                 // .then((res) => {

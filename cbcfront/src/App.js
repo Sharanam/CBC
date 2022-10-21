@@ -19,18 +19,15 @@ import CommuterPortal from "./components/commuter/portal/Index";
 import AdminDesk from "./components/admin/Index";
 import Account from "./components/common/account/Index";
 import SignOut from "./components/common/signOut/SignOut";
-import FourZeroFour from "./components/common/FourZeroFour";
-
 import userModel from "./globalState/user";
 import checkLocalStorage from "./utils/checkLocalStorage";
 import { useSessionStorage } from "./utils/browserStore";
 import MyContext from "./context/Flag";
-import Announcement from "./components/homepage/announcement/Index";
-import Gallery from "./components/homepage/gallery/Index";
 import ResetPassword from "./components/common/ResetPassword";
 import ResendToken from "./components/common/ResendToken";
 import ConfirmToken from "./components/common/ConfirmToken";
 import { ErrorBoundary } from ".";
+import ParentalPath from "./components/common/Index";
 
 function App() {
   document.title = "Home | CBC";
@@ -109,32 +106,9 @@ function App() {
               <Route path=":path" element={<Account />} />
             </Route>
             <Route path="/logout" element={<SignOut />} />
-            <Route
-              path="/Announcements"
-              element={
-                <div
-                  style={{
-                    minHeight: "80vh",
-                  }}
-                >
-                  <Announcement />
-                </div>
-              }
-            />
-            <Route
-              path="/Gallery"
-              element={
-                <div
-                  style={{
-                    minHeight: "80vh",
-                  }}
-                >
-                  <Gallery />
-                </div>
-              }
-            />
-            <Route path="/profile/:id" element={<CommuterPortal />} />
-            <Route path="/*" element={<FourZeroFour />} />
+            <Route path="/:other" element={<ParentalPath />}>
+              <Route path=":argA" element={<ParentalPath />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

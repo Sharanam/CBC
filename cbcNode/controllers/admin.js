@@ -27,11 +27,6 @@ exports.getUsers = (req, res) => {
             .status(500)
             .send("something went wrong while fetching the users");
 
-        console.log(
-          req
-          // `email:${req.body.email} name:${req.body.name}`,
-          // JSON.stringify(users)
-        );
         res.json(users || []);
       }
     );

@@ -4,7 +4,7 @@ import { Label, Input, Form, Button } from "../lib/formElements/Index";
 import { Container } from "../lib/layout/Index";
 import { Card } from "../lib/styledElements/Index";
 
-const Profile = (props) => {
+const Profile = ({ user, card }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
 
@@ -15,11 +15,24 @@ const Profile = (props) => {
       setData({ ...result });
     });
   }, []);
+  const fetchProfileOf = useCallback(() => {
+    setIsLoading(true);
+    userModel.getProfileOf(user).then((result) => {
+      setIsLoading(false);
+      setData({ ...result });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => {
+    if (user) {
+      fetchProfileOf(user);
+      return;
+    }
     fetchProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (isLoading) return <h3>Loading...</h3>;
-  if (props.card) {
+  if (card || user) {
     return (
       <Container size="sm">
         <Card
