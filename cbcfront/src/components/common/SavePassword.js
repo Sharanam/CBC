@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Button, Form, Label } from "./lib/formElements/Index";
 import Input from "./lib/formElements/Input";
-import Container from "./lib/layout/Container";
+import { Container } from "./lib/layout/Index";
 
 const SavePassword = () => {
-  const [SavePassword, setSavepassword] = useState("");
+  const [SavePassword, setSavePassword] = useState("");
   return (
     <main>
       <Container size="xs">
@@ -21,7 +21,7 @@ const SavePassword = () => {
                   placeholder="Enter Token"
                   value={SavePassword}
                   onChange={(e) => {
-                    setSavepassword(e.target.value);
+                    setSavePassword(e.target.value);
                   }}
                 />
                 <Label className="required" htmlFor="Password">
@@ -32,7 +32,7 @@ const SavePassword = () => {
                   placeholder="Enter Password"
                   value={SavePassword}
                   onChange={(e) => {
-                    setSavepassword(e.target.value);
+                    setSavePassword(e.target.value);
                   }}
                 />
                 <Label className="required" htmlFor="Confirm Password">
@@ -43,7 +43,7 @@ const SavePassword = () => {
                   placeholder="Enter Confirm Password"
                   value={SavePassword}
                   onChange={(e) => {
-                    setSavepassword(e.target.value);
+                    setSavePassword(e.target.value);
                   }}
                 />
               </>

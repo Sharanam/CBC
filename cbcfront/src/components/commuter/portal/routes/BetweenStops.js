@@ -7,205 +7,68 @@ import {
   Form,
   SearchAutocomplete,
 } from "../../../common/lib/formElements/Index";
-import Container from "../../../common/lib/layout/Container";
+import { Container } from "../../../common/lib/layout/Index";
 import {
   Card,
   Highlighter,
   Loading,
 } from "../../../common/lib/styledElements/Index";
-
-const dummy = [
-  {
-    stops: ["GIDC", "Alavanaka", "Market"],
-    schedule: ["06:30", "07:25"],
-    _id: "63410bd6e668862ed81fee0a",
-    identifier: "10A",
-    tripTime: 50,
-  },
-  {
-    stops: ["This", "is", "Fafda", "ni", "dish"],
-    schedule: ["03:11", "08:12"],
-    _id: "6341ed94009f1920787857c3",
-    identifier: "11A",
-    tripTime: 45,
-  },
-];
-
-function RouteView({ route, tripTime, stops, schedule }) {
-  const navigate = useNavigate();
-  return (
-    <>
-      <Card
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          flexWrap: "nowrap",
-          backgroundColor: "var(--less-white)",
-          color: "var(--card-bg)",
-        }}
-        actions={
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              gap: "0.8rem",
-            }}
-          >
-            <Button
-              className="negative"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate(`/portal/routes/${route}`);
-              }}
-            >
-              View Available Buses
-            </Button>
-          </div>
-        }
-      >
-        <p
-          style={{
-            fontSize: "1.2em",
-            margin: " 0 0 0.3rem 0",
-            display: "flex",
-          }}
-        >
-          <span
-            style={{
-              flexGrow: "1",
-              textTransform: "uppercase",
-            }}
-          >
-            {route}
-          </span>
-          <span
-            style={{
-              fontSize: "0.8em",
-            }}
-          >
-            {tripTime} mins
-          </span>
-        </p>
-        <p
-          style={{
-            fontSize: "0.8em",
-          }}
-        >
-          {/* Status: */}
-          <Highlighter color="correct">
-            <span
-              style={{
-                padding: "0.2rem",
-                textTransform: "capitalize",
-                color: "var(--black)",
-              }}
-            >
-              {stops?.join(", ")}
-            </span>
-          </Highlighter>
-        </p>
-        <p
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "0.5rem",
-            fontSize: "0.8em",
-            margin: "0.2rem",
-          }}
-        >
-          {schedule?.map((s, i) => (
-            <Highlighter
-              key={i}
-              style={{
-                backgroundColor: "var(--light-blue)",
-                color: "var(--yellow)",
-              }}
-            >
-              <span
-                style={{
-                  padding: "0.05rem",
-                }}
-              >
-                {s}
-              </span>
-            </Highlighter>
-          ))}
-        </p>
-      </Card>
-    </>
-  );
-}
-function RouteList({ data }) {
-  const [routes, setRoutes] = useState(dummy);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    setIsLoading(false);
-    // setIsLoading(true);
-    // routesModel.getRoutes({ from: data.from, to: data.to }).then((result) => {
-    //   setIsLoading(false);
-    //   setRoutes(result.routes || routes);
-    //   if (result.msg) {
-    //     alert(result.msg);
-    //   }
-    // });
-  }, []);
-
-  return (
-    <>
-      <h1>
-        Routes to go from <u>{data.from}</u> to <u>{data.to}</u>
-      </h1>
-      {isLoading ? (
-        <h3>Loading</h3>
-      ) : (
-        <Container>
-          <mark>
-            This list is dummy, back-end is being debugged. <br />
-            After solving the bug, data will be injected from the server
-          </mark>
-          {routes ? (
-            <>
-              {routes?.map((v, i) => (
-                <RouteView
-                  route={v.identifier}
-                  tripTime={v.tripTime}
-                  stops={v.stops}
-                  schedule={v.schedule}
-                  key={i}
-                />
-              ))}
-            </>
-          ) : (
-            <mark>No direct route for given stops</mark>
-          )}
-        </Container>
-      )}
-    </>
-  );
-}
+import { RouteList } from "./RouteList";
 
 const BetweenStops = (props) => {
+  const flagFrontPage = props.from && props.to;
   const [stops, setStops] = useState({ from: "", to: "" });
+
   const [busStands, setBusStands] = useState(null);
+  const [routes, setRoutes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [msg, setMsg] = useState(null);
   useEffect(() => {
-    setIsLoading(true);
-    busStandsModel.getStands().then((result) => {
-      setBusStands(result);
-      setIsLoading(false);
-    });
-  }, []);
+    if (flagFrontPage) {
+      setIsLoading(true);
+
+      routesModel
+        .getRoutes({ from: props.from, to: props.to })
+        .then((result) => {
+          setIsLoading(false);
+          if (result.success) {
+            setRoutes(result?.routes);
+          }
+          if (result.msg) setMsg(result.msg);
+        });
+    } else {
+      setIsLoading(true);
+      busStandsModel.busStandNames().then((result) => {
+        setBusStands(result);
+        setIsLoading(false);
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [flagFrontPage]);
   const navigate = useNavigate();
   if (isLoading) return <Loading />;
-  if (props.from && props.to) return <RouteList data={props} />;
+  if (flagFrontPage)
+    return (
+      <>
+        <h1>
+          Routes to go from <Highlighter>{props.from}</Highlighter> to{" "}
+          <Highlighter>{props.to}</Highlighter>
+        </h1>
+        {msg && <Card className="info-message">{msg}</Card>}
+        <RouteList routes={routes} />
+      </>
+    );
   return (
     <Container size="md">
       <Form
         margin="unset"
         onSubmit={(e) => {
           e.preventDefault();
-          if (stops.from && stops.to && stops.from !== stops.to)
+          setIsLoading(true);
+          if (stops.from && stops.to && stops.from !== stops.to) {
             navigate(`/portal/routes/${stops.from}/${stops.to}`);
+          }
+          setIsLoading(false);
         }}
       >
         {{

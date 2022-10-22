@@ -6,8 +6,9 @@ import {
   Form,
   SearchAutocomplete,
 } from "../../../common/lib/formElements/Index";
-import Container from "../../../common/lib/layout/Container";
+import { Container } from "../../../common/lib/layout/Index";
 import { Loading } from "../../../common/lib/styledElements/Index";
+import LiveBusStop from "./LiveBusStop";
 
 const BusStops = (props) => {
   const [stop, setStop] = useState("");
@@ -15,14 +16,14 @@ const BusStops = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(true);
-    busStandsModel.getStands().then((result) => {
+    busStandsModel.busStandNames().then((result) => {
       setBusStands(result);
       setIsLoading(false);
     });
   }, []);
   const navigate = useNavigate();
   if (isLoading) return <Loading />;
-  if (props.name) return <>Buses at {props.name}.</>;
+  if (props.name) return <LiveBusStop name={props.name} />;
   return (
     <Container size="md">
       <Form

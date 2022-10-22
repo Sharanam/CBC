@@ -8,7 +8,7 @@ const AreaOfService = () => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(true);
-    busStandsModel.getStands().then((result) => {
+    busStandsModel.busStandNames().then((result) => {
       setBusStands(result);
       setIsLoading(false);
     });

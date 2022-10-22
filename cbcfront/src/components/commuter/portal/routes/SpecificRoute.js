@@ -7,7 +7,7 @@ import {
   Label,
   SearchAutocomplete,
 } from "../../../common/lib/formElements/Index";
-import Container from "../../../common/lib/layout/Container";
+import { Container } from "../../../common/lib/layout/Index";
 import { BusList } from "./BusList";
 
 const SpecificRoute = (props) => {

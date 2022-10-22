@@ -1,7 +1,7 @@
 import announcementModel from "../../../globalState/announcement";
 import { useEffect, useState } from "react";
 import { Card, Loading } from "../../common/lib/styledElements/Index";
-import Container from "../../common/lib/layout/Container";
+import { Container } from "../../common/lib/layout/Index";
 import getDateInFormat from "../../../utils/timekeeper";
 
 const Announcement = () => {

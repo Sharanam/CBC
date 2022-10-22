@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import userModel from "../../globalState/user";
 import { Button, Form, Label } from "./lib/formElements/Index";
 import Input from "./lib/formElements/Input";
-import Container from "./lib/layout/Container";
+import { Container } from "./lib/layout/Index";
 
 const ResetPassword = () => {
   const [payload, setPayload] = useState({

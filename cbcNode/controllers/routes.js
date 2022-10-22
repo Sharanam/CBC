@@ -35,10 +35,10 @@ exports.editRoute = (req, res) => {
     const { routeId, stops, identifier, schedule, tripTime } = req.body;
     Route.findOne({ _id: routeId }, (_, route) => {
       if (!route) return res.json({ msg: "route not found" });
-      route.stops = stops;
-      route.identifier = identifier;
-      route.schedule = schedule;
-      route.tripTime = tripTime;
+      route.stops = stops || route.stops;
+      route.identifier = identifier || route.identifier;
+      route.schedule = schedule || route.schedule;
+      route.tripTime = tripTime || route.tripTime;
       route.save((error) => {
         if (error) {
           return res.json({
@@ -89,17 +89,35 @@ exports.getRoute = (req, res) => {
   }
 };
 
-exports.getRoutes = (req, res) => {
+exports.getRoutes = async (req, res) => {
   try {
-    const { from, to } = req.body;
-    const routes = [];
-    // search routes in which, stops consists 'from' and
-    // then and then only search for 'to' in that same route,
-    // if they are there in sequence, then push them into
-    // routes array (local array variable)
+    const { from, to } = req.query;
+    let routes = [];
+    routes = await Route.find({
+      stops: {
+        $elemMatch: {
+          $regex: new RegExp(`^${from.toString().trim()}$`, "i"),
+        },
+      },
+    });
+    routes = routes.filter(
+      (route) =>
+        route.stops
+          .map((v) => v.toString().toUpperCase())
+          .includes(to.toString().toUpperCase()) &&
+        route.stops
+          .map((v) => v.toString().toUpperCase())
+          .indexOf(from.toString().toUpperCase()) <
+          route.stops
+            .map((v) => v.toString().toUpperCase())
+            .indexOf(to.toString().toUpperCase())
+    );
     res.json({
-      success: false,
-      msg: "No direct bus is available for given places.",
+      success: true,
+      msg:
+        routes.length === 0 &&
+        `No direct bus is available from ${from} to ${to}.`,
+      routes,
     });
   } catch (error) {
     console.error(error.message);

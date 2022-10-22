@@ -7,7 +7,7 @@ import {
   Label,
   SearchAutocomplete,
 } from "../../../common/lib/formElements/Index";
-import Container from "../../../common/lib/layout/Container";
+import { Container } from "../../../common/lib/layout/Index";
 import { Loading } from "../../../common/lib/styledElements/Index";
 import BusCurrent from "./Bus";
 const Bus = (props) => {

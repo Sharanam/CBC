@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "../lib/formElements/Index";
-import Container from "../lib/layout/Container";
+import { Container } from "../lib/layout/Index";
 import Profile from "./Profile";
 
 const Home = () => {

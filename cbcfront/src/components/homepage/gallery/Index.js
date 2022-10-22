@@ -1,4 +1,4 @@
-import Container from "../../common/lib/layout/Container";
+import { Container } from "../../common/lib/layout/Index";
 import { Card } from "../../common/lib/styledElements/Index";
 import "./style.css";
 

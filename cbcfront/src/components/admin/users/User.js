@@ -5,7 +5,7 @@ import Button from "../../common/lib/formElements/button/Button";
 import Form from "../../common/lib/formElements/Form";
 import Input from "../../common/lib/formElements/Input";
 import Label from "../../common/lib/formElements/label/Label";
-import Container from "../../common/lib/layout/Container";
+import { Container } from "../../common/lib/layout/Index";
 import Divider from "../../common/lib/styledElements/Divider";
 import { Loading } from "../../common/lib/styledElements/Index";
 

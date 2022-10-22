@@ -4,7 +4,7 @@ import Error from "../../common/lib/formElements/Error";
 import Form from "../../common/lib/formElements/Form";
 import Input from "../../common/lib/formElements/Input";
 import Label from "../../common/lib/formElements/label/Label";
-import Container from "../../common/lib/layout/Container";
+import { Container } from "../../common/lib/layout/Index";
 
 const tomorrow = new Date(+new Date() + 86400000).toLocaleDateString("en-CA");
 const CreateAnnouncement = (props) => {

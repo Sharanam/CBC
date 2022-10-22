@@ -25,7 +25,7 @@ const AddRoute = (props) => {
   const [busStands, setBusStands] = useState(null);
   useEffect(() => {
     setIsLoading(true);
-    busStandsModel.getStands().then((result) => {
+    busStandsModel.busStandNames().then((result) => {
       setBusStands(result);
       setIsLoading(false);
     });

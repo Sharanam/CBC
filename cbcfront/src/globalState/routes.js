@@ -12,7 +12,7 @@ const routesModel = {
   },
   getRoutes: async (payload) => {
     try {
-      const result = await axios.get(`/route`, { params: payload });
+      const result = await axios.get(`/route/for/stops`, { params: payload });
       return result.data;
     } catch (err) {
       alert(err.message);
