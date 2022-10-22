@@ -11,6 +11,7 @@ import Feedback from "./feedback/Index";
 import Home from "./Home";
 import User from "./users/User";
 import Reports from "./reports/Index";
+import Reporting from "./reporting/Index";
 import ViewLinks from "./link/ViewLinks";
 import Passes from "./passes/Index";
 
@@ -47,6 +48,9 @@ const Desk = () => {
       break;
     case "feedback":
       component = <Feedback />;
+      break;
+    case "reportings":
+      component = <Reporting />;
       break;
     case "reports":
       component = <Reports />;

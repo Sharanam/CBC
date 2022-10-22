@@ -1,5 +1,4 @@
-import Form from "../../common/lib/formElements/Form";
-import { Button, Input, Label } from "../../common/lib/formElements/Index";
+import { Button, Input } from "../../common/lib/formElements/Index";
 
 export default function SearchBoxes(props) {
   return (

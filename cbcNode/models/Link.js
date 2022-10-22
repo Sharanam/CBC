@@ -4,12 +4,12 @@ let linkSchema = new Schema(
   {
     route: {
       type: Schema.Types.ObjectId,
-      required: true,
+      required: [true, "route is required"],
       ref: "routes",
     },
     bus: {
       type: Schema.Types.ObjectId,
-      required: true,
+      required: [true, "bus is required"],
       ref: "buses",
       unique: [
         true,
