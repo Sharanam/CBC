@@ -1,5 +1,6 @@
 const { isMongoId } = require("validator");
 const Bus = require("../models/Bus");
+const Link = require("../models/Link");
 const handleError = require("../utils/handleError");
 
 exports.addBus = (req, res) => {
@@ -70,21 +71,47 @@ exports.deleteBus = (req, res) => {
   }
 };
 
-exports.getBus = (req, res) => {
+exports.getBus = async (req, res) => {
   try {
     const { busId } = req.params;
+    const { live } = req.query;
     if (!busId) return res.json({ success: false, msg: "Id is required." });
     const criteria = {};
     if (isMongoId(busId)) criteria._id = busId;
-    else criteria.registrationNumber = busId;
-    Bus.findOne(criteria, (err, bus) => {
-      if (err) return res.status(500).send(err.message);
+    else
+      criteria.registrationNumber = {
+        $regex: new RegExp(`^${busId.toString().trim()}$`, "i"),
+      };
+    let bus = await Bus.findOne(criteria);
+    if (!bus)
+      return res.json({
+        success: false,
+        bus,
+        msg: "No bus with given number found.",
+      });
+    if (live) {
+      let link = await Link.findOne({ bus })
+        .populate("route", "identifier stops tripTime")
+        .populate("bus", "registrationNumber serviceType capacity status");
+      return res.json({
+        success: true,
+        link,
+      });
+    } else {
       return res.json({
         success: true,
         bus,
-        msg: !bus ? "No bus with given number found." : null,
       });
-    });
+    }
+
+    // Bus.findOne(criteria, (err, bus) => {
+    //   if (err) return res.status(500).send(err.message);
+    //   return res.json({
+    //     success: true,
+    //     bus,
+    //     msg: !bus ? "No bus with given number found." : null,
+    //   });
+    // });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");

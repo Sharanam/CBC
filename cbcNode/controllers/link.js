@@ -16,7 +16,9 @@ exports.addLink = async (req, res) => {
     if (!bus || !route) return res.json({ msg: "Fields are missing" });
 
     if (!isMongoId(bus)) {
-      criteria.registrationNumber = bus;
+      criteria.registrationNumber = {
+        $regex: new RegExp(`^${bus.toString().trim()}$`, "i"),
+      };
       bus = await Bus.findOne(criteria);
       if (bus?._id) bus = bus._id;
       else return res.json({ errors: { bus: "No bus found." } });
@@ -24,7 +26,9 @@ exports.addLink = async (req, res) => {
 
     criteria = {};
     if (!isMongoId(route)) {
-      criteria.identifier = route;
+      criteria.identifier = {
+        $regex: new RegExp(`^${route.toString().trim()}$`, "i"),
+      };
       route = await Route.findOne(criteria);
       if (route?._id) route = route._id;
       else return res.json({ errors: { route: "No route found." } });
@@ -59,7 +63,9 @@ exports.editLink = async (req, res) => {
     if (!bus || !route) return res.json({ msg: "Fields are missing" });
 
     if (!isMongoId(bus)) {
-      criteria.registrationNumber = bus;
+      criteria.registrationNumber = {
+        $regex: new RegExp(`^${bus.toString().trim()}$`, "i"),
+      };
       bus = await Bus.findOne(criteria);
       if (bus?._id) bus = bus._id;
       else return res.json({ errors: { bus: "No bus found." } });
@@ -67,7 +73,9 @@ exports.editLink = async (req, res) => {
 
     criteria = {};
     if (!isMongoId(route)) {
-      criteria.identifier = route;
+      criteria.identifier = {
+        $regex: new RegExp(`^${route.toString().trim()}$`, "i"),
+      };
       route = await Route.findOne(criteria);
       if (route?._id) route = route._id;
       else return res.json({ errors: { route: "No route found." } });
@@ -128,7 +136,9 @@ exports.getLink = async (req, res) => {
     } else if (route) {
       criteria = {};
       if (!isMongoId(route)) {
-        criteria.identifier = route;
+        criteria.identifier = {
+          $regex: new RegExp(`^${route.toString().trim()}$`, "i"),
+        };
         route = await Route.findOne(criteria);
         if (route?._id) route = route._id;
       }

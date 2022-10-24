@@ -19,6 +19,15 @@ const busesModel = {
       return { error: "Server down" };
     }
   },
+  getLiveBus: async (busNumber, payload = {}) => {
+    try {
+      const result = await axios.get(`/bus/${busNumber}`, { params: payload });
+      return result.data;
+    } catch (err) {
+      alert(err.message);
+      return { error: "Server down" };
+    }
+  },
   getBuses: async (route) => {
     try {
       const result = await axios.get(`/bus/on/${route}`);
