@@ -30,8 +30,6 @@ import { ErrorBoundary } from ".";
 import ParentalPath from "./components/common/Index";
 
 function App() {
-  document.title = "Home | CBC";
-
   const { setCurrentUser, signOut } = userModel;
   const { decoded, expired } = checkLocalStorage(jwtDecode);
 
