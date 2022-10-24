@@ -45,6 +45,10 @@ export function RouteView({ route, tripTime, stops, schedule }) {
             style={{
               flexGrow: "1",
               textTransform: "uppercase",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              navigate(`/portal/routes/${route}`);
             }}
           >
             {route}
@@ -54,7 +58,7 @@ export function RouteView({ route, tripTime, stops, schedule }) {
               fontSize: "0.8em",
             }}
           >
-            Trip time: {tripTime} mins
+            Maximum Trip Time: {tripTime} mins
           </span>
         </p>
         <p

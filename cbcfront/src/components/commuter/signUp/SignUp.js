@@ -51,6 +51,7 @@ export default function SignUp() {
     return () => {
       clearErrors();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionUser.isAuthenticated]);
 
   return (
@@ -181,7 +182,7 @@ export default function SignUp() {
                 Create Account
               </Button>
             ),
-            additional: <Link to="/Login">Have already account?</Link>,
+            additional: <Link to="/Login">Have already an account?</Link>,
           }}
         </Form>
       </Container>

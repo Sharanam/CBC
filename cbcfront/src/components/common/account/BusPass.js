@@ -6,7 +6,7 @@ import { Loading } from "../lib/styledElements/Index";
 const BusPass = () => {
   const [passes, setPasses] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const fetchConti = useCallback(() => {
+  const fetchPasses = useCallback(() => {
     setIsLoading(true);
     commutersModel.getMyPasses().then((result) => {
       setIsLoading(false);
@@ -15,7 +15,8 @@ const BusPass = () => {
     });
   }, []);
   useEffect(() => {
-    fetchConti();
+    fetchPasses();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Container size="sm">

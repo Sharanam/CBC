@@ -9,22 +9,23 @@ import {
 } from "../../../common/lib/formElements/Index";
 import { Container } from "../../../common/lib/layout/Index";
 import { Loading } from "../../../common/lib/styledElements/Index";
-import BusCurrent from "./Bus";
+import BusView from "./BusView";
 const Bus = (props) => {
   const [busNumber, setBusNumber] = useState(props.regNumber || "");
   const [buses, setBuses] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    if (props.regNumber) return;
     setIsLoading(true);
     busesModel.viewBuses().then((result) => {
       result = result?.buses?.map((v) => v.registrationNumber);
       setBuses(result);
       setIsLoading(false);
     });
-  }, []);
+  }, [props.regNumber]);
   const navigate = useNavigate();
   if (isLoading) return <Loading />;
-  if (props.regNumber) return <BusCurrent number={busNumber} />;
+  if (props.regNumber) return <BusView number={busNumber} />;
   return (
     <Container size="md">
       <Form

@@ -61,7 +61,7 @@ export function LinkCards(props) {
             >
               {link?.bus?.registrationNumber}
             </span>
-            {link?.bus?.serviceType >= 0 ? (
+            {link?.bus?.serviceType >= 0 && (
               <span
                 style={{
                   fontSize: "0.8em",
@@ -72,8 +72,6 @@ export function LinkCards(props) {
               >
                 ({serviceType[link.bus.serviceType]})
               </span>
-            ) : (
-              ""
             )}
             <span
               style={{

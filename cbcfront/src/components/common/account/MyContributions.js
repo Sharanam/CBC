@@ -6,7 +6,7 @@ import { Loading } from "../lib/styledElements/Index";
 const MyContributions = () => {
   const [contributions, setContributions] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const fetchConti = useCallback(() => {
+  const fetchContributions = useCallback(() => {
     setIsLoading(true);
     commutersModel.getMyContribution().then((result) => {
       setIsLoading(false);
@@ -15,7 +15,8 @@ const MyContributions = () => {
     });
   }, []);
   useEffect(() => {
-    fetchConti();
+    fetchContributions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Container size="md">
