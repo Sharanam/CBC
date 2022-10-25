@@ -9,6 +9,7 @@ export default function getDateInFormat(date, options = {}) {
 }
 
 function getTotalDays(date) {
+  if (!date) return "";
   const formatter = new Intl.RelativeTimeFormat("en", {
     // style: "narrow",
     // numeric: "auto",

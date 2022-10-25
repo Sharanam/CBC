@@ -8,20 +8,17 @@ ul.printStop li::marker {
 ul.printStop li {
   margin-bottom: 0.5em;
 }
-
+ul.printStop li {
+  position: relative;
+}
 ul.printStop li::before {
   content: "";
-  position: absolute;
-  left: 22px;
   border-left: 1px solid currentColor;
-  height: 75px; /* Add similar code for 5 different viewport */
-  width: 1px;
+  position: absolute;
+  left: -18px;
+  height: calc(100% + 0.5em);
+  top: 15px;
 }
-
-ul.printStop li:first-child:before {
-  top: 20px;
-}
-
-ul.printStop li:last-child:before {
+ul.printStop li:last-child::before {
   display: none;
 }

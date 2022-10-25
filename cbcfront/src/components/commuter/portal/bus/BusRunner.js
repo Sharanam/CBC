@@ -89,7 +89,7 @@ export function BusRunner(props) {
             }}
             onClick={() => setSearchParams()}
           >
-            {bus.registrationNumber}
+            {bus?.registrationNumber}
           </span>
 
           <span
@@ -170,7 +170,7 @@ export function BusRunner(props) {
                 fontSize: "0.8em",
               }}
             >
-              Type of bus is: ({serviceType[bus.serviceType]})
+              Type of bus is: ({serviceType[bus?.serviceType]})
             </span>
           )}
         </p>
@@ -184,7 +184,7 @@ export function BusRunner(props) {
         {time && (
           <>
             <Divider />
-            {colorOf(bus.status) === "warning" ? (
+            {colorOf(bus?.status) === "warning" ? (
               <Highlighter
                 color="warning"
                 style={{
@@ -220,6 +220,15 @@ export function BusRunner(props) {
 function ContributiveStop({ stop, tripTime, depTime }) {
   return (
     <>
+      <p>
+        <span
+          style={{
+            flexGrow: "1",
+          }}
+        >
+          {stop}
+        </span>
+      </p>
       <p
         style={{
           display: "flex",
@@ -230,23 +239,6 @@ function ContributiveStop({ stop, tripTime, depTime }) {
           gap: "0.5em",
         }}
       >
-        <span
-          style={{
-            flexGrow: "1",
-          }}
-        >
-          {stop}
-        </span>
-
-        <span
-          style={{
-            fontSize: "0.8em",
-          }}
-        >
-          Contribute
-        </span>
-      </p>
-      <p>
         <span
           style={{
             fontSize: "0.65em",
@@ -265,6 +257,13 @@ function ContributiveStop({ stop, tripTime, depTime }) {
             readOnly
           />
           ETA
+        </span>
+        <span
+          style={{
+            fontSize: "0.8em",
+          }}
+        >
+          Contribute
         </span>
       </p>
     </>

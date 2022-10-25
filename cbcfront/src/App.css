@@ -48,3 +48,9 @@ main {
     margin: 0 auto;
   }
 }
+
+/* remove cross from time element */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+  display: none;
+}
