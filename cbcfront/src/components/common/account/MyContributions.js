@@ -8,7 +8,7 @@ const MyContributions = () => {
   const [isLoading, setIsLoading] = useState(true);
   const fetchContributions = useCallback(() => {
     setIsLoading(true);
-    commutersModel.getMyContribution().then((result) => {
+    commutersModel.getMyContributions().then((result) => {
       setIsLoading(false);
       if (result.success) setContributions(result.contributions);
       if (result.msg) alert(result.msg);

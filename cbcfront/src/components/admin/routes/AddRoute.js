@@ -183,7 +183,7 @@ const AddRoute = (props) => {
                   key={i}
                   style={{
                     display: "flex",
-                    flexDiretion: "row-reverse",
+                    flexDirection: "row-reverse",
                   }}
                 >
                   <Input

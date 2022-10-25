@@ -26,7 +26,7 @@ const BetweenStops = (props) => {
   useEffect(() => {
     if (flagFrontPage) {
       setIsLoading(true);
-
+      setMsg(null);
       routesModel
         .getRoutes({ from: props.from, to: props.to })
         .then((result) => {
@@ -49,14 +49,34 @@ const BetweenStops = (props) => {
   if (isLoading) return <Loading />;
   if (flagFrontPage)
     return (
-      <>
-        <h1>
-          Routes to go from <Highlighter>{props.from}</Highlighter> to{" "}
-          <Highlighter>{props.to}</Highlighter>
-        </h1>
+      <Container size="md">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+          }}
+        >
+          <h1
+            style={{
+              flexGrow: 1,
+            }}
+          >
+            Routes to go from <Highlighter>{props.from}</Highlighter> to{" "}
+            <Highlighter>{props.to}</Highlighter>
+          </h1>
+          <Button
+            onClick={() => navigate(`/portal/routes/${props.to}/${props.from}`)}
+            className="neutral"
+            style={{
+              margin: "unset",
+            }}
+          >
+            Swap bus stops
+          </Button>
+        </div>
         {msg && <Card className="info-message">{msg}</Card>}
         <RouteList routes={routes} />
-      </>
+      </Container>
     );
   return (
     <Container size="md">

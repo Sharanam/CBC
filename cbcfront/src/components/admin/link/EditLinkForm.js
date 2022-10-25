@@ -119,10 +119,36 @@ export default function EditLinkForm(props) {
                   injected={payload.route}
                   data={routes?.map((v) => v.identifier)}
                   handleCallback={(selected) => {
-                    setPayload((payload) => ({
-                      ...payload,
-                      route: selected,
-                    }));
+                    // commitment: upgraded the solution but is not robust yet
+                    if (
+                      selected &&
+                      routes.filter((v) => v.identifier.includes(selected))
+                        .length
+                    ) {
+                      setErrors((e) => ({
+                        ...e,
+                        route: null,
+                      }));
+                      if (selected !== payload.route) {
+                        setPayload((payload) => ({
+                          ...payload,
+                          route: selected,
+                          // Issue: it needs to remove redundant elements
+                          // i.e., schedule of old route
+                          schedule: payload?.schedule?.filter((t) =>
+                            routes
+                              .filter((v) => v.identifier === selected)
+                              .map((v) => v.schedule)
+                              .filter((v) => v.includes(t))
+                          ),
+                        }));
+                      }
+                    } else {
+                      setErrors((e) => ({
+                        ...e,
+                        route: "This will give an error !!!",
+                      }));
+                    }
                   }}
                   placeholder="Enter Route Identifier"
                   style={{ width: "100%" }}

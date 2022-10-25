@@ -33,3 +33,11 @@ export function toDateFrom(time) {
 export function toTimeFrom(date) {
   return new Date(date).toTimeString().slice(0, 8);
 }
+
+export function addTimeInto(depTime, tripTime, options = {}) {
+  let date = new Date();
+  date = new Date(date.toString().split(":")[0].slice(0, -2) + depTime);
+  date.setTime(date.getTime() + tripTime * 60 * 1000);
+  if (options.time) return date.toTimeString().match(/\d+:\d+/)[0];
+  return date;
+}

@@ -1,48 +1,76 @@
 const Feedback = require("../models/Feedback");
 const Contribution = require("../models/Contribution");
 const Pass = require("../models/Pass");
+const User = require("../models/User");
+const Route = require("../models/Route");
 
-exports.newFeedback = (req, res) => {
+exports.makeContribution = async (req, res) => {
   try {
-    let { message } = req.body;
-    message = (message || "").toString().trim();
-    const user = req.user;
-    new Feedback({ user: user.userId, message })
-      .save()
-      .then((feedback) => {
-        res.json({
-          success: true,
-          feedback,
-        });
-      })
-      .catch((err) => {
-        console.log(err.message);
-        res.json({
-          success: false,
-          // errors: handleError(err), //handleErrorIssue
-          msg: "Something is wrong with database",
-        });
+    let user = req.user.userId;
+    let { message, stop, bus, route } = req.body;
+
+    user = await User.findOne({ _id: user });
+    user.isVerified && !user.isBlacklisted;
+    console.log(!user.isVerified || user.isBlacklisted);
+    if (!user.isVerified || user.isBlacklisted)
+      return res.json({
+        success: false,
+        msg: "you are either unverified user or admin may have blocked you !!!",
       });
+    route = await Route.findOne({ _id: route });
+    if (!route?.stops?.includes(stop))
+      return res.json({
+        success: false,
+        msg: "stop is invalid",
+      });
+    let cont = await new Contribution({
+      user: user._id,
+      message,
+      stop,
+      bus,
+      route,
+    }).save();
+    return res.json({ success: true, contribution: cont });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");
   }
-  // it has been done again in (or let say, moved to)
-  // sophisticated feedback page
 };
 
-exports.makeContribution = (req, res) => {
+exports.editContribution = async (req, res) => {
   try {
-    const user = req.user.userId;
-    const { message, stop, bus } = req.body;
+    let user = req.user.userId;
 
-    // validation:
-    // check the credibility of the stop
-    // from where the bus is supposed to run
-
-    new Contribution({ user, message, stop, bus })
-      .save()
-      .then((cont) => res.json({ success: true, contribution: cont }))
+    // only if the user want to re-declare that the bus has been reached the stop.
+    let { _id, message } = req.body;
+    let cont = await new Contribution({
+      _id,
+      user: user,
+      message,
+    }).save();
+    return res.json({ success: true, contribution: cont });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("something went wrong");
+  }
+};
+exports.getContributionsFor = (req, res) => {
+  let user = req.user.userId;
+  let { bus, route, createdAfter } = req.query;
+  // createdAfter will provide the time in DATE format,
+  // compare that with 'createdAt'
+  // ignore the contributions of next round trip by removing them from the result
+  try {
+    Contribution.find({ bus, route })
+      .then((cont) =>
+        res.json({
+          success: true,
+          contributions: {
+            ...cont,
+            user: cont.user === user ? cont.user : undefined,
+          },
+        })
+      )
       .catch((err) => {
         console.log(err.message);
         res.json({
@@ -55,10 +83,9 @@ exports.makeContribution = (req, res) => {
     res.status(500).send("something went wrong");
   }
 };
-exports.getMyContribution = (req, res) => {
+exports.getMyContributions = (req, res) => {
   try {
     const user = req.user.userId;
-
     Contribution.find({ user })
       .then((cont) => res.json({ success: true, contributions: cont }))
       .catch((err) => {

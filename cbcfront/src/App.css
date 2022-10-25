@@ -23,6 +23,9 @@
   --info-message-bg: lightgreen;
   --info-message-fg: var(--black);
 
+  --toggle-button-true: rgb(157, 150, 236);
+  --toggle-button-false: rgb(236, 150, 150);
+
   --yellow: yellow;
 
   --warning-message-bg: var(--light-red);

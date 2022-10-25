@@ -1,0 +1,43 @@
+/* after some debugging,
+I will delete these commented code blocks */
+
+ul.printStop {
+  list-style-type: disc;
+  position: relative;
+  /* margin-bottom: 0;
+  padding-bottom: 1.5em; */
+}
+ul.printStop li::marker {
+  font-size: 1.5em;
+}
+ul.printStop li {
+  /* padding-left: 33px;
+  padding-left: 27px; */
+  margin-bottom: 0.5em;
+}
+
+ul.printStop li::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  border-left: 1px solid currentColor;
+  height: 100%;
+  top: 0;
+  width: 1px;
+}
+/* 
+ul.printStop li:first-child::before {
+  /* border-left: 6px solid currentColor; * /
+  top: -6px;
+}
+ul.printStop li::after {
+  content: "";
+  position: absolute;
+  left: -26px;
+  top: 0px;
+}
+
+
+ul.printStop li:last-child::before {
+  height: 6px;
+} */

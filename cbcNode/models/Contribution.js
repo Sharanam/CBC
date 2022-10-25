@@ -18,13 +18,18 @@ let contributionSchema = new Schema(
       type: String,
       trim: true,
       required: [true, "message is required."],
-      enum: ["bus reached at", "hasn't reached"],
+      enum: ["reached at", "hasn't reached at"],
     },
     stop: { type: String, trim: true, required: true },
     bus: {
       type: Schema.Types.ObjectId,
       required: [true, "bus id is required."],
       ref: "buses",
+    },
+    route: {
+      type: Schema.Types.ObjectId,
+      required: [true, "route id is required."],
+      ref: "routes",
     },
   },
   {
