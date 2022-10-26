@@ -2,7 +2,7 @@ import "./style.css";
 function Table(props) {
   return (
     <>
-      <table {...props} className={(props.className || "") + " customtable"}>
+      <table {...props} className={(props.className || "") + " custom-table"}>
         {props.children}
       </table>
     </>
