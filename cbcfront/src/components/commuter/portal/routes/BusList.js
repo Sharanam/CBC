@@ -23,7 +23,11 @@ export function BusList({ route }) {
     if (res?.links) {
       setLinks(res?.links);
       setIsLoading(false);
-      setMsg(`${res?.links?.length} bus(es) found on route ${route}`);
+      setMsg(
+        `${res?.links?.length} bus(es) found on route ${
+          res?.links[0]?.route?.identifier || route
+        }`
+      );
     }
   };
 
@@ -53,7 +57,7 @@ export function BusList({ route }) {
             </h3>
           ) : (
             <>
-              <h1>Buses on route {route}</h1>
+              <h1>Buses on route {links[0]?.route?.identifier || route}</h1>
               {msg && (
                 <Card
                   className="info-message"

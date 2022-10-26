@@ -38,7 +38,7 @@ const RouteCard = ({ route }) => {
               className="neutral"
               onClick={(e) => {
                 e.preventDefault();
-                navigate(`/portal/route/${route._id}`);
+                navigate(`/portal/routes/${route._id}`);
               }}
             >
               View Route

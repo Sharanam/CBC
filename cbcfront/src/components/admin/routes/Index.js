@@ -7,9 +7,9 @@ const Route = () => {
   let component;
   const { argA, argB } = useParams();
   switch (argA) {
-    case "view":
-      component = `View Route ${argB}. here "buses/ForSpecificRoute.js`;
-      break;
+    // case "view":
+    //   component = `View Route ${argB}. here "buses/ForSpecificRoute.js`;
+    //   break;
     case "delete":
       component = <DeleteRoute route={argB} />;
       break;
