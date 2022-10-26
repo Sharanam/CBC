@@ -14,6 +14,7 @@ export default function DeleteRoute(props) {
   };
   useEffect(() => {
     deleteRoute();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.route]);
   return;
 }

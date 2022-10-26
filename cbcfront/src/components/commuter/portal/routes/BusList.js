@@ -36,7 +36,7 @@ export function BusList({ route }) {
   const [msg, setMsg] = useState(null);
 
   return (
-    <Container>
+    <Container size="md">
       {isLoading ? (
         <Loading />
       ) : (

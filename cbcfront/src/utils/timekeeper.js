@@ -42,3 +42,10 @@ export function addTimeInto(depTime, tripTime, options = {}) {
   if (options.time) return date.toTimeString().match(/\d+:\d+/)[0];
   return date;
 }
+export function timeDistributor(tripTime, numberOfStops, key) {
+  try {
+    return (tripTime * key) / numberOfStops;
+  } catch (e) {
+    return tripTime;
+  }
+}

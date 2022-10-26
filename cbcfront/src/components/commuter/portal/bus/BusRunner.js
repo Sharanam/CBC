@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { colorOf } from "../../../../utils/getBusServiceStatuses";
 import serviceType from "../../../../utils/getBusServiceTypes";
-import { addTimeInto } from "../../../../utils/timekeeper";
+import { addTimeInto, timeDistributor } from "../../../../utils/timekeeper";
 import { Input, Toggle } from "../../../common/lib/formElements/Index";
 import { Container } from "../../../common/lib/layout/Index";
 import {
@@ -202,7 +202,11 @@ export function BusRunner(props) {
                     <li key={key}>
                       <ContributiveStop
                         stop={stop}
-                        tripTime={route?.tripTime - route?.tripTime / (key + 1)}
+                        tripTime={timeDistributor(
+                          route?.tripTime,
+                          route?.stops?.length - 1,
+                          key
+                        )}
                         depTime={time}
                       />
                     </li>
