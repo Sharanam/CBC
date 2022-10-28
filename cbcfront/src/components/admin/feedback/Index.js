@@ -98,7 +98,7 @@ const Feedback = (props) => {
   }
   return (
     <>
-      <Container>
+      <Container size="md">
         <h1>Feedbacks</h1>
         {msg && <Card className="info-message">{msg}</Card>}
         {isLoading ? (

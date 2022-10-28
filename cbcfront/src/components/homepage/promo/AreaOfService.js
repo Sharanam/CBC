@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import busStandsModel from "../../../globalState/busStands";
 import { Container } from "../../common/lib/layout/Index";
 import { Card, Loading } from "../../common/lib/styledElements/Index";
@@ -13,6 +14,8 @@ const AreaOfService = () => {
       setIsLoading(false);
     });
   }, []);
+  const navigate = useNavigate();
+
   if (isLoading) return <Loading />;
   return (
     <>
@@ -31,7 +34,16 @@ const AreaOfService = () => {
         >
           {busStands &&
             busStands.map((bs, i) => (
-              <Card key={i} white={true}>
+              <Card
+                key={i}
+                white={true}
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  navigate(`/portal/busstops/${bs}`);
+                }}
+              >
                 {bs}
               </Card>
             ))}

@@ -257,7 +257,9 @@ function ContributiveStop({ stop, tripTime, depTime }) {
               padding: "0.2em",
               margin: "0 5px 0 0",
             }}
-            value={addTimeInto(depTime, tripTime, { time: 1 }).toString()}
+            value={(
+              addTimeInto(depTime, tripTime, { time: 1 }) || ""
+            ).toString()}
             readOnly
           />
           ETA

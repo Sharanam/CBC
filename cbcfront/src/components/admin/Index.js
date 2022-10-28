@@ -62,7 +62,7 @@ const Desk = () => {
   return (
     <>
       <MainWrapper sidebar={<Sidebar for="dashboard" />}>
-        <Container>{component}</Container>
+        <Container size="xl">{component}</Container>
       </MainWrapper>
     </>
   );

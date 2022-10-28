@@ -31,12 +31,24 @@ exports.addBus = (req, res) => {
     res.status(500).send("Something went wrong");
   }
 };
-exports.editBus = (req, res) => {
+exports.editBus = async (req, res) => {
   try {
-    const { busId, registrationNumber, serviceType, status, route } = req.body;
+    let { busId, registrationNumber, serviceType, status, route } = req.body;
+    let criteria = {};
+    if (!isMongoId(busId || "")) {
+      criteria.registrationNumber = {
+        $regex: new RegExp(
+          `^${(busId || registrationNumber || "").toString().trim()}$`,
+          "i"
+        ),
+      };
+      console.log(JSON.stringify(criteria));
+      bus = await Bus.findOne(criteria);
+      busId = bus?._id;
+    }
     Bus.findOne({ _id: busId }, (_, bus) => {
       if (!bus) return res.json({ msg: "bus not found" });
-      bus.registrationNumber = registrationNumber;
+      bus.registrationNumber = registrationNumber || bus.registrationNumber;
       bus.serviceType = serviceType || bus.serviceType;
       bus.status = status || bus.status;
       bus.route = route || bus.route;
@@ -51,6 +63,7 @@ exports.editBus = (req, res) => {
       });
     });
   } catch (e) {
+    console.log(e.message);
     res.status(500).send(e.message);
   }
 };
@@ -80,7 +93,7 @@ exports.getBus = async (req, res) => {
     if (isMongoId(busId)) criteria._id = busId;
     else
       criteria.registrationNumber = {
-        $regex: new RegExp(`^${busId.toString().trim()}$`, "i"),
+        $regex: new RegExp(`^${(busId || "").toString().trim()}$`, "i"),
       };
     let bus = await Bus.findOne(criteria);
     if (!bus)

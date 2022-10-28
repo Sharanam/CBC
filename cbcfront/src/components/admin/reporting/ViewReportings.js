@@ -3,7 +3,7 @@ import { Highlighter } from "../../common/lib/styledElements/Index";
 
 export default function ViewReportings() {
   return (
-    <Container>
+    <Container size="md">
       <h1>Manage Reportings</h1>
       <h3>
         <Highlighter>Under Development</Highlighter>

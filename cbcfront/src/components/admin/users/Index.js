@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import adminModel from "../../../globalState/admin";
 import { Button } from "../../common/lib/formElements/Index";
 
@@ -6,7 +7,6 @@ import { Container } from "../../common/lib/layout/Index";
 import Table from "../../common/lib/layout/table/Index";
 import { Loading } from "../../common/lib/styledElements/Index";
 import Blacklist from "./Blacklist";
-import IssuePass from "./IssuePass";
 import SearchBoxes from "./SearchBoxes";
 import SetAdmin from "./SetAdmin";
 
@@ -77,9 +77,16 @@ const Users = () => {
                       user["public"] ? "public" : "private"
                     }`}
                   >
-                    <IssuePass id={user["_id"]} visibility={user["public"]}>
-                      {user["name"]}
-                    </IssuePass>
+                    <Link
+                      to={`/admin/user/${user["_id"]}`}
+                      style={{
+                        color: user["public"]
+                          ? "var(--light-blue)"
+                          : "var(--danger)",
+                      }}
+                    >
+                      <Button className="neutral">{user["name"]}</Button>
+                    </Link>
                   </td>
                   <td
                     title={user["email"]}
@@ -102,9 +109,16 @@ const Users = () => {
                     {user["social"]}
                   </td>
                   <td title={user["type"]} className="center">
-                    <IssuePass id={user["_id"]} visibility={user["public"]}>
-                      New Pass
-                    </IssuePass>
+                    <Link
+                      to={`/admin/user/${user["_id"]}?issuePass=1`}
+                      style={{
+                        color: user["public"]
+                          ? "var(--light-blue)"
+                          : "var(--danger)",
+                      }}
+                    >
+                      <Button className="neutral">New Pass</Button>
+                    </Link>
                   </td>
                   <td title={user["type"]} className="center">
                     <SetAdmin type={user["type"]} _id={user["_id"]} />

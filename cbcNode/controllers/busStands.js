@@ -29,7 +29,9 @@ exports.relatedRoutesTo = async function (req, res) {
     const { standName } = req.params;
     let routes = [];
     routes = await Route.find({
-      stops: { $regex: new RegExp(`^${standName.toString().trim()}$`, "i") },
+      stops: {
+        $regex: new RegExp(`^${(standName || "").toString().trim()}$`, "i"),
+      },
     });
     res.json({ success: true, routes });
   } catch (err) {

@@ -67,7 +67,7 @@ const BusCard = ({ bus }) => {
                 );
               }}
             >
-              Edit Bus Link
+              Manage Assignment
             </Button>
           </div>
         }

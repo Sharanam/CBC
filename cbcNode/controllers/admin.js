@@ -2,34 +2,26 @@ const Pass = require("../models/Pass");
 const User = require("../models/User");
 const handleError = require("../utils/handleError");
 
-exports.getUsers = (req, res) => {
+exports.getUsers = async (req, res) => {
   try {
-    User.aggregate(
-      [
-        {
-          $match: {
-            $and: [
-              { email: { $regex: req.query.email || "", $options: "i" } },
-              { name: { $regex: req.query.name || "", $options: "i" } },
-            ],
-          },
+    let user = await User.aggregate([
+      {
+        $match: {
+          $and: [
+            { email: { $regex: req.query.email || "", $options: "i" } },
+            { name: { $regex: req.query.name || "", $options: "i" } },
+          ],
         },
-        {
-          $project: {
-            password: 0,
-            __v: 0,
-          },
+      },
+      {
+        $project: {
+          password: 0,
+          __v: 0,
         },
-      ],
-      (err, users) => {
-        if (err)
-          return res
-            .status(500)
-            .send("something went wrong while fetching the users");
+      },
+    ]);
 
-        res.json(users || []);
-      }
-    );
+    return res.json(user || {});
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");
