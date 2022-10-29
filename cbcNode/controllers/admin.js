@@ -28,7 +28,7 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-exports.getUser = (req, res) => {
+exports.getSpecificUser = (req, res) => {
   try {
     User.findOne(
       {
@@ -47,6 +47,13 @@ exports.getUser = (req, res) => {
 
 exports.blacklistUser = (req, res) => {
   try {
+    const { userId } = req.user;
+    const { id } = req.params;
+    if (userId === id)
+      return res.json({
+        success: false,
+        msg: "You cannot blacklist yourself.",
+      });
     User.findOne(
       {
         _id: req.params.id,
@@ -76,9 +83,16 @@ exports.blacklistUser = (req, res) => {
 };
 exports.setAdmin = (req, res) => {
   try {
+    const { userId } = req.user;
+    const { id } = req.params;
+    if (userId === id)
+      return res.json({
+        success: false,
+        msg: "You cannot unset yourself as an admin.",
+      });
     User.findOne(
       {
-        _id: req.params.id,
+        _id: id,
       },
       (err, user) => {
         if (err) return res.status(500).send(err.message);
@@ -105,32 +119,6 @@ exports.setAdmin = (req, res) => {
   }
 };
 
-exports.setAdminPrivilege = (req, res) => {
-  // e.g., http://localhost:8000/api/admin/setAdmin/63276274dc0319342809014c?admin=false
-  try {
-    User.findOne(
-      {
-        _id: req.params.userId,
-      },
-      (_, user) => {
-        if (!user) return res.json({ msg: "User not found" });
-        if (!user.isVerified) return res.json({ msg: "User is not verified" });
-        user.type = req.query.admin === "true" ? "a" : "c";
-        console.log(user.type, req.query.admin);
-        user.save((error) => {
-          if (error) {
-            return res.status(500).json({
-              msg: error.message,
-            });
-          }
-          res.send({ success: true, msg: "Task finished successfully." });
-        });
-      }
-    );
-  } catch (e) {
-    res.status(500).send(e.message);
-  }
-};
 exports.issuePass = async (req, res) => {
   try {
     const { user, from, to, date, validity, price } = req.body;
