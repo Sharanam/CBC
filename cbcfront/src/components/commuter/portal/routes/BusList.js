@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import linksModel from "../../../../globalState/links";
 import { colorOf } from "../../../../utils/getBusServiceStatuses";
 import serviceType from "../../../../utils/getBusServiceTypes";
-import { Button } from "../../../common/lib/formElements/Index";
+import { Button, Input } from "../../../common/lib/formElements/Index";
 import { Container } from "../../../common/lib/layout/Index";
 import {
   Card,
@@ -124,7 +124,7 @@ export function BusList({ route }) {
                           flexGrow: "1",
                         }}
                       >
-                        ({serviceType[link.bus.serviceType]})
+                        ({serviceType[link?.bus?.serviceType]})
                       </span>
                     )}
                     <span
@@ -163,21 +163,19 @@ export function BusList({ route }) {
                     }}
                   >
                     {link?.schedule?.map((s, i) => (
-                      <Highlighter
+                      <Input
                         key={i}
+                        type="time"
                         style={{
-                          backgroundColor: "var(--light-blue)",
-                          color: "var(--yellow)",
+                          cursor: "pointer",
                         }}
-                      >
-                        <span
-                          style={{
-                            padding: "0.05rem",
-                          }}
-                        >
-                          {s}
-                        </span>
-                      </Highlighter>
+                        value={s}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigate(`/portal/buses/${link?.bus?._id}?time=${s}`);
+                        }}
+                        readOnly
+                      />
                     ))}
                   </p>
                   <p
