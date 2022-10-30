@@ -12,7 +12,7 @@ const commutersModel = {
   },
   makeContribution: async (payload) => {
     try {
-      const result = await axios.post("/commuter/makeContribution", payload);
+      const result = await axios.post("/commuter/contribution", payload);
       return result.data;
     } catch (err) {
       alert(err.message);
@@ -21,7 +21,7 @@ const commutersModel = {
   },
   editContribution: async (payload) => {
     try {
-      const result = await axios.put("/commuter/makeContribution", payload);
+      const result = await axios.put("/commuter/contribution", payload);
       return result.data;
     } catch (err) {
       alert(err.message);
@@ -30,7 +30,7 @@ const commutersModel = {
   },
   getContributionsFor: async (payload) => {
     try {
-      const result = await axios.get("/commuter/makeContribution/for", {
+      const result = await axios.get("/commuter/contribution/for", {
         params: payload,
       });
       return result.data;

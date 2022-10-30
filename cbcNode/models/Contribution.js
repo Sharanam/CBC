@@ -7,18 +7,11 @@ let contributionSchema = new Schema(
       required: [true, "user id is required."],
       ref: "users",
     },
-    // type: {
-    //   type: Number,
-    //   required: [true, "type is required."],
-    //   enum: [0, 1],
-    //   // 0: about current location
-    //   // 1: about bus timings
-    // },
     message: {
       type: String,
       trim: true,
       required: [true, "message is required."],
-      enum: ["reached at", "hasn't reached at"],
+      enum: ["arrived", "not arrived"],
     },
     stop: { type: String, trim: true, required: true },
     bus: {
@@ -30,6 +23,10 @@ let contributionSchema = new Schema(
       type: Schema.Types.ObjectId,
       required: [true, "route id is required."],
       ref: "routes",
+    },
+    createdAfter: {
+      type: Date,
+      required: [true, "time is required."],
     },
   },
   {

@@ -6,29 +6,54 @@ const Route = require("../models/Route");
 
 exports.makeContribution = async (req, res) => {
   try {
-    let user = req.user.userId;
-    let { message, stop, bus, route } = req.body;
+    let user = req.user?.userId;
+    let { message, stop, bus, route, createdAfter } = req.body;
 
-    user = await User.findOne({ _id: user });
-    user.isVerified && !user.isBlacklisted;
-    console.log(!user.isVerified || user.isBlacklisted);
-    if (!user.isVerified || user.isBlacklisted)
+    // preprocessing
+    if (!user)
       return res.json({
         success: false,
         msg: "you are either unverified user or admin may have blocked you !!!",
       });
     route = await Route.findOne({ _id: route });
-    if (!route?.stops?.includes(stop))
+    if (
+      !route?.stops
+        ?.map((v) => v.toString().toLowerCase())
+        .includes(stop.toString().toLowerCase())
+    )
       return res.json({
         success: false,
         msg: "stop is invalid",
       });
+
+    // already done or not
+    const c = await Contribution.findOne({
+      bus,
+      route,
+      createdAfter,
+      user,
+      stop,
+    });
+    if (c) {
+      if (c.message === message)
+        return res.json({ success: false, msg: "you have already done this" });
+      c.message = message;
+      // edit message, if it has been done already
+      await c.save();
+      return res.json({
+        success: true,
+        contribution: c,
+      });
+    }
+
+    // actual work
     let cont = await new Contribution({
-      user: user._id,
+      user,
       message,
       stop,
       bus,
       route,
+      createdAfter,
     }).save();
     return res.json({ success: true, contribution: cont });
   } catch (error) {
@@ -39,45 +64,53 @@ exports.makeContribution = async (req, res) => {
 
 exports.editContribution = async (req, res) => {
   try {
-    let user = req.user.userId;
-
-    // only if the user want to re-declare that the bus has been reached the stop.
+    // preprocessing
+    let user = req.user?.userId;
     let { _id, message } = req.body;
-    let cont = await new Contribution({
-      _id,
-      user: user,
-      message,
-    }).save();
-    return res.json({ success: true, contribution: cont });
+
+    // preprocessing
+    if (!user)
+      return res.json({
+        success: false,
+        msg: "you are either unverified user or admin may have blocked you !!!",
+      });
+
+    // actual work
+    const contribution = await Contribution.findById(_id);
+    console.log(contribution.message, user);
+    if (contribution.user?.toString() !== user?.toString())
+      return res.json({
+        success: false,
+        msg: "do not try to be a malicious user unless you want to get blocked by an administrator.",
+      });
+    contribution.message = message;
+    const result = await contribution.save();
+    return res.json({ success: true, contribution });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");
   }
 };
-exports.getContributionsFor = (req, res) => {
-  let user = req.user.userId;
+exports.getContributionsFor = async (req, res) => {
+  let user = req.user?.userId;
   let { bus, route, createdAfter } = req.query;
-  // createdAfter will provide the time in DATE format,
-  // compare that with 'createdAt'
-  // ignore the contributions of next round trip by removing them from the result
   try {
-    Contribution.find({ bus, route })
-      .then((cont) =>
-        res.json({
-          success: true,
-          contributions: {
-            ...cont,
-            user: cont.user === user ? cont.user : undefined,
-          },
-        })
-      )
-      .catch((err) => {
-        console.log(err.message);
-        res.json({
-          success: false,
-          msg: "Something is wrong with the database",
-        });
-      });
+    const contributions = await Contribution.find({
+      bus,
+      route,
+      createdAfter,
+    }).select("-bus -route -createdAfter -createdAt");
+
+    return res.json({
+      success: true,
+      // contributions: { ...cont, user: cont.user === user ? cont.user : null },
+      contributions: contributions.map((cont) => {
+        return {
+          ...cont._doc,
+          user: cont.user?.toString() === user?.toString() ? cont.user : null,
+        };
+      }),
+    });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");
@@ -85,7 +118,7 @@ exports.getContributionsFor = (req, res) => {
 };
 exports.getMyContributions = (req, res) => {
   try {
-    const user = req.user.userId;
+    const user = req.user?.userId;
     Contribution.find({ user })
       .then((cont) => res.json({ success: true, contributions: cont }))
       .catch((err) => {
@@ -103,7 +136,7 @@ exports.getMyContributions = (req, res) => {
 
 exports.getMyPasses = (req, res) => {
   try {
-    const user = req.user.userId;
+    const user = req.user?.userId;
 
     Pass.find({ user })
       .then((passes) => res.json({ success: true, passes }))

@@ -42,6 +42,15 @@ export class ErrorBoundary extends React.Component {
   }
 }
 
+export function locationCapture(success, error) {
+  const geo = navigator.geolocation;
+  if (geo) {
+    geo.watchPosition(success, error);
+  } else {
+    console.error("error in geo");
+  }
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // strict mode is not required because of the full stack development

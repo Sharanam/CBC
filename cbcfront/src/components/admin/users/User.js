@@ -242,6 +242,7 @@ export default function User(props) {
                   >
                     Issue Pass
                   </Button>
+                  Blacklist, set Admin
                 </Card>
               </>
             )}
