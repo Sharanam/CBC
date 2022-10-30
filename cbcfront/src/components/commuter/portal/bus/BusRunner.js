@@ -88,140 +88,142 @@ export function BusRunner(props) {
   }
   return (
     <Container size="sm">
-      <Card
-        white={true}
-        style={{
-          backgroundColor: "var(--lightblue)",
-          color: "var(--white)",
-          fontSize: "0.9rem",
-        }}
-      >
-        <div
+      {colorOf(bus?.status) !== "warning" ? (
+        <Card
+          white={true}
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "nowrap",
-            flexDirection: "row",
-            gap: "0.5em",
+            backgroundColor: "var(--lightblue)",
+            color: "var(--white)",
+            fontSize: "0.9rem",
           }}
         >
-          <p>Are you in the bus?</p>
-          <Toggle
-            name="inBus"
-            trueText="Yes"
-            falseText="No"
-            checked={inBus}
-            onToggle={() => {
-              setInBus(!inBus);
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexWrap: "nowrap",
+              flexDirection: "row",
+              gap: "0.5em",
             }}
-            style={{ color: "currentColor" }}
-          />
-        </div>
-        <div
-          style={{
-            fontSize: "0.9em",
-            color: "var(--dull-white)",
-          }}
-        >
-          {inBus && position ? (
-            <>
-              <p>
-                <Highlighter color="warning">
-                  DEVELOPMENT NOTE: The latitude and longitude are being
-                  captured and updated by the navigator API.
-                </Highlighter>
-              </p>
-              <p>
-                <Highlighter color="warning">
-                  But the name of the location is derived from the list of the
-                  stops, it is not being determined by the Google Maps.
-                </Highlighter>
-              </p>
-              {position.message ? (
-                <>
-                  <p
-                    style={{
-                      textAlign: "center",
-                    }}
-                  >
-                    <Highlighter color="info">
-                      message: {position.message}
-                    </Highlighter>
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p>
-                    Your current location is:{" "}
-                    {JSON.stringify({
-                      latitude: position.latitude,
-                      longitude: position.longitude,
-                      accuracy: parseInt(position.accuracy || 0) + " metres",
-                    })}
-                    . Which means, the bus is closest to the{" "}
-                    <Highlighter color="correct">
-                      <b>
-                        "
-                        {nearbyBusStop(
-                          route?.stops || [],
-                          position.latitude + position.longitude
-                        )}
-                        "
-                      </b>
-                    </Highlighter>
-                    .
-                  </p>
-                  <p>
-                    Do you agree that bus has been arrived at "
-                    {nearbyBusStop(
-                      route?.stops || [],
-                      position.latitude + position.longitude
-                    )}
-                    "? If yes, then click the below button.
-                  </p>
-                  <Button
-                    style={{
-                      backgroundColor: "var(--white)",
-                      color: "var(--lightblue)",
-                      fontSize: "0.9rem",
-                      margin: "0.5em 0",
-                      width: "100%",
-                    }}
-                    onClick={async (e) => {
-                      e.preventDefault();
-                      const result = await commutersModel.makeContribution({
-                        bus: bus._id,
-                        route: route._id,
-                        stop: nearbyBusStop(
-                          route?.stops || [],
-                          position.latitude + position.longitude
-                        ),
-                        createdAfter: toDateFrom(time),
-                        message: contMessages[0],
-                      });
-                      if (result.success) {
-                        fetchContributions();
-                      }
-                      if (result.msg) alert(result.msg);
-                    }}
-                  >
-                    Yes, I agree
-                  </Button>
-                </>
-              )}
-            </>
-          ) : (
-            <>
-              <p>
-                Please allow us to capture your location, if you are traveling
-                via this bus. You might have blocked the location request,
-                please go to the settings and enable it.
-              </p>
-            </>
-          )}
-        </div>
-      </Card>
+          >
+            <p>Are you in the bus?</p>
+            <Toggle
+              name="inBus"
+              trueText="Yes"
+              falseText="No"
+              checked={inBus}
+              onToggle={() => {
+                setInBus(!inBus);
+              }}
+              style={{ color: "currentColor" }}
+            />
+          </div>
+          <div
+            style={{
+              fontSize: "0.9em",
+              color: "var(--dull-white)",
+            }}
+          >
+            {inBus && position ? (
+              <>
+                <p>
+                  <Highlighter color="warning">
+                    DEVELOPMENT NOTE: The latitude and longitude are being
+                    captured and updated by the navigator API.
+                  </Highlighter>
+                </p>
+                <p>
+                  <Highlighter color="warning">
+                    But the name of the location is derived from the list of the
+                    stops, it is not being determined by the Google Maps.
+                  </Highlighter>
+                </p>
+                {position.message ? (
+                  <>
+                    <p
+                      style={{
+                        textAlign: "center",
+                      }}
+                    >
+                      <Highlighter color="info">
+                        message: {position.message}
+                      </Highlighter>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      Your current location is:{" "}
+                      {JSON.stringify({
+                        latitude: position.latitude,
+                        longitude: position.longitude,
+                        accuracy: parseInt(position.accuracy || 0) + " metres",
+                      })}
+                      . Which means, the bus is closest to the{" "}
+                      <Highlighter color="correct">
+                        <b>
+                          "
+                          {nearbyBusStop(
+                            route?.stops || [],
+                            position.latitude + position.longitude
+                          )}
+                          "
+                        </b>
+                      </Highlighter>
+                      .
+                    </p>
+                    <p>
+                      Do you agree that bus has been arrived at "
+                      {nearbyBusStop(
+                        route?.stops || [],
+                        position.latitude + position.longitude
+                      )}
+                      "? If yes, then click the below button.
+                    </p>
+                    <Button
+                      style={{
+                        backgroundColor: "var(--white)",
+                        color: "var(--lightblue)",
+                        fontSize: "0.9rem",
+                        margin: "0.5em 0",
+                        width: "100%",
+                      }}
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        const result = await commutersModel.makeContribution({
+                          bus: bus._id,
+                          route: route._id,
+                          stop: nearbyBusStop(
+                            route?.stops || [],
+                            position.latitude + position.longitude
+                          ),
+                          createdAfter: toDateFrom(time),
+                          message: contMessages[0],
+                        });
+                        if (result.success) {
+                          fetchContributions();
+                        }
+                        if (result.msg) alert(result.msg);
+                      }}
+                    >
+                      Yes, I agree
+                    </Button>
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <p>
+                  Please allow us to capture your location, if you are traveling
+                  via this bus. You might have blocked the location request,
+                  please go to the settings and enable it.
+                </p>
+              </>
+            )}
+          </div>
+        </Card>
+      ) : null}
       <Card
         style={{
           display: "flex",

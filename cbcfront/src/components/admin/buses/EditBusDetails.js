@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import busesModel from "../../../globalState/buses";
 import statuses from "../../../utils/getBusServiceStatuses";
+import serviceType from "../../../utils/getBusServiceTypes";
 import {
   Input,
   Label,
@@ -83,7 +84,8 @@ export default function EditBusDetails(props) {
                   }}
                 />
                 <Label className="required" htmlFor="serviceType">
-                  Type of Bus Service (Facilities)
+                  Type of Bus Service (Facilities) : (
+                  {serviceType[payload.serviceType]})
                 </Label>
                 {errors?.serviceType && <Error>{errors.serviceType}</Error>}
                 <Input
