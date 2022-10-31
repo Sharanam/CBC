@@ -42,7 +42,6 @@ exports.editBus = async (req, res) => {
           "i"
         ),
       };
-      console.log(JSON.stringify(criteria));
       bus = await Bus.findOne(criteria);
       busId = bus?._id;
     }

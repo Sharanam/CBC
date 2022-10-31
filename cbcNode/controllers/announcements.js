@@ -27,7 +27,7 @@ async function createAnnouncement(req, res) {
   }
 }
 
-async function getAnnouncements(req, res) {
+async function getAnnouncements(_, res) {
   try {
     const announcements = await Announcement.find({})
       .sort({ updatedAt: -1 })

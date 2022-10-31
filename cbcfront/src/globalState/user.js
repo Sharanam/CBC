@@ -18,7 +18,7 @@ const userModel = {
       const result = await axios.post("/auth/signup", payload);
       if (result.data.success) {
         act.clearErrors();
-        return { message: result.data.msg };
+        return { success: true, message: result.data.msg };
       }
       act.setErrors(result.data.errors);
       return result.data;

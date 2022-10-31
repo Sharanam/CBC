@@ -29,6 +29,7 @@ export default function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
 
   const { signUp, clearErrors } = userModel;
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -39,10 +40,11 @@ export default function SignUp() {
         setSessionUser({ ...sessionUser, errors: response.errors });
       }
       setIsLoading(false);
+      if (response.success) {
+        navigate("/login");
+      }
     });
   };
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (sessionUser.isAuthenticated) {

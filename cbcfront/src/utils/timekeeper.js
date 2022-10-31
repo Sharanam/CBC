@@ -26,8 +26,11 @@ function getTotalDays(date) {
   return x;
 }
 
-export function toDateFrom(time) {
+export function toDateFrom(time, options = {}) {
   let d = new Date();
+  if (options.date) d.setDate(options.date);
+  if (options.month) d.setMonth(options.month - 1);
+  if (options.fullYear) d.setFullYear(options.fullYear);
   return new Date(d.toString().split(":")[0].slice(0, -2) + time);
 }
 

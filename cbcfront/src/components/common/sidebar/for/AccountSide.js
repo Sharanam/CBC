@@ -7,7 +7,7 @@ const AccountSide = () => {
         <Link to="/account/favourites">My Favourites</Link>
       </li>
       <li>
-        <Link to="/account/buspass">My Bus Pass</Link>
+        <Link to="/account/buspass">My Bus Pass(es)</Link>
       </li>
       <li>
         <Link to="/account/profile">Edit Profile</Link>

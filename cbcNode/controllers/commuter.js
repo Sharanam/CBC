@@ -120,6 +120,9 @@ exports.getMyContributions = (req, res) => {
   try {
     const user = req.user?.userId;
     Contribution.find({ user })
+      .select("-user -createdAt")
+      .populate("route", "identifier")
+      .populate("bus", "registrationNumber serviceType")
       .then((cont) => res.json({ success: true, contributions: cont }))
       .catch((err) => {
         console.log(err.message);
