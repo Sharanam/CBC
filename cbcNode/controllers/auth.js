@@ -119,7 +119,7 @@ exports.signin = (req, res) => {
             const access_token = jwt.sign(
               { email: user.email, userId: user._id, type: user.type },
               process.env.secretOrKey,
-              { expiresIn: 3600 }
+              { expiresIn: 36000 }
             );
             jwt.verify(
               access_token,
@@ -141,6 +141,7 @@ exports.signin = (req, res) => {
                       phone: user.phone,
                       type: user.type,
                       modifiedDetails: user.updatedAt,
+                      favorites: user.favorites,
                     },
                   });
                 }

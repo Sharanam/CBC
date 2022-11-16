@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import linksModel from "../../../../globalState/links";
+import userModel from "../../../../globalState/user";
 import { colorOf } from "../../../../utils/getBusServiceStatuses";
 import serviceType from "../../../../utils/getBusServiceTypes";
 import { Button, Input } from "../../../common/lib/formElements/Index";
 import { Container } from "../../../common/lib/layout/Index";
 import {
   Card,
+  Favorite,
   Highlighter,
   Loading,
 } from "../../../common/lib/styledElements/Index";
@@ -38,6 +40,9 @@ export function BusList({ route }) {
   }, [route]);
 
   const [msg, setMsg] = useState(null);
+  const [favorite, setFavorite] = useState(
+    (links && userModel?.getFavorites()?.includes(links[0]?.route._id)) || false
+  );
 
   return (
     <Container size="md">
@@ -57,7 +62,30 @@ export function BusList({ route }) {
             </h3>
           ) : (
             <>
-              <h1>Buses on route {links[0]?.route?.identifier || route}</h1>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                  flexWrap: "wrap",
+                }}
+              >
+                <h1>Buses on route {links[0]?.route?.identifier || route}</h1>
+                <Favorite
+                  liked={favorite}
+                  onClick={(task) => {
+                    userModel
+                      .updateFavorites({ routeId: links[0]?.route._id, task })
+                      .then((res) => {
+                        setFavorite((f) =>
+                          userModel
+                            ?.getFavorites()
+                            ?.includes(links[0]?.route._id)
+                        );
+                      });
+                  }}
+                />
+              </div>
               {msg && (
                 <Card
                   className="info-message"

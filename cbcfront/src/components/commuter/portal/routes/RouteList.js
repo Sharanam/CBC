@@ -8,6 +8,7 @@ export function RouteList({ routes }) {
         {routes?.map((v, i) => (
           <RouteView
             route={v.identifier}
+            routeId={v._id}
             tripTime={v.tripTime}
             stops={v.stops}
             schedule={v.schedule}

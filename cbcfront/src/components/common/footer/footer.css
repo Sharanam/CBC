@@ -48,7 +48,7 @@ div.footer-col ul li a {
   font-size: 1em;
   text-transform: capitalize;
   color: var(--google-gray-300);
-  display: block;
+  width: fit-content;
   transition: trasform 1s ease-in 2s;
 }
 div.footer-col ul li a:hover {

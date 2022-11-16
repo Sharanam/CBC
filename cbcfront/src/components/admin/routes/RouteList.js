@@ -61,7 +61,7 @@ const RouteCard = ({ route }) => {
                 );
               }}
             >
-              Set Buses
+              Assign Buses
             </Button>
           </div>
         }

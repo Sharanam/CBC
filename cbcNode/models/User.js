@@ -60,6 +60,13 @@ let userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        unique: [true, "route is already in the list."],
+        ref: "routes",
+      },
+    ],
   },
   {
     timestamps: true,

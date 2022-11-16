@@ -34,6 +34,7 @@ const userModel = {
         localStorage.setItem("jwtToken", result.data.access_token);
         setAuthToken(result.data.access_token);
         const decoded = jwtDecode(result.data.access_token);
+        act.setFavorites(result?.data?.user?.favorites);
         // act.setCurrentUser({ ...decoded, ...result.data.user });
         return { ...decoded, ...result.data };
       }
@@ -48,6 +49,35 @@ const userModel = {
     localStorage.removeItem("jwtToken");
     setAuthToken(false);
     act.setCurrentUser(false);
+  },
+  setFavorites: (f) => {
+    window.sessionStorage.setItem("favorites", JSON.stringify(f));
+  },
+  getFavorites: () => {
+    return modelParser("favorites");
+  },
+  updateFavorites: async (payload) => {
+    try {
+      console.table(payload);
+      const result = await axios.put("/commuter/favorites", {
+        task: payload.task,
+        route: payload.routeId,
+      });
+
+      if (result.data.success) {
+        const newFavorites = result.data.favorites;
+        window.sessionStorage.setItem(
+          "favorites",
+          JSON.stringify(newFavorites)
+        );
+        return { success: true, message: result.data.msg };
+      }
+      return result.data.success;
+    } catch (err) {
+      console.log(err);
+      // alert(err.message);
+      return { error: "Server down" };
+    }
   },
   setCurrentUser: (payload) => {
     if (payload) {

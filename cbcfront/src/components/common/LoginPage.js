@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Form, Input, Label, Button, Error } from "./lib/formElements/Index";
 import { Container } from "./lib/layout/Index";
@@ -14,7 +14,7 @@ const initialState = {
 };
 
 export default function LoginPage() {
-  const [flag, setFlag] = useContext(FlagContext);
+  const [_, setFlag] = useContext(FlagContext);
   const [user, setUser] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -61,6 +61,7 @@ export default function LoginPage() {
         clearErrors();
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return (

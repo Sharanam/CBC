@@ -1,9 +1,18 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import userModel from "../../../../globalState/user";
 import { Button } from "../../../common/lib/formElements/Index";
-import { Card, Highlighter } from "../../../common/lib/styledElements/Index";
+import {
+  Card,
+  Favorite,
+  Highlighter,
+} from "../../../common/lib/styledElements/Index";
 
-export function RouteView({ route, tripTime, stops, schedule }) {
+export function RouteView({ route, tripTime, stops, schedule, routeId }) {
   const navigate = useNavigate();
+  const [favorite, setFavorite] = useState(
+    userModel?.getFavorites()?.includes(routeId) || false
+  );
   return (
     <>
       <Card
@@ -23,14 +32,24 @@ export function RouteView({ route, tripTime, stops, schedule }) {
             }}
           >
             <Button
-              className="negative"
+              className="positive"
               onClick={(e) => {
                 e.preventDefault();
                 navigate(`/portal/routes/${route}`);
               }}
             >
-              View Buses
+              View Available Buses
             </Button>
+            <Favorite
+              liked={favorite}
+              onClick={(task) => {
+                userModel.updateFavorites({ routeId, task }).then((res) => {
+                  setFavorite((f) =>
+                    userModel?.getFavorites()?.includes(routeId)
+                  );
+                });
+              }}
+            />
           </div>
         }
       >
