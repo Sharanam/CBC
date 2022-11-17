@@ -17,7 +17,8 @@ function getUser(req, res, next) {
         }
       })
       .catch((e) => {
-        res.status(500).send(e.message);
+        console.log(e.message);
+        res.status(500).send("something went wrong");
       });
   });
 }
@@ -43,7 +44,7 @@ function getOptionalUser(req, res, next) {
         }
       })
       .catch((e) => {
-        res.status(500).send(e.message);
+        res.status(500).send("something went wrong");
       });
   });
 }

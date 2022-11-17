@@ -13,8 +13,6 @@ import User from "./users/User";
 import Reports from "./reports/Index";
 import Reporting from "./reporting/Index";
 import ViewLinks from "./link/ViewLinks";
-import Passes from "./passes/Index";
-
 const Desk = () => {
   let component;
   const { path, argA, argB } = useParams();
@@ -39,9 +37,6 @@ const Desk = () => {
       break;
     case "user":
       component = <User id={argA} />;
-      break;
-    case "passes":
-      component = <Passes />;
       break;
     case "announcements":
       component = <Announcement />;

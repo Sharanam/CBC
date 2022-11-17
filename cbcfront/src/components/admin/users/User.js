@@ -73,7 +73,7 @@ export default function User(props) {
     to: "",
     date: new Date().toLocaleDateString("en-CA"),
     validity: 1,
-    price: "",
+    price: "0",
     offFor: [0],
   });
 
@@ -88,17 +88,17 @@ export default function User(props) {
     }
   }, [pass.from, pass.to]);
   const navigate = useNavigate();
-  const [busStands, setBusStands] = useState(null);
+  const [busStands, setBusStands] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    if (!pass.issue) return;
+    if (!pass.issue || busStands !== undefined) return;
     setIsLoading(true);
     busStandsModel.busStandNames().then((result) => {
       setBusStands(result);
       setIsLoading(false);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [pass.issue]);
 
   if (isLoading) <Loading />;
 
@@ -115,10 +115,18 @@ export default function User(props) {
                   onSubmit={(e) => {
                     e.preventDefault();
                     const payload = { user: id, ...pass };
-                    adminModel.issuePass(payload).then((result) => {
-                      if (result?.msg) alert(result?.msg);
-                      if (result.success) navigate(-1);
-                    });
+                    if (pass._id) {
+                      adminModel.updatePass(payload).then((result) => {
+                        if (result) {
+                          navigate(-1);
+                        }
+                      });
+                    } else {
+                      adminModel.issuePass(payload).then((result) => {
+                        if (result?.msg) alert(result?.msg);
+                        if (result.success) navigate(-1);
+                      });
+                    }
                   }}
                 >
                   {{
@@ -261,7 +269,7 @@ export default function User(props) {
                     buttons: (
                       <>
                         <Button type="submit" className="positive">
-                          Issue Pass
+                          {pass._id ? "Update Pass" : "Issue Pass"}
                         </Button>
                       </>
                     ),
@@ -269,12 +277,7 @@ export default function User(props) {
                       <Button
                         onClick={(e) => {
                           e.preventDefault();
-                          if (
-                            window.confirm(
-                              "Are you sure you want to cancel this procedure?"
-                            )
-                          )
-                            navigate(-1);
+                          setPass((pass) => ({ ...pass, issue: 0 }));
                         }}
                       >
                         Cancel
@@ -320,7 +323,29 @@ export default function User(props) {
                       }
                     >
                       <h2 style={{ textAlign: "center" }}>Passes</h2>
-                      <PassPrinter passes={user.passes} admin={false} />
+                      <PassPrinter
+                        passes={user.passes}
+                        admin={true}
+                        user={user._id}
+                        onUpdate={(i) => {
+                          const pass = user.passes.find((p) => i === p._id);
+                          setPass((state) => ({
+                            ...state,
+                            _id: i,
+                            ...pass,
+                            date: new Date(pass.date).toLocaleDateString(
+                              "en-CA"
+                            ),
+                            issue: 1,
+                          }));
+                        }}
+                        onDelete={(pass) => {
+                          setUser((user) => ({
+                            ...user,
+                            passes: user.passes.filter((p) => p._id !== pass),
+                          }));
+                        }}
+                      />
                     </Card>
                     <Card
                       white={true}

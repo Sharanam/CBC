@@ -1,11 +1,15 @@
+import { useState } from "react";
+import adminModel from "../../../../globalState/admin";
 import getDateInFormat from "../../../../utils/timekeeper";
 import { Button } from "../../lib/formElements/Index";
 import Table from "../../lib/layout/table/Index";
-import { Card } from "../../lib/styledElements/Index";
+import { Card, Loading } from "../../lib/styledElements/Index";
 import { isValid } from "../BusPass";
 import "./style.css";
 
-export function PassPrinter({ passes, admin }) {
+export function PassPrinter({ passes, admin, user, onDelete, onUpdate }) {
+  const [isLoading, setIsLoading] = useState(false);
+  if (isLoading) <Loading />;
   return passes?.length ? (
     <Card white={true}>
       <Table className="pass">
@@ -74,10 +78,33 @@ export function PassPrinter({ passes, admin }) {
               {admin ? (
                 <>
                   <td>
-                    <Button className="neutral">Update </Button>
+                    <Button
+                      className="neutral"
+                      onClick={(e) => {
+                        onUpdate(pass._id);
+                      }}
+                    >
+                      Update
+                    </Button>
                   </td>
                   <td>
-                    <Button className="negative">Delete </Button>
+                    <Button
+                      className="negative"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsLoading(true);
+                        adminModel
+                          .deletePass({ _id: pass._id, user })
+                          .then((res) => {
+                            setIsLoading(false);
+                            if (res.success) {
+                              onDelete(pass._id);
+                            }
+                          });
+                      }}
+                    >
+                      Delete
+                    </Button>
                   </td>
                 </>
               ) : null}

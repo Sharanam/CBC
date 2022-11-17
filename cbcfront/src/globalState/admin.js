@@ -45,7 +45,27 @@ const adminModel = {
   },
   issuePass: async (payload) => {
     try {
-      const { data } = await axios.post(`/admin/issuePass/`, payload);
+      const { data } = await axios.post(`/admin/pass/`, payload);
+      return data;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  updatePass: async (payload) => {
+    try {
+      const { data } = await axios.put(`/admin/pass/`, payload);
+      return data;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  deletePass: async (payload) => {
+    try {
+      const { data } = await axios.delete(`/admin/pass/`, {
+        data: payload,
+      });
       return data;
     } catch (e) {
       alert("server down");

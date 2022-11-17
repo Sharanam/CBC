@@ -142,6 +142,50 @@ exports.issuePass = async (req, res) => {
       msg: "pass created successfully!",
     });
   } catch (e) {
-    res.status(500).send(e.message);
+    console.log(e.message);
+    res.status(500).send("something went wrong");
+  }
+};
+exports.updatePass = async (req, res) => {
+  try {
+    let { _id, from, to, date, validity, price, offFor } = req.body;
+    const pass = await Pass.findOne({ _id });
+    if (!pass) {
+      return res.json({ success: false, msg: "Pass not found" });
+    }
+    pass.from = from;
+    pass.to = to;
+    pass.date = date;
+    pass.validity = validity;
+    pass.price = price;
+    pass.offFor = offFor;
+    await pass.save();
+    return res.json({
+      success: true,
+      pass,
+      msg: "pass updated successfully!",
+    });
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).send("something went wrong");
+  }
+};
+exports.deletePass = async (req, res) => {
+  try {
+    let { user, _id } = req.body;
+    user = await User.findOne({ _id: user });
+    if (!user) {
+      return res.json({ success: false, msg: "User not found" });
+    }
+    user.passes = user.passes.filter((pass) => pass._id !== _id);
+    await user.save();
+    await Pass.deleteOne({ _id });
+    return res.json({
+      success: true,
+      msg: "pass deleted successfully!",
+    });
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).send("something went wrong");
   }
 };

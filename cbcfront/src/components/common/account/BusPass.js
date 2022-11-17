@@ -22,13 +22,12 @@ const BusPass = () => {
   return (
     <Container size="lg">
       <h1>My Bus Passes</h1>
-      {isLoading ? <Loading /> : PassPrinter({ passes })}
+      {isLoading ? <Loading /> : <PassPrinter passes={passes} />}
     </Container>
   );
 };
 export function isValid(pass) {
   let d = new Date(pass.date);
-  console.clear();
   if (d > new Date()) return false; // pass is not started yet
   d.setMonth(d.getMonth() + pass.validity);
   if (d < new Date()) return false; // pass is expired

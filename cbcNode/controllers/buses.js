@@ -64,7 +64,7 @@ exports.editBus = async (req, res) => {
     });
   } catch (e) {
     console.log(e.message);
-    res.status(500).send(e.message);
+    res.status(500).send("something went wrong");
   }
 };
 
