@@ -21,9 +21,9 @@ function FeedbackView({ feedback }) {
               gap: "0.8rem",
             }}
           >
-            <Button className="positive">Reply</Button>
-            <Button className="neutral">View</Button>
-            <Button className="negative">Delete</Button>
+            <Button className="positive">Give Reply</Button>
+            <Button className="neutral">View Interactions</Button>
+            <Button className="negative">Mark as Spam</Button>
           </div>
         }
       >
@@ -34,23 +34,7 @@ function FeedbackView({ feedback }) {
             justifyContent: "space-between",
           }}
         >
-          <h2
-            style={{
-              color: feedback?.user?.isBlacklisted
-                ? "var(--danger)"
-                : "currentColor",
-            }}
-          >
-            <span
-              title={
-                feedback?.user?.isBlacklisted
-                  ? "User has been black listed."
-                  : feedback?.user?.name
-              }
-            >
-              {feedback?.user?.name}
-            </span>
-          </h2>
+          <h2>{feedback.message}</h2>
           <p
             style={{
               fontSize: "0.8em",
@@ -59,7 +43,23 @@ function FeedbackView({ feedback }) {
             {getDateInFormat(feedback.updatedAt)}
           </p>
         </div>
-        <p>{feedback.message}</p>
+        <p
+          style={{
+            color: feedback?.user?.isBlacklisted
+              ? "var(--danger)"
+              : "currentColor",
+          }}
+        >
+          <span
+            title={
+              feedback?.user?.isBlacklisted
+                ? "User has been black listed."
+                : feedback?.user?.name
+            }
+          >
+            {feedback?.user?.name}
+          </span>
+        </p>
         <p
           style={{
             display: "flex",

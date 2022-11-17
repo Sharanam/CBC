@@ -141,6 +141,9 @@ export default function User(props) {
                           placeholder="User Id"
                           value={id}
                           readOnly={true}
+                          style={{
+                            backgroundColor: "var(--dull-white)",
+                          }}
                         />
                         <Label className="required" htmlFor="name">
                           Name
@@ -150,6 +153,9 @@ export default function User(props) {
                           placeholder="User name"
                           value={user.name}
                           readOnly={true}
+                          style={{
+                            backgroundColor: "var(--dull-white)",
+                          }}
                         />
                         <Label className="required" htmlFor="email">
                           Email
@@ -159,6 +165,9 @@ export default function User(props) {
                           placeholder="User email"
                           value={user.email}
                           readOnly={true}
+                          style={{
+                            backgroundColor: "var(--dull-white)",
+                          }}
                         />
                         <Label className="required" htmlFor="bio">
                           Bio
@@ -168,6 +177,9 @@ export default function User(props) {
                           placeholder="User bio"
                           value={user.bio}
                           readOnly={true}
+                          style={{
+                            backgroundColor: "var(--dull-white)",
+                          }}
                         />
                         <Label className="required" htmlFor="social">
                           Social
@@ -177,6 +189,9 @@ export default function User(props) {
                           placeholder="User social"
                           value={user.social}
                           readOnly={true}
+                          style={{
+                            backgroundColor: "var(--dull-white)",
+                          }}
                         />
                         <Divider style={{ margin: "0.5rem 0" }} />
                         <Label className="required" htmlFor="from">

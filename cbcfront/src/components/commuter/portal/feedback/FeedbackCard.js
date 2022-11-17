@@ -20,27 +20,14 @@ export function FeedbackCard({ feedback, additional }) {
             justifyContent: "space-between",
           }}
         >
-          <h2
-            style={{
-              color: feedback?.user?.isBlacklisted
-                ? "var(--danger)"
-                : "currentColor",
-              cursor: "pointer",
-            }}
+          <p
             onClick={() => {
-              navigate(`/profile/${feedback?.user?._id}`);
+              navigate(feedback._id);
             }}
+            style={{ cursor: "pointer", fontSize: "1.1em", fontWeight: "bold" }}
           >
-            <span
-              title={
-                feedback?.user?.isBlacklisted
-                  ? "User has been black listed."
-                  : feedback?.user?.name
-              }
-            >
-              {feedback?.user?.name}
-            </span>
-          </h2>
+            {feedback.message}
+          </p>
           <p
             style={{
               fontSize: "0.8em",
@@ -50,12 +37,25 @@ export function FeedbackCard({ feedback, additional }) {
           </p>
         </div>
         <p
-          onClick={() => {
-            navigate(feedback._id);
+          style={{
+            color: feedback?.user?.isBlacklisted
+              ? "var(--danger)"
+              : "currentColor",
+            cursor: "pointer",
           }}
-          style={{ cursor: "pointer" }}
+          onClick={() => {
+            navigate(`/profile/${feedback?.user?._id}`);
+          }}
         >
-          {feedback.message}
+          <span
+            title={
+              feedback?.user?.isBlacklisted
+                ? "User has been black listed."
+                : feedback?.user?.name
+            }
+          >
+            {feedback?.user?.name}
+          </span>
         </p>
         <p
           style={{

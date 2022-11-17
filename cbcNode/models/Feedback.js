@@ -26,6 +26,10 @@ let feedbackSchema = new Schema(
         ref: "users",
       },
     ],
+    spam: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
