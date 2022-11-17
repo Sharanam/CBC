@@ -28,17 +28,16 @@ exports.getUsers = async (req, res) => {
   }
 };
 
-exports.getSpecificUser = (req, res) => {
+exports.getSpecificUser = async (req, res) => {
   try {
-    User.findOne(
-      {
-        _id: req.params.id,
-      },
-      (err, user) => {
-        if (err) return res.status(500).send(err.message);
-        res.json(user);
-      }
-    );
+    const user = await User.findOne({
+      _id: req.params.id,
+    })
+      .populate("history.route.routeId", "identifier -_id")
+      .populate("history.bus.busId", "registrationNumber serviceType -_id")
+      .populate("favorites", "identifier -_id")
+      .populate("passes");
+    res.json(user);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");
@@ -118,30 +117,30 @@ exports.setAdmin = (req, res) => {
     res.status(500).send("something went wrong");
   }
 };
-
 exports.issuePass = async (req, res) => {
   try {
-    const { user, from, to, date, validity, price } = req.body;
-    new Pass({
+    let { user, from, to, date, validity, price, offFor } = req.body;
+    user = await User.findOne({ _id: user });
+    if (!user) {
+      return res.json({ success: false, msg: "User not found" });
+    }
+    const pass = new Pass({
       user,
       from,
       to,
       date,
       validity,
       price,
-    })
-      .save()
-      .then((pass) => {
-        return res.json({
-          success: true,
-          pass,
-          msg: "pass created successfully!",
-        });
-      })
-      .catch((error) => {
-        console.log(error.message);
-        res.json({ success: false, errors: handleError(error) });
-      });
+      offFor,
+    });
+    await pass.save();
+    await user.passes.push(pass._id);
+    await user.save();
+    return res.json({
+      success: true,
+      pass,
+      msg: "pass created successfully!",
+    });
   } catch (e) {
     res.status(500).send(e.message);
   }

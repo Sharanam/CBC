@@ -15,6 +15,7 @@ export default function SetAdmin(props) {
         if (done.success) setAdmin(newState);
       }}
       className={/^a/.test(admin) ? "positive" : "negative"}
+      style={{ ...props.style }}
     >
       {/^a/.test(admin) ? "Make Commuter" : "Make Admin"}
     </Button>

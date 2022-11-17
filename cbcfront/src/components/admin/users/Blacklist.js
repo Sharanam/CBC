@@ -14,6 +14,7 @@ export default function Blacklist(props) {
         if (done) setState((state) => !state);
       }}
       className={state ? "positive" : "negative"}
+      style={{ ...props.style }}
     >
       {state ? "Whitelist" : "Blacklist"}
     </Button>

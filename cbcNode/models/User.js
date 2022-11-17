@@ -60,6 +60,13 @@ let userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    passes: [
+      {
+        type: Schema.Types.ObjectId,
+        unique: [true, "pass has already been issued."],
+        ref: "passes",
+      },
+    ],
     favorites: [
       {
         type: Schema.Types.ObjectId,

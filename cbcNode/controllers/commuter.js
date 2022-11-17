@@ -137,19 +137,15 @@ exports.getMyContributions = (req, res) => {
   }
 };
 
-exports.getMyPasses = (req, res) => {
+exports.getMyPasses = async (req, res) => {
   try {
-    const user = req.user?.userId;
+    let user = req.user?.userId;
+    let passes = await User.findOne({ _id: user })
+      .select("passes")
+      .populate("passes");
+    passes = passes.passes;
 
-    Pass.find({ user })
-      .then((passes) => res.json({ success: true, passes }))
-      .catch((err) => {
-        console.log(err.message);
-        res.json({
-          success: false,
-          msg: "Something is wrong with the database",
-        });
-      });
+    res.json({ success: true, passes });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");

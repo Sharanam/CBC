@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../lib/formElements/Index";
 import { Container } from "../lib/layout/Index";
 import { Card } from "../lib/styledElements/Index";
+import BusPass from "./BusPass";
 import Favorites from "./Favourites";
 import History from "./History";
 import Profile from "./Profile";
@@ -38,6 +39,15 @@ const Home = () => {
         }}
       >
         <History />
+      </Card>
+      <Card
+        style={{
+          overflowY: "auto",
+          maxHeight: "80vh",
+          backgroundColor: "var(--light-blue)",
+        }}
+      >
+        <BusPass />
       </Card>
     </Container>
   );

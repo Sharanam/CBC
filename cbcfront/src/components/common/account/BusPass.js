@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import commutersModel from "../../../globalState/commuter";
 import { Container } from "../lib/layout/Index";
 import { Loading } from "../lib/styledElements/Index";
+import { PassPrinter } from "./passPrinter/PassPrinter";
 
 const BusPass = () => {
   const [passes, setPasses] = useState(null);
@@ -19,10 +20,19 @@ const BusPass = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <Container size="sm">
+    <Container size="lg">
       <h1>My Bus Passes</h1>
-      {isLoading ? <Loading /> : <>{JSON.stringify(passes)}</>}
+      {isLoading ? <Loading /> : PassPrinter({ passes })}
     </Container>
   );
 };
+export function isValid(pass) {
+  let d = new Date(pass.date);
+  console.clear();
+  if (d > new Date()) return false; // pass is not started yet
+  d.setMonth(d.getMonth() + pass.validity);
+  if (d < new Date()) return false; // pass is expired
+  if (pass.offFor.includes(new Date().getDay())) return false; // pass is off for today
+  return true;
+}
 export default BusPass;

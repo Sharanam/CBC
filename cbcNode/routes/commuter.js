@@ -16,7 +16,7 @@ router.post("/contribution", getOptionalUser, makeContribution);
 router.put("/contribution", getOptionalUser, editContribution);
 router.get("/contribution", getUser, getMyContributions);
 router.get("/contribution/for", getOptionalUser, getContributionsFor);
-router.get("/pass", getOptionalUser, getMyPasses);
+router.get("/pass", getUser, getMyPasses);
 router.put("/favorites", getUser, setFavorites);
 router.get("/history", getUser, getMyHistory);
 router.delete("/history", getUser, removeFromHistory);
