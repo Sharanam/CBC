@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { locationCapture } from "../../../..";
 import commutersModel from "../../../../globalState/commuter";
 import { colorOf } from "../../../../utils/getBusServiceStatuses";
@@ -288,7 +288,9 @@ export function BusRunner(props) {
           }}
         >
           Assigned onto route{" "}
-          <mark className="correct">{route?.identifier}</mark>
+          <Link to={`/portal/routes/${route?._id}`}>
+            <mark className="correct">{route?.identifier}</mark>
+          </Link>
         </p>
         <p
           style={{

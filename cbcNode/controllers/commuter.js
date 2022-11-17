@@ -1,8 +1,8 @@
-const Feedback = require("../models/Feedback");
+const { isMongoId } = require("validator");
 const Contribution = require("../models/Contribution");
 const Pass = require("../models/Pass");
-const User = require("../models/User");
 const Route = require("../models/Route");
+const User = require("../models/User");
 
 exports.makeContribution = async (req, res) => {
   try {
@@ -150,6 +150,75 @@ exports.getMyPasses = (req, res) => {
           msg: "Something is wrong with the database",
         });
       });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("something went wrong");
+  }
+};
+exports.setFavorites = async (req, res) => {
+  try {
+    console.log(req.body);
+    let user = req.user?.userId;
+    let { task, route } = req.body;
+    // task = [add,remove], route = routeID
+    user = await User.findById(user);
+    if (task === "add") {
+      if (user.favorites.includes(route))
+        return res.json({ success: false, msg: "already added" });
+      user.favorites.push(route);
+    } else {
+      user.favorites = user.favorites.filter(
+        (v) => v.toString() !== route.toString()
+      );
+    }
+    await user.save();
+    res.json({ success: true, favorites: user.favorites });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("something went wrong");
+  }
+};
+exports.getMyHistory = async (req, res) => {
+  try {
+    const user = req.user?.userId;
+
+    let history = await User.findById(user)
+      .select("history")
+      .populate("history.route.routeId", "identifier -_id")
+      .populate("history.bus.busId", "registrationNumber serviceType -_id")
+      .exec();
+    history = history.history;
+    history.bus = history?.bus.reverse();
+    history.route = history?.route.reverse();
+
+    res.json({ success: true, history });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("something went wrong");
+  }
+};
+exports.removeFromHistory = async (req, res) => {
+  try {
+    const { historyId, type } = req.body;
+    if (!isMongoId(historyId)) {
+      return res.json({
+        success: false,
+        msg: "id is invalid.",
+      });
+    }
+    let user = req.user?.userId;
+    user = await User.findById(user);
+    if (type === "bus") {
+      user.history.bus = user.history.bus.filter(
+        (v) => v._id.toString() !== historyId.toString()
+      );
+    } else if (type === "route") {
+      user.history.route = user.history.route.filter(
+        (v) => v._id.toString() !== historyId.toString()
+      );
+    }
+    await user.save();
+    res.json({ success: true });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");

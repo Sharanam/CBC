@@ -1,6 +1,7 @@
 const { isMongoId } = require("validator");
 const Route = require("../models/Route");
 const handleError = require("../utils/handleError");
+const historyLogger = require("../utils/historyLogger");
 
 exports.addRoute = (req, res) => {
   try {
@@ -71,9 +72,14 @@ exports.deleteRoute = (req, res) => {
   }
 };
 
-exports.getRoute = (req, res) => {
+exports.getRoute = async (req, res) => {
   try {
     const { routeId } = req.params;
+    let user = req.user?.userId;
+    if (user) {
+      console.log("logged");
+      await historyLogger({ user, id: routeId, forCollection: "route" });
+    }
     Route.findOne(
       {
         _id: routeId,

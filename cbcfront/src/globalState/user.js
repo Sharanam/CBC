@@ -200,5 +200,41 @@ const userModel = {
       return false;
     }
   },
+  getMyHistory: async () => {
+    try {
+      const { data } = await axios.get("/commuter/history");
+      if (data.success) {
+        window.sessionStorage.setItem("history", JSON.stringify(data.history));
+      }
+      return data.success;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  removeFromHistory: async (payload) => {
+    try {
+      const { data } = await axios.delete("/commuter/history", {
+        data: payload,
+      });
+      if (data.success) {
+        let his = modelParser("history");
+        if (payload?.type === "route") {
+          his.route = his?.route.filter((r) => r._id !== payload?.historyId);
+        } else if (payload?.type === "bus") {
+          his.bus = his?.bus.filter((r) => r._id !== payload?.historyId);
+        }
+        window.sessionStorage.setItem("history", JSON.stringify(his));
+      }
+      if (data.msg) alert(data.msg);
+      return data.success;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  getHistory: () => {
+    return modelParser("history") || {};
+  },
 };
 export default userModel;

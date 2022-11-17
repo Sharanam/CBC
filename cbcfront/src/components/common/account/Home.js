@@ -3,6 +3,7 @@ import { Button } from "../lib/formElements/Index";
 import { Container } from "../lib/layout/Index";
 import { Card } from "../lib/styledElements/Index";
 import Favorites from "./Favourites";
+import History from "./History";
 import Profile from "./Profile";
 
 const Home = () => {
@@ -28,6 +29,15 @@ const Home = () => {
         }}
       >
         <Favorites />
+      </Card>
+      <Card
+        style={{
+          overflowY: "auto",
+          maxHeight: "80vh",
+          backgroundColor: "var(--google-gray-700)",
+        }}
+      >
+        <History />
       </Card>
     </Container>
   );

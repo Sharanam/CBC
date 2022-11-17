@@ -3,6 +3,7 @@ const Bus = require("../models/Bus");
 const Link = require("../models/Link");
 const Route = require("../models/Route");
 const handleError = require("../utils/handleError");
+const historyLogger = require("../utils/historyLogger");
 
 function getUniqueFrom(schedule) {
   return Array.from(new Set(schedule));
@@ -118,6 +119,7 @@ exports.deleteLink = (req, res) => {
 exports.getLink = async (req, res) => {
   try {
     let { linkId, route, page, bus } = req.params;
+    let user = req.user?.userId;
 
     let criteria = {};
     if (linkId) {
@@ -142,6 +144,12 @@ exports.getLink = async (req, res) => {
         route = await Route.findOne(criteria);
         if (route?._id) route = route._id;
       }
+      // logger route
+      if (user) {
+        console.log("logged");
+        await historyLogger({ user, id: route, forCollection: "route" });
+      }
+      // logger ends
       Link.find({ route })
         .populate("route", "identifier stops tripTime")
         .populate("bus", "registrationNumber serviceType capacity status")
@@ -166,6 +174,12 @@ exports.getLink = async (req, res) => {
         bus = await Bus.findOne(criteria);
         if (bus?._id) bus = bus._id;
       }
+      // logger bus
+      if (user) {
+        console.log("logged");
+        await historyLogger({ user, id: bus, forCollection: "bus" });
+      }
+      // logger ends
       Link.find({ bus })
         .populate("route", "identifier stops tripTime")
         .populate("bus", "registrationNumber serviceType capacity status")

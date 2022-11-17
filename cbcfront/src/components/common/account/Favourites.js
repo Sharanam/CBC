@@ -33,16 +33,20 @@ const Favorites = () => {
     <Container size="sm">
       <h1>Favorites</h1>
       <div>
-        {favorites?.map((f, i) => (
-          <RouteView
-            route={f.identifier}
-            routeId={f._id}
-            tripTime={f.tripTime}
-            stops={f.stops}
-            schedule={f.schedule}
-            key={i}
-          />
-        ))}
+        {favorites?.length ? (
+          favorites?.map((f, i) => (
+            <RouteView
+              route={f.identifier}
+              routeId={f._id}
+              tripTime={f.tripTime}
+              stops={f.stops}
+              schedule={f.schedule}
+              key={i}
+            />
+          ))
+        ) : (
+          <p>You have no favorites</p>
+        )}
       </div>
     </Container>
   );

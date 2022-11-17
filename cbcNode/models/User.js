@@ -67,6 +67,28 @@ let userSchema = new Schema(
         ref: "routes",
       },
     ],
+    history: {
+      bus: [
+        {
+          busId: { type: Schema.Types.ObjectId, ref: "buses" },
+          time: {
+            type: Date,
+            required: true,
+            default: Date.now(),
+          },
+        },
+      ],
+      route: [
+        {
+          routeId: { type: Schema.Types.ObjectId, ref: "routes" },
+          time: {
+            type: Date,
+            required: true,
+            default: Date.now(),
+          },
+        },
+      ],
+    },
   },
   {
     timestamps: true,

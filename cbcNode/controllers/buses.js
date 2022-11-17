@@ -2,6 +2,7 @@ const { isMongoId } = require("validator");
 const Bus = require("../models/Bus");
 const Link = require("../models/Link");
 const handleError = require("../utils/handleError");
+const historyLogger = require("../utils/historyLogger");
 
 exports.addBus = (req, res) => {
   try {
@@ -86,6 +87,7 @@ exports.deleteBus = (req, res) => {
 exports.getBus = async (req, res) => {
   try {
     const { busId } = req.params;
+    let user = req.user?.userId;
     const { live } = req.query;
     if (!busId) return res.json({ success: false, msg: "Id is required." });
     const criteria = {};
@@ -95,6 +97,13 @@ exports.getBus = async (req, res) => {
         $regex: new RegExp(`^${(busId || "").toString().trim()}$`, "i"),
       };
     let bus = await Bus.findOne(criteria);
+    if (user) {
+      await historyLogger({
+        user,
+        id: criteria._id || bus._id,
+        forCollection: "bus",
+      });
+    }
     if (!bus)
       return res.json({
         success: false,
