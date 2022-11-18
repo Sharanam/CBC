@@ -26,7 +26,13 @@ export default function UnitFeedback(props) {
   if (isLoading) return "Loading...";
   return (
     <Container>
-      <FeedbackCard feedback={feedback} additional={<></>} />
+      <FeedbackCard
+        feedback={feedback}
+        updateFeedback={(f) => {
+          setFeedback((s) => ({ ...s, likes: f.likes, dislikes: f.dislikes }));
+        }}
+        additional={<></>}
+      />
     </Container>
   );
 }

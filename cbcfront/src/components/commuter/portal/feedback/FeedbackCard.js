@@ -1,9 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import feedbacksModel from "../../../../globalState/feedback";
+import modelParser from "../../../../utils/modelParser";
 import getDateInFormat from "../../../../utils/timekeeper";
 import { Button } from "../../../common/lib/formElements/Index";
 import { Card } from "../../../common/lib/styledElements/Index";
 
-export function FeedbackCard({ feedback, additional }) {
+function me() {
+  return modelParser("userDetails")?.userId;
+}
+
+export function FeedbackCard({ feedback, additional, updateFeedback }) {
   const navigate = useNavigate();
   return (
     <>
@@ -65,10 +71,33 @@ export function FeedbackCard({ feedback, additional }) {
             justifyContent: "flex-end",
           }}
         >
-          <Button className="positive">
+          <Button
+            className={feedback?.likes?.includes(me()) ? "positive" : "neutral"}
+            onClick={(e) => {
+              e.preventDefault();
+              feedbacksModel
+                .reactOnFeedback({ feedbackId: feedback._id, like: true })
+                .then((res) => {
+                  updateFeedback(res?.feedback);
+                });
+            }}
+          >
             <span>Likes: {feedback.likes.length}</span>
           </Button>
-          <Button className="negative">
+          <Button
+            className={
+              feedback?.dislikes?.includes(me()) ? "negative" : "neutral"
+            }
+            onClick={(e) => {
+              e.preventDefault();
+              feedbacksModel
+
+                .reactOnFeedback({ feedbackId: feedback._id, dislike: true })
+                .then((res) => {
+                  updateFeedback(res?.feedback);
+                });
+            }}
+          >
             <span>Dislikes: {feedback.dislikes.length}</span>
           </Button>
         </p>

@@ -51,7 +51,16 @@ export default function ViewFeedbacks(props) {
         ) : (
           <>
             {feedbacks?.map((f, i) => (
-              <FeedbackCard feedback={f} key={i} />
+              <FeedbackCard
+                feedback={f}
+                key={i}
+                updateFeedback={(f) => {
+                  const temp = [...feedbacks];
+                  temp[i].likes = f.likes;
+                  temp[i].dislikes = f.dislikes;
+                  setFeedbacks(temp);
+                }}
+              />
             ))}
           </>
         )}

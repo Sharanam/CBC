@@ -39,6 +39,19 @@ const feedbacksModel = {
       return { error: "Server down" };
     }
   },
+  reactOnFeedback: async (payload) => {
+    try {
+      const result = await axios.post(
+        `/feedback/react/${payload?.feedbackId}`,
+        payload
+      );
+      if (result.msg) alert(result.msg);
+      return result.data;
+    } catch (err) {
+      alert(err.message);
+      return { error: "Server down" };
+    }
+  },
 };
 export default feedbacksModel;
 // edit, delete, comment

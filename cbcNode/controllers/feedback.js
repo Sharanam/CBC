@@ -108,3 +108,48 @@ exports.giveReply = (req, res) => {
 // other modules like,
 // users can comment, like or dislike the feedback
 // user can edit, delete
+
+exports.reactOnFeedback = async (req, res) => {
+  try {
+    const user = req.user.userId;
+    const { feedbackId } = req.params;
+    const { like, dislike } = req.body;
+    const feedback = await Feedback.findOne({
+      _id: feedbackId,
+    });
+    if (!feedback)
+      return res.json({ success: false, msg: "No feedback for given id." });
+    if (like && feedback.likes.includes(user))
+      return res.json({
+        success: false,
+        msg: "You already liked this feedback.",
+      });
+    if (dislike && feedback.dislikes.includes(user))
+      return res.json({
+        success: false,
+        msg: "You already disliked this feedback.",
+      });
+    if (like) {
+      feedback.likes.push(user);
+      feedback.dislikes = feedback.dislikes.filter(
+        (id) => id.toString() !== user.toString()
+      );
+    }
+    if (dislike) {
+      feedback.dislikes.push(user);
+      feedback.likes = feedback.likes.filter(
+        (id) => id.toString() !== user.toString()
+      );
+    }
+    feedback
+      .save()
+      .then((feedback) => res.json({ success: true, feedback }))
+      .catch((err) => {
+        console.log(err.message);
+        res.status(500).send("Something went wrong");
+      });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("Something went wrong");
+  }
+};
