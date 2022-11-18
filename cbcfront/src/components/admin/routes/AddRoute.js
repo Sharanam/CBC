@@ -30,19 +30,30 @@ const AddRoute = (props) => {
       setIsLoading(false);
     });
   }, []);
+  const { edit } = props;
+  useEffect(() => {
+    if (edit) {
+      routesModel.getRoute(edit).then((result) => {
+        if (result.success) setPayload(result.route);
+      });
+    }
+  }, [edit]);
+
   return (
     <Container size="sm">
       <Form
         onSubmit={async (e) => {
           e.preventDefault();
           setIsLoading(true);
-          const response = await routesModel.addRoute(payload);
+          let response;
+          if (edit) response = await routesModel.editRoute(payload);
+          else response = await routesModel.addRoute(payload);
           setIsLoading(false);
           if (response.errors) {
             setErrors({ ...response.errors });
           }
+          if (response?.msg) alert(response?.msg);
           if (response?.success) {
-            alert("route added successfully");
             navigate("/admin/routes");
           } else {
             alert("Something is erroneous in the data");
@@ -50,7 +61,7 @@ const AddRoute = (props) => {
         }}
       >
         {{
-          title: "New Route",
+          title: edit ? "Edit Route" : "New Route",
           formFields: (
             <>
               <Label className="required" htmlFor="identifier">
@@ -97,21 +108,6 @@ const AddRoute = (props) => {
                     width: "100%",
                   }}
                 >
-                  {/* <Input
-                    type="text"
-                    required
-                    style={{ flexGrow: "1" }}
-                    value={value}
-                    placeholder="Enter Stop Name"
-                    onChange={(e) => {
-                      const s = payload.stops;
-                      s[i] = e.target.value;
-                      setPayload((payload) => ({
-                        ...payload,
-                        stops: s,
-                      }));
-                    }}
-                  /> */}
                   <div
                     style={{
                       flexGrow: 1,
@@ -122,12 +118,11 @@ const AddRoute = (props) => {
                       injected={value}
                       autoFocus
                       handleCallback={(selected) => {
-                        const s = [...payload.stops];
-                        s[i] = selected;
-
                         setPayload((payload) => ({
                           ...payload,
-                          stops: s,
+                          stops: payload.stops.map((v, j) =>
+                            j === i ? selected : v
+                          ),
                         }));
                       }}
                       placeholder="at this bus stop"
@@ -183,7 +178,6 @@ const AddRoute = (props) => {
                   key={i}
                   style={{
                     display: "flex",
-                    flexDirection: "row-reverse",
                   }}
                 >
                   <Input
@@ -244,7 +238,7 @@ const AddRoute = (props) => {
           buttons: (
             <>
               <Button type="submit" className="positive" disabled={isLoading}>
-                Insert route into database
+                {edit ? "Save Route" : "Insert route into database"}
               </Button>
               <Button
                 type="reset"

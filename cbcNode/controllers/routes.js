@@ -11,6 +11,7 @@ exports.addRoute = (req, res) => {
       .then((route) => {
         return res.json({
           success: true,
+          msg: "Route added successfully",
           route: {
             identifier,
             stops,
@@ -33,8 +34,8 @@ exports.addRoute = (req, res) => {
 };
 exports.editRoute = (req, res) => {
   try {
-    const { routeId, stops, identifier, schedule, tripTime } = req.body;
-    Route.findOne({ _id: routeId }, (_, route) => {
+    const { _id, stops, identifier, schedule, tripTime } = req.body;
+    Route.findOne({ _id }, (_, route) => {
       if (!route) return res.json({ msg: "route not found" });
       route.stops = stops || route.stops;
       route.identifier = identifier || route.identifier;
