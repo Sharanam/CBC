@@ -78,7 +78,6 @@ exports.getRoute = async (req, res) => {
     const { routeId } = req.params;
     let user = req.user?.userId;
     if (user) {
-      console.log("logged");
       await historyLogger({ user, id: routeId, forCollection: "route" });
     }
     Route.findOne(

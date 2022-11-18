@@ -2,7 +2,6 @@ const User = require("../models/User");
 
 async function historyLogger({ user, id, forCollection }) {
   try {
-    console.log("historyLogger");
     const userInDb = await User.findOne({
       _id: user,
     });

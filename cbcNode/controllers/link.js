@@ -146,7 +146,6 @@ exports.getLink = async (req, res) => {
       }
       // logger route
       if (user) {
-        console.log("logged");
         await historyLogger({ user, id: route, forCollection: "route" });
       }
       // logger ends
@@ -176,7 +175,6 @@ exports.getLink = async (req, res) => {
       }
       // logger bus
       if (user) {
-        console.log("logged");
         await historyLogger({ user, id: bus, forCollection: "bus" });
       }
       // logger ends
