@@ -18,6 +18,7 @@ const adminRoutes = require("./routes/admin");
 const commuterRoutes = require("./routes/commuter");
 const feedbackRoutes = require("./routes/feedback");
 const linkRoutes = require("./routes/link");
+const reportingRoutes = require("./routes/reportings");
 
 const app = express();
 app.use(cors());
@@ -57,6 +58,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/commuter", commuterRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/link", linkRoutes);
+app.use("/api/reporting", reportingRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

@@ -4,33 +4,42 @@ let reportingSchema = new Schema(
   {
     route: {
       type: Schema.Types.ObjectId,
-      required: [true],
+      required: [true, "route is required"],
       ref: "routes",
     },
-    serviceType: {
-      type: Number,
-      required: [true, "Type of service is required."],
-      default: 0,
-      enum: [0, 1, 2],
+    bus: {
+      type: Schema.Types.ObjectId,
+      required: [true, "bus is required"],
+      ref: "buses",
     },
-    capacity: {
-      type: Number,
-      min: [20, "too few peeps"],
-      required: [true, "maximum number of people is required."],
-    },
-    passengers: {
-      type: Number,
-      min: 0,
-      required: [true, "number of passengers is required."],
-    },
-    time: {
+    passengers: [
+      {
+        from: {
+          type: String,
+          trim: true,
+          required: [true, "from is required"],
+        },
+        to: {
+          type: String,
+          trim: true,
+          required: [true, "to is required"],
+        },
+        count: {
+          type: Number,
+          required: [true, "count is required"],
+          default: 0,
+          min: [0, "count must be greater than or equal to 0"],
+        },
+      },
+    ],
+    schedule: {
       type: String,
       trim: true,
       required: [true, "The time to start the journey by the bus is required."],
     },
   },
   {
-    timestamps: false,
+    timestamps: true,
   }
 );
 

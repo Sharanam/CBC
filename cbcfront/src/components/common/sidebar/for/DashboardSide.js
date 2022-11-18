@@ -16,9 +16,6 @@ const DashboardSide = () => {
         <Link to="/admin/reportings">Manage Reportings</Link>
       </li>
       <li>
-        <Link to="/admin/reports">View Reports</Link>
-      </li>
-      <li>
         <Link to="/admin/humanresource">Manage Staff</Link>
       </li>
       <li>
