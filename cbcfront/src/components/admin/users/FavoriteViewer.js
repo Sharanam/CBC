@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card } from "../../common/lib/styledElements/Index";
 
 export function FavoriteViewer({ route }) {
@@ -27,7 +28,7 @@ export function FavoriteViewer({ route }) {
               color: "var(--black)",
             }}
           >
-            {r?.identifier}
+            <Link to={`/portal/routes/${r?.identifier}`}>{r?.identifier}</Link>
           </Card>
         ))}
       </Card>

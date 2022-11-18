@@ -75,7 +75,7 @@ const userModel = {
       return result.data.success;
     } catch (err) {
       console.log(err);
-      // alert(err.message);
+      alert("Error updating favorites, try to re-login");
       return { error: "Server down" };
     }
   },

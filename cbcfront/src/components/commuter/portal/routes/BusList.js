@@ -24,6 +24,9 @@ export function BusList({ route }) {
     if (res?.msg) alert(res?.msg);
     if (res?.links) {
       setLinks(res?.links);
+      setFavorite(
+        userModel?.getFavorites()?.includes(res?.links[0]?.route?._id) || false
+      );
       setIsLoading(false);
       setMsg(
         `${res?.links?.length} bus(es) found on route ${
@@ -40,9 +43,7 @@ export function BusList({ route }) {
   }, [route]);
 
   const [msg, setMsg] = useState(null);
-  const [favorite, setFavorite] = useState(
-    (links && userModel?.getFavorites()?.includes(links[0]?.route._id)) || false
-  );
+  const [favorite, setFavorite] = useState(false);
 
   return (
     <Container size="md">

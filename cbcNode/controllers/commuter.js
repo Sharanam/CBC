@@ -153,7 +153,6 @@ exports.getMyPasses = async (req, res) => {
 };
 exports.setFavorites = async (req, res) => {
   try {
-    console.log(req.body);
     let user = req.user?.userId;
     let { task, route } = req.body;
     // task = [add,remove], route = routeID
