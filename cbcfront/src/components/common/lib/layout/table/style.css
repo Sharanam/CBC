@@ -1,0 +1,34 @@
+table.custom-table {
+  margin: auto;
+  padding: 0.4rem;
+  width: 100%;
+  table-layout: fixed;
+  overflow-wrap: break-word;
+}
+
+table.custom-table tbody tr:nth-child(even) {
+  background: var(--dull-white);
+}
+table.custom-table tbody tr:nth-child(2n + 1) {
+  background: var(--less-white);
+}
+
+table.custom-table thead tr {
+  background-color: var(--dark-blue);
+  color: var(--less-white);
+}
+table.custom-table thead {
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-transform: capitalize;
+}
+td.textOverflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+td.center {
+  text-align: center;
+}

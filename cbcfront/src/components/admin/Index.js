@@ -1,4 +1,5 @@
-import { MainWrapper } from "../common/lib/layout/Index";
+import { useParams } from "react-router-dom";
+import { Container, MainWrapper } from "../common/lib/layout/Index";
 import Sidebar from "../common/sidebar/Sidebar";
 import Announcement from "./announcement/Index";
 import Routes from "./routes/Index";
@@ -6,17 +7,24 @@ import Buses from "./buses/Index";
 import BusStops from "./busStops/Index";
 import HumanResources from "./humanResources/Index";
 import Users from "./users/Index";
-import Pass from "./pass/Index";
+import Feedback from "./feedback/Index";
 import Home from "./Home";
-
-const Desk = (props) => {
+import User from "./users/User";
+import Reports from "./reports/Index";
+import Reporting from "./reporting/Index";
+import ViewLinks from "./link/ViewLinks";
+const Desk = () => {
   let component;
-  switch (props.path) {
+  const { path, argA, argB } = useParams();
+  switch (path) {
     case "routes":
       component = <Routes />;
       break;
     case "buses":
       component = <Buses />;
+      break;
+    case "link":
+      component = <ViewLinks task={argA} link={argB} />;
       break;
     case "busstops":
       component = <BusStops />;
@@ -27,11 +35,20 @@ const Desk = (props) => {
     case "users":
       component = <Users />;
       break;
+    case "user":
+      component = <User id={argA} />;
+      break;
     case "announcements":
       component = <Announcement />;
       break;
-    case "pass":
-      component = <Pass />;
+    case "feedback":
+      component = <Feedback />;
+      break;
+    case "reportings":
+      component = <Reporting />;
+      break;
+    case "reports":
+      component = <Reports />;
       break;
     default:
       component = <Home />;
@@ -39,8 +56,11 @@ const Desk = (props) => {
   }
   return (
     <>
-      <MainWrapper sidebar={<Sidebar for="dashboard" />}>
-        {component}
+      <MainWrapper
+        sidebar={<Sidebar for="dashboard" />}
+        // aside={"Sharanam"}
+      >
+        <Container size="xl">{component}</Container>
       </MainWrapper>
     </>
   );

@@ -18,7 +18,7 @@ const userModel = {
       const result = await axios.post("/auth/signup", payload);
       if (result.data.success) {
         act.clearErrors();
-        return { message: result.data.msg };
+        return { success: true, message: result.data.msg };
       }
       act.setErrors(result.data.errors);
       return result.data;
@@ -34,6 +34,7 @@ const userModel = {
         localStorage.setItem("jwtToken", result.data.access_token);
         setAuthToken(result.data.access_token);
         const decoded = jwtDecode(result.data.access_token);
+        act.setFavorites(result?.data?.user?.favorites);
         // act.setCurrentUser({ ...decoded, ...result.data.user });
         return { ...decoded, ...result.data };
       }
@@ -48,6 +49,35 @@ const userModel = {
     localStorage.removeItem("jwtToken");
     setAuthToken(false);
     act.setCurrentUser(false);
+  },
+  setFavorites: (f) => {
+    window.sessionStorage.setItem("favorites", JSON.stringify(f));
+  },
+  getFavorites: () => {
+    return modelParser("favorites");
+  },
+  updateFavorites: async (payload) => {
+    try {
+      console.table(payload);
+      const result = await axios.put("/commuter/favorites", {
+        task: payload.task,
+        route: payload.routeId,
+      });
+
+      if (result.data.success) {
+        const newFavorites = result.data.favorites;
+        window.sessionStorage.setItem(
+          "favorites",
+          JSON.stringify(newFavorites)
+        );
+        return { success: true, message: result.data.msg };
+      }
+      return result.data.success;
+    } catch (err) {
+      console.log(err);
+      alert("Error updating favorites, try to re-login");
+      return { error: "Server down" };
+    }
   },
   setCurrentUser: (payload) => {
     if (payload) {
@@ -142,6 +172,69 @@ const userModel = {
       alert("server down");
       return false;
     }
+  },
+  getMyProfile: async () => {
+    try {
+      const { data } = await axios.get("/auth/profile");
+      if (data.success) return data.user;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  updateMyProfile: async (payload) => {
+    try {
+      const { data } = await axios.post("/auth/profile", payload);
+      if (data.msg) alert(data.msg);
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  getProfileOf: async (userId) => {
+    try {
+      const { data } = await axios.get(`/auth/profile/${userId}`);
+      if (data.success) return data.user;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  getMyHistory: async () => {
+    try {
+      const { data } = await axios.get("/commuter/history");
+      if (data.success) {
+        window.sessionStorage.setItem("history", JSON.stringify(data.history));
+      }
+      return data.success;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  removeFromHistory: async (payload) => {
+    try {
+      const { data } = await axios.delete("/commuter/history", {
+        data: payload,
+      });
+      if (data.success) {
+        let his = modelParser("history");
+        if (payload?.type === "route") {
+          his.route = his?.route.filter((r) => r._id !== payload?.historyId);
+        } else if (payload?.type === "bus") {
+          his.bus = his?.bus.filter((r) => r._id !== payload?.historyId);
+        }
+        window.sessionStorage.setItem("history", JSON.stringify(his));
+      }
+      if (data.msg) alert(data.msg);
+      return data.success;
+    } catch (e) {
+      alert("server down");
+      return false;
+    }
+  },
+  getHistory: () => {
+    return modelParser("history") || {};
   },
 };
 export default userModel;

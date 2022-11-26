@@ -1,5 +1,5 @@
 div.autocomplete {
-  width: max-content;
+  /* width: max-content; */
   position: relative;
 }
 
@@ -7,7 +7,7 @@ div.autocomplete ul {
   list-style-type: none;
   max-height: 20vh;
   overflow-y: scroll;
-  background-color: var(--white-dark);
+  background-color: var(--dull-white);
   margin: 0;
   padding: 0;
   position: absolute;
@@ -17,16 +17,16 @@ div.autocomplete ul {
   z-index: 15;
 }
 div.autocomplete ul::-webkit-scrollbar-thumb {
-  background-color: var(--bov-dark);
+  background-color: var(--dark-blue);
   border-radius: 10px;
 }
 div.autocomplete ul::-webkit-scrollbar-track {
-  background-color: var(--tubelight);
+  background-color: var(--white);
 }
 div.autocomplete ul::-webkit-scrollbar {
   width: 5px;
 }
 div.autocomplete li.active {
   background-color: var(--text-color);
-  color: var(--white-light);
+  color: var(--less-white);
 }

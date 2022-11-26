@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 
 let commentSchema = new Schema(
   {
@@ -10,6 +9,7 @@ let commentSchema = new Schema(
     },
     message: {
       type: String,
+      trim: true,
       required: [true, "message is required."],
     },
     likes: [
@@ -36,8 +36,7 @@ let commentSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: "comments",
   }
 );
 
-module.exports = mongoose.model("Comment", commentSchema);
+module.exports = model("comments", commentSchema);

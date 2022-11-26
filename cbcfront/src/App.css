@@ -1,22 +1,36 @@
 :root {
-  --bov-dark: #1c3879;
-  --light-dark: #607eaa;
-  --white-dark: #eae3d2;
-  --white-light: #f9f5eb;
+  --dark-blue: #1c3879;
+  --light-blue: #607eaa;
+  --dull-white: #eae3d2;
+  --less-white: #f9f5eb;
   --black: black;
-  --tubelight: white;
-  --quiet-background-color: rgb(247, 247, 247);
+  --white: white;
+
   --text-color: var(--google-gray-700);
   --danger: rgb(117, 53, 49);
 
-  --footer-heading-underline-color: #e91e63;
+  --light-red: #e91e63;
+  --footer-heading-underline-color: var(--light-red);
 
+  --google-gray-500: rgb(209, 210, 211);
   --google-gray-700: rgb(95, 99, 104);
   --google-gray-900: rgb(32, 33, 36);
 
   --bold-font: 500;
   --card-bg: rgb(17, 20, 197);
+  --lightblue: #1c6ea4;
   --card-shadow: 0 0.321rem 0.29rem hsl(0, 0%, 0%, 0.2);
+
+  --info-message-bg: lightgreen;
+  --info-message-fg: var(--black);
+
+  --toggle-button-true: rgb(157, 150, 236);
+  --toggle-button-false: rgb(236, 150, 150);
+
+  --yellow: yellow;
+
+  --warning-message-bg: var(--light-red);
+  --warning-message-fg: var(--less-white);
 }
 
 a {
@@ -34,4 +48,10 @@ main {
   main {
     margin: 0 auto;
   }
+}
+
+/* remove cross from time element */
+input[type="time"]::-webkit-calendar-picker-indicator {
+  background: none;
+  display: none;
 }

@@ -3,17 +3,17 @@ const handleError = require("../utils/handleError");
 
 async function createAnnouncement(req, res) {
   try {
-    const { title, description } = req.body;
-    new Announcement({ title, description })
+    const { title, description, expireAt } = req.body;
+    new Announcement({
+      title,
+      description,
+      expireAt: new Date(expireAt),
+    })
       .save()
       .then((announcement) => {
         res.json({
           success: true,
-          announcement: {
-            title: announcement.title,
-            description: announcement.description,
-            _id: announcement._id,
-          },
+          announcement,
         });
       })
       .catch((error) => {
@@ -27,11 +27,11 @@ async function createAnnouncement(req, res) {
   }
 }
 
-async function getAnnouncements(req, res) {
+async function getAnnouncements(_, res) {
   try {
     const announcements = await Announcement.find({})
       .sort({ updatedAt: -1 })
-      .select("-updatedAt -createdAt -__v")
+      .select("-updatedAt -__v")
       .exec();
     return res.json({
       success: true,

@@ -1,12 +1,12 @@
-footer {
+footer div.info {
   font-size: 0.9rem;
   background-color: var(--google-gray-900);
-  color: var(--white-dark);
+  color: var(--dull-white);
 
   width: 100%;
   padding: 2em 1em;
 }
-footer .row {
+footer div.info .row {
   margin: auto 4rem;
   display: flex;
   flex-wrap: wrap;
@@ -15,17 +15,17 @@ footer .row {
   gap: 1rem;
   max-width: 70em;
 }
-footer .row > * {
+footer div.info .row > * {
   flex-grow: 1;
   min-width: 11rem;
 }
-footer ul {
+footer div.info ul {
   list-style: none;
   padding: 0.3rem;
 }
 div.footer-col h4 {
   font-size: 1.1rem;
-  color: var(--tubelight);
+  color: var(--white);
   text-transform: capitalize;
   margin-bottom: 2.5rem;
   font-weight: var(--bold-font);
@@ -48,7 +48,7 @@ div.footer-col ul li a {
   font-size: 1em;
   text-transform: capitalize;
   color: var(--google-gray-300);
-  display: block;
+  width: fit-content;
   transition: trasform 1s ease-in 2s;
 }
 div.footer-col ul li a:hover {

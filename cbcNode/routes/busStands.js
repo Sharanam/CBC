@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const busStands = require("../controllers/busStands");
+const { busStandNames, relatedRoutesTo } = require("../controllers/busStands");
 
-router.get("/", busStands);
+router.get("/", busStandNames);
+router.get("/:standName", relatedRoutesTo);
 module.exports = router;

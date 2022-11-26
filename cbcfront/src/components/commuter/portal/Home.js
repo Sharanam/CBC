@@ -5,13 +5,17 @@ import Routes from "./routes/Index";
 const Home = () => {
   return (
     <>
-      <BusStops />
-      <Bus
+      <Routes
         style={{
           margin: "unset",
         }}
       />
-      <Routes
+      <BusStops
+        style={{
+          margin: "unset",
+        }}
+      />
+      <Bus
         style={{
           margin: "unset",
         }}

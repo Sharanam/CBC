@@ -1,0 +1,11 @@
+mark.info {
+  background-color: var(--yellow);
+}
+mark.correct {
+  background-color: var(--info-message-bg);
+  color: var(--info-message-fg);
+}
+mark.warning {
+  background-color: var(--warning-message-bg);
+  color: var(--warning-message-fg);
+}

@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 
 let feedbackSchema = new Schema(
   {
@@ -10,6 +9,7 @@ let feedbackSchema = new Schema(
     },
     message: {
       type: String,
+      trim: true,
       required: [true, "message is required."],
     },
     likes: [
@@ -26,11 +26,14 @@ let feedbackSchema = new Schema(
         ref: "users",
       },
     ],
+    spam: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
-    collection: "feedbacks",
   }
 );
 
-module.exports = mongoose.model("Feedback", feedbackSchema);
+module.exports = model("feedbacks", feedbackSchema);

@@ -4,7 +4,7 @@
     "description": "for the backend of an application",
     "main": "index.js",
     "scripts": {
-        "cient-install": "cd ../cbcfront && npm install",
+        "client-install": "cd ../cbcfront && npm install",
         "start": "node index.js",
         "server": "nodemon index.js",
         "client": "cd ../cbcfront && npm start",

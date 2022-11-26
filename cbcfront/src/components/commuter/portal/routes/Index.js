@@ -1,49 +1,17 @@
-import { useState } from "react";
-import Form from "../../../common/lib/formElements/Form";
-import {
-  Button,
-  Error,
-  Input,
-  Label,
-} from "../../../common/lib/formElements/Index";
-import Container from "../../../common/lib/layout/Container";
+import BetweenStops from "./BetweenStops";
+import SpecificRoute from "./SpecificRoute";
 
-const errors = {};
 const Routes = (props) => {
-  const [routeNumber, setRouteNumber] = useState("");
+  if (props.identifier) {
+    return <SpecificRoute identifier={props.identifier} />;
+  } else if (props.from) {
+    return <BetweenStops from={props.from} to={props.to} />;
+  }
   return (
-    <Container size="md">
-      <Form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-        style={{
-          ...props.style,
-        }}
-      >
-        {{
-          title: "Search Specific Route",
-          formFields: (
-            <>
-              <Label className="required" htmlFor="Route">
-                Route Number
-              </Label>
-              {errors?.route && <Error>{errors.route}</Error>}
-              <Input
-                type="text"
-                placeholder="Enter Route Number"
-                value={routeNumber}
-                onChange={(e) => {
-                  setRouteNumber(e.target.value);
-                }}
-                error="Name require"
-              />
-            </>
-          ),
-          buttons: <Button className="positive">Look Route</Button>,
-        }}
-      </Form>
-    </Container>
+    <>
+      <BetweenStops />
+      <SpecificRoute />
+    </>
   );
 };
 export default Routes;

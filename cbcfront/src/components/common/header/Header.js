@@ -9,7 +9,7 @@ function Header() {
   return (
     <header>
       <Link to="/">
-        <h1 className="logo">Citybus</h1>
+        <h1 className="logo">Shree Citybus</h1>
       </Link>
       <Navbar />
     </header>

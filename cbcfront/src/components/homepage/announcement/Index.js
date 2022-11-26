@@ -1,7 +1,8 @@
 import announcementModel from "../../../globalState/announcement";
 import { useEffect, useState } from "react";
-import { Card } from "../../common/lib/styledElements/Index";
-import Container from "../../common/lib/layout/Container";
+import { Card, Loading } from "../../common/lib/styledElements/Index";
+import { Container } from "../../common/lib/layout/Index";
+import getDateInFormat from "../../../utils/timekeeper";
 
 const Announcement = () => {
   const [announcements, setAnnouncements] = useState(null);
@@ -19,7 +20,7 @@ const Announcement = () => {
       <h1>Announcements</h1>
       <div
         style={{
-          backgroundColor: "var(--white-dark)",
+          backgroundColor: "var(--dull-white)",
           color: "var(--black)",
           padding: "0.5rem",
           borderRadius: "0.3rem",
@@ -33,11 +34,27 @@ const Announcement = () => {
               <Card
                 key={i}
                 style={{
-                  backgroundColor: "var(--tubelight)",
+                  backgroundColor: "var(--white)",
                   color: "currentColor",
                 }}
               >
-                <span style={{ display: "block" }}>{announcement.title}</span>
+                <p
+                  style={{
+                    display: "flex",
+                  }}
+                >
+                  <span style={{ flexGrow: 1 }}>{announcement.title}</span>
+                  <span
+                    style={{
+                      fontSize: "0.6em",
+                    }}
+                  >
+                    announced:{" "}
+                    <span>
+                      {getDateInFormat(announcement.createdAt, { counter: 1 })}
+                    </span>
+                  </span>
+                </p>
                 <span
                   style={{
                     display: "block",
@@ -52,7 +69,7 @@ const Announcement = () => {
             ))}
           </>
         ) : (
-          <>Loading...</>
+          <Loading />
         )}
       </div>
     </Container>

@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 const { isEmail, isMobilePhone } = require("validator");
 
 let userSchema = new Schema(
   {
     name: {
       type: String,
+      trim: true,
       required: [true, "name is required"],
       validate: [
         (val) => val.match("^[A-Za-z1-9 ]+$"),
@@ -14,6 +14,7 @@ let userSchema = new Schema(
     },
     email: {
       type: String,
+      trim: true,
       required: [true, "email is required"],
       unique: true,
       lowercase: true,
@@ -21,15 +22,18 @@ let userSchema = new Schema(
     },
     password: {
       type: String,
+      trim: true,
       required: [true, "password is required"],
     },
     phone: {
       type: String,
+      trim: true,
       required: [true, "phone number is required."],
       validate: [isMobilePhone, "phone number is invalid."],
     },
     type: {
       type: String,
+      trim: true,
       enum: ["a", "c"], // a:'admin', c:'commuter'
       default: "c",
     },
@@ -41,11 +45,61 @@ let userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    bio: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    social: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      default: "",
+    },
+    public: {
+      type: Boolean,
+      default: false,
+    },
+    passes: [
+      {
+        type: Schema.Types.ObjectId,
+        unique: [true, "pass has already been issued."],
+        ref: "passes",
+      },
+    ],
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        unique: [true, "route is already in the list."],
+        ref: "routes",
+      },
+    ],
+    history: {
+      bus: [
+        {
+          busId: { type: Schema.Types.ObjectId, ref: "buses" },
+          time: {
+            type: Date,
+            required: true,
+            default: Date.now(),
+          },
+        },
+      ],
+      route: [
+        {
+          routeId: { type: Schema.Types.ObjectId, ref: "routes" },
+          time: {
+            type: Date,
+            required: true,
+            default: Date.now(),
+          },
+        },
+      ],
+    },
   },
   {
     timestamps: true,
-    collection: "users",
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = model("users", userSchema);

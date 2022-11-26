@@ -1,6 +1,6 @@
 import userModel from "../../../globalState/user";
 import { Button, Label } from "../lib/formElements/Index";
-import Container from "../lib/layout/Container";
+import { Container } from "../lib/layout/Index";
 import Card from "../lib/styledElements/card/Index";
 
 const DeleteAccount = () => {
@@ -12,12 +12,12 @@ const DeleteAccount = () => {
           flexWrap: "nowrap",
           flexDirection: "column",
           alignItems: "center",
-          backgroundColor: "var(--tubelight)",
+          backgroundColor: "var(--white)",
           color: "var(--black)",
           gap: "0.5rem",
         }}
       >
-        <Label>Delete your account permanently !!!</Label>
+        <Label>Delete this account permanently !!!</Label>
         <Button
           className="negative"
           onClick={() => {

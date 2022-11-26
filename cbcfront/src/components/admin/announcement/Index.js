@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import announcementModel from "../../../globalState/announcement";
+import { Loading } from "../../common/lib/styledElements/Index";
 import CreateAnnouncement from "./Create";
 import UnitAnnouncement from "./Unit";
 
@@ -20,12 +21,12 @@ const Announcement = (props) => {
   function deleteAnnouncement(payload) {
     announcementModel.deleteAnnouncement(payload).then((result) => {
       if (result.success) {
-        const anmts = [...announcements];
-        anmts.splice(
-          anmts.findIndex((a) => a._id === payload.announcementId),
+        const temp = [...announcements];
+        temp.splice(
+          temp.findIndex((a) => a._id === payload.announcementId),
           1
         );
-        setAnnouncements([...anmts]);
+        setAnnouncements([...temp]);
         setErrors(null);
       }
     });
@@ -61,7 +62,7 @@ const Announcement = (props) => {
           ))}
         </>
       ) : (
-        <>Loading...</>
+        <Loading />
       )}
       <CreateAnnouncement
         callback={createAnnouncement}

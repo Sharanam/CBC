@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { model, Schema } = require("mongoose");
 
 let tokenSchema = new Schema(
   {
@@ -10,6 +9,7 @@ let tokenSchema = new Schema(
     },
     token: {
       type: String,
+      trim: true,
       required: true,
     },
     createdAt: {
@@ -21,8 +21,7 @@ let tokenSchema = new Schema(
   },
   {
     timestamps: true,
-    collection: "tokens",
   }
 );
 
-module.exports = mongoose.model("Token", tokenSchema);
+module.exports = model("tokens", tokenSchema);

@@ -3,14 +3,14 @@ export default function Form(props) {
     <form
       {...props}
       style={{
-        margin: "2rem auto",
+        margin: props.margin || "2rem auto",
         width: "100%",
         display: "flex",
         flexDirection: "column",
 
         padding: "1rem",
         borderRadius: "0.5rem",
-        backgroundColor: "var(--white-dark)",
+        backgroundColor: "var(--dull-white)",
         ...props.style,
       }}
     >

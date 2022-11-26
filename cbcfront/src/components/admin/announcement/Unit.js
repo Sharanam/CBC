@@ -1,8 +1,9 @@
+import getDateInFormat from "../../../utils/timekeeper";
 import Button from "../../common/lib/formElements/button/Button";
 import { Card } from "../../common/lib/styledElements/Index";
 
 const UnitAnnouncement = (props) => {
-  const { _id, title, description } = props.announcement;
+  const { _id, title, description, createdAt, expireAt } = props.announcement;
   const handleClick = (e) => {
     e.preventDefault();
     props.callback({ announcementId: _id });
@@ -14,7 +15,7 @@ const UnitAnnouncement = (props) => {
           display: "flex",
           alignItems: "center",
           gap: "1rem",
-          backgroundColor: "var(--tubelight)",
+          backgroundColor: "var(--white)",
           justifyContent: "center",
         }}
       >
@@ -34,6 +35,14 @@ const UnitAnnouncement = (props) => {
           }}
         >
           {description}
+          <span
+            style={{
+              display: "block",
+              fontSize: "0.8em",
+            }}
+          >
+            ({getDateInFormat(createdAt)} to {getDateInFormat(expireAt)})
+          </span>
         </span>
         <Button
           className="negative"

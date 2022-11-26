@@ -4,9 +4,6 @@
  - Idea: 
    - inspired from whereismytrain android application
    - but for the city bus
-
-## Code
- - You can find the latest code into the branch, named **`post-internals`**, because that's where I was developing the stuff, after finishing my internal evaluation.
    
 ## Installation
  - go to cbcfront and install packages using npm. Followed by

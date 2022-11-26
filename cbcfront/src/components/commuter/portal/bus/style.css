@@ -1,0 +1,24 @@
+ul.printStop {
+  list-style-type: disc;
+  position: relative;
+}
+ul.printStop li::marker {
+  font-size: 1.5em;
+}
+ul.printStop li {
+  margin-bottom: 0.5em;
+}
+ul.printStop li {
+  position: relative;
+}
+ul.printStop li::before {
+  content: "";
+  border-left: 1px solid currentColor;
+  position: absolute;
+  left: -18px;
+  height: calc(100% + 0.5em);
+  top: 15px;
+}
+ul.printStop li:last-child::before {
+  display: none;
+}

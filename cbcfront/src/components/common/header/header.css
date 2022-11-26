@@ -1,5 +1,5 @@
 header {
-  background: var(--white-dark);
+  background: var(--dull-white);
   color: black;
   font-size: 1rem;
   box-shadow: 0 0.321rem 0.29rem hsl(0, 0%, 0%, 0.5);
@@ -20,7 +20,7 @@ header {
 
 h1.logo {
   font-size: 2rem;
-  color: var(--bov-dark);
+  color: var(--dark-blue);
 }
 @media (max-width: 35em) {
   header {

@@ -5,5 +5,11 @@ div.card {
   border-radius: 0.3rem;
   box-shadow: var(--card-shadow);
   background: var(--card-bg);
-  color: var(--tubelight);
+  color: var(--white);
+}
+
+div.info-message {
+  text-transform: capitalize;
+  background-color: var(--info-message-bg);
+  color: var(--info-message-fg);
 }

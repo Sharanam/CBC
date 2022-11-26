@@ -2,9 +2,9 @@ import "./sidebar.css";
 import AccountSide from "./for/AccountSide";
 import PortalSide from "./for/PortalSide";
 import DashboardSide from "./for/DashboardSide";
-export default function Sidebar(props) {
+export function sidebarGenerator(propsFor) {
   let links;
-  switch (props.for) {
+  switch (propsFor) {
     case "account":
       links = <AccountSide />;
       break;
@@ -17,9 +17,12 @@ export default function Sidebar(props) {
     default:
       links = <AccountSide />;
   }
+  return links;
+}
+export default function Sidebar(props) {
   return (
     <>
-      <div className="sidebar">{links}</div>
+      <div className="sidebar">{sidebarGenerator(props.for)}</div>
     </>
   );
 }

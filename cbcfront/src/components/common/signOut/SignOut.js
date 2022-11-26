@@ -12,8 +12,8 @@ function SignOut() {
   const navigate = useNavigate();
   useEffect(() => {
     navigate("/");
-    return () => setFlag(Date.now());
-  });
+    return () => setFlag((_) => Date.now());
+  }, []);
 
   return;
   //  <Navigate to="/" replace={true} />;

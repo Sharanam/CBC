@@ -3,7 +3,7 @@ function handleError(err) {
   if (err.message.includes("validation failed")) {
     //validation errors
     Object.values(err.errors).forEach(({ properties }) => {
-      errors[properties.path] = properties.message;
+      errors[properties?.path] = properties?.message;
     });
   }
   return errors;

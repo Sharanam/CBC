@@ -7,10 +7,13 @@ import BusPass from "./BusPass";
 import Favourites from "./Favourites";
 import History from "./History";
 import DeleteAccount from "./DeleteAccount";
+import { useParams } from "react-router-dom";
+import MyContributions from "./MyContributions";
 
 const Account = (props) => {
   let component;
-  switch (props.path) {
+  let { path } = useParams();
+  switch (path) {
     case "buspass":
       component = <BusPass />;
       break;
@@ -28,6 +31,9 @@ const Account = (props) => {
       break;
     case "deleteAccount":
       component = <DeleteAccount />;
+      break;
+    case "myContributions":
+      component = <MyContributions />;
       break;
     default:
       component = <Home />;

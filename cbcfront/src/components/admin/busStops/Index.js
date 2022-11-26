@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import busStandsModel from "../../../globalState/busStands";
-import Container from "../../common/lib/layout/Container";
-import Card from "../../common/lib/styledElements/card/Index";
+import { Container } from "../../common/lib/layout/Index";
+import { Card, Loading } from "../../common/lib/styledElements/Index";
 
 const BusStops = () => {
   const [busStands, setBusStands] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    busStandsModel.getStands().then((result) => {
+    setIsLoading(true);
+    busStandsModel.busStandNames().then((result) => {
       setBusStands(result);
+      setIsLoading(false);
     });
   }, []);
+  const navigate = useNavigate();
+  if (isLoading) return <Loading />;
   return (
     <>
-      <Container size="md">
+      <Container size="sm">
         <h2>Bus Stops</h2>
         <div
           style={{
@@ -24,23 +30,16 @@ const BusStops = () => {
           {busStands &&
             busStands.map((bs, i) => (
               <Card
+                white={true}
                 key={i}
                 style={{
-                  backgroundColor: "var(--google-gray-700)",
-                  flexGrow: "1",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  navigate(`/portal/busstops/${bs}`);
                 }}
               >
-                <p>
-                  {bs.from} is {bs.distance} KMs away from {bs.to}.
-                </p>
-                <span
-                  style={{
-                    display: "block",
-                    fontSize: "0.8em",
-                  }}
-                >
-                  Rs. {bs.price}
-                </span>
+                {bs}
               </Card>
             ))}
         </div>

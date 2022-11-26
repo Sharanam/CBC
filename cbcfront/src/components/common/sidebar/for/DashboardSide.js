@@ -4,25 +4,28 @@ const DashboardSide = () => {
   return (
     <ul>
       <li>
-        <Link to="/admin/routes">Routes</Link>
+        <Link to="/admin/routes">Manage Routes</Link>
       </li>
       <li>
-        <Link to="/admin/buses">Buses</Link>
+        <Link to="/admin/buses">Manage Buses</Link>
       </li>
       <li>
-        <Link to="/admin/busstops">Bus Stops</Link>
+        <Link to="/admin/busstops">View Bus Stops</Link>
       </li>
       <li>
-        <Link to="/admin/humanresource">Human Resource</Link>
+        <Link to="/admin/reportings">Manage Reportings</Link>
       </li>
       <li>
-        <Link to="/admin/users">Users</Link>
+        <Link to="/admin/humanresource">Manage Staff</Link>
+      </li>
+      <li>
+        <Link to="/admin/users">Manage Users</Link>
       </li>
       <li>
         <Link to="/admin/announcements">Announcements</Link>
       </li>
       <li>
-        <Link to="/admin/pass">Pass</Link>
+        <Link to="/admin/feedback">Manage Feedback</Link>
       </li>
     </ul>
   );

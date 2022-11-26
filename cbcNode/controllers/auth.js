@@ -12,6 +12,7 @@ const { isEmpty } = require("../utils/errorGenerator");
 const handleError = require("../utils/handleError");
 const isStrongPassword = require("../utils/isStrongPassword");
 const { sendEmail } = require("../utils/sendEmail");
+const { getProfileOf } = require("../utils/getProfileOfUser");
 
 function sendAccountActivator(user, _, res) {
   jwt.sign(
@@ -118,7 +119,7 @@ exports.signin = (req, res) => {
             const access_token = jwt.sign(
               { email: user.email, userId: user._id, type: user.type },
               process.env.secretOrKey,
-              { expiresIn: 3600 }
+              { expiresIn: 36000 }
             );
             jwt.verify(
               access_token,
@@ -140,6 +141,7 @@ exports.signin = (req, res) => {
                       phone: user.phone,
                       type: user.type,
                       modifiedDetails: user.updatedAt,
+                      favorites: user.favorites,
                     },
                   });
                 }
@@ -188,7 +190,7 @@ exports.confirmToken = (req, res) => {
           user.save((error) => {
             if (error) {
               return res.status(500).json({
-                msg: err.message,
+                msg: error.message,
               });
             }
             token.remove();
@@ -221,7 +223,7 @@ exports.resendToken = (req, res) => {
 };
 exports.deleteUser = (req, res) => {
   try {
-    User.findByIdAndDelete(req.user.userId, async (err) => {
+    User.findByIdAndDelete(req.user.userId, (err) => {
       if (err) return res.status(500).send({ msg: err.message });
       res.json({
         success: true,
@@ -276,34 +278,39 @@ exports.forgotPassword = (req, res) => {
     if (!isEmpty(email)) {
       const payload = {};
       let secret;
-      User.findOne({ email }).then((user) => {
-        if (!user) {
-          return res.json({ msg: "There is no user for this email" });
-        }
-        if (!user.isVerified) {
-          return res.json({ msg: "User is not verified yet" });
-        }
-        payload.id = user.id;
-        payload.email = email;
-        payload.type = user.type;
+      User.findOne({ email })
+        .then((user) => {
+          if (!user) {
+            return res.json({ msg: "There is no user for this email" });
+          }
+          if (!user.isVerified) {
+            return res.json({ msg: "User is not verified yet" });
+          }
+          payload.id = user.id;
+          payload.email = email;
+          payload.type = user.type;
 
-        secret = `${user.password}-${user.updatedAt}`;
-        const token = jwt.sign(payload, secret, { expiresIn: 3600 });
-        console.log(token);
-        const host = req.get("host");
-        const url = `/api/auth/resetPassword/${payload.id}/${token}`;
-        sendEmail(
-          {
-            from: process.env.email,
-            to: payload.email,
-            subject: "Reset Password",
-            id: payload.id,
-            token,
-            html: `<b>Click on this link to reset Password</b><a href=\"${url}\">Link</a>`,
-          },
-          res
-        );
-      });
+          secret = `${user.password}-${user.updatedAt}`;
+          const token = jwt.sign(payload, secret, { expiresIn: 3600 });
+          console.log(token);
+          const host = req.get("host");
+          const url = `/api/auth/resetPassword/${payload.id}/${token}`;
+          sendEmail(
+            {
+              from: process.env.email,
+              to: payload.email,
+              subject: "Reset Password",
+              id: payload.id,
+              token,
+              html: `<b>Click on this link to reset Password</b><a href=\"${url}\">Link</a>`,
+            },
+            res
+          );
+        })
+        .catch((err) => {
+          console.log(err.message);
+          res.status(500).send("Something went wrong");
+        });
     }
   } catch (err) {
     res.status(500).send(err.message);
@@ -318,9 +325,53 @@ exports.getProfile = (req, res) => {
       },
       (err, user) => {
         if (err) return res.status(500).send(err.message);
-        res.json(user);
+        res.json({ success: true, user });
       }
     );
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("something went wrong");
+  }
+};
+
+exports.updateProfile = (req, res) => {
+  try {
+    const { name, email, phone, bio, social, public } = req.body;
+    User.findOne(
+      {
+        _id: req.user.userId,
+      },
+      (err, user) => {
+        if (err) return res.json({ msg: err.message });
+        user.name = name;
+        // user.email = email;
+        // user.phone = phone;
+        user.bio = bio;
+        user.social = social;
+        user.public = public;
+        user
+          .save()
+          .then(() => {
+            return res.json({
+              success: true,
+              msg: "Profile Updated successfully.",
+            });
+          })
+          .catch(function (err) {
+            return res.json({ msg: err.message });
+          });
+      }
+    );
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("something went wrong");
+  }
+};
+
+exports.getProfileOf = async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.json(await getProfileOf(id));
   } catch (error) {
     console.error(error.message);
     res.status(500).send("something went wrong");
